@@ -9,7 +9,7 @@ spring:
 
 #配置包别名
 mybatis:
-  type-aliases-package: com.study.pojo
+  type-aliases-package: com.test.pojo
 
 #更改日志级别
 logging:
