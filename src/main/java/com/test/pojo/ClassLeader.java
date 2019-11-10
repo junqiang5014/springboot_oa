@@ -4,7 +4,6 @@ public class ClassLeader {
     private int clid;
     private String clname;
     private User user;
-    private Class aClass;
 
     @Override
     public String toString() {
@@ -12,7 +11,6 @@ public class ClassLeader {
                 "clid=" + clid +
                 ", clname='" + clname + '\'' +
                 ", user=" + user +
-                ", aClass=" + aClass +
                 '}';
     }
 
@@ -38,13 +36,5 @@ public class ClassLeader {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Class getaClass() {
-        return aClass;
-    }
-
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
     }
 }
