@@ -1,6 +1,6 @@
 package com.test.pojo;
 
-public class Class {
+public class Classes {
     private int cid;
     private String cname;
     private Teacher teacher;
@@ -8,7 +8,7 @@ public class Class {
 
     @Override
     public String toString() {
-        return "Class{" +
+        return "Classes{" +
                 "cid=" + cid +
                 ", cname='" + cname + '\'' +
                 ", teacher=" + teacher +
