@@ -32,7 +32,7 @@
         <result property="yue" column="yue"></result>
         <result property="week" column="week"></result>
         <result property="title" column="title"></result>
-        <result property="content"column="content"></result>
+        <result property="content" column="content"></result>
         <result property="score" column="score"></result>
         <association property="student" column="stuid" javaType="student">
             <id property="stuid" column="stuid"></id>
