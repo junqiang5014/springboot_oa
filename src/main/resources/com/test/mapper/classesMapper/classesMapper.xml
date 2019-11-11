@@ -5,22 +5,30 @@
 <mapper namespace="com.test.mapper.classesMapper.ClassesMapper">
 
     <resultMap id="classesMap" type="classes">
-
-
+        <id property="cid" column="cid" ></id>
+        <result property="cname" column="cname"></result>
+        <association property="teacher" column="tid" javaType="teacher">
+            <id property="tid" column="tid"></id>
+            <result property="tname" column="tname"></result>
+        </association>
+        <association property="classleader" column="clid" javaType="classleader">
+            <id property="clid" column="clid"></id>
+            <result property="clname" column="clname"></result>
+        </association>
     </resultMap>
     <insert id="addClass" parameterType="classes" useGeneratedKeys="true" keyProperty="cid">
-        insert into classes(cname,tid,clid) values (#{cname},#{teacher.tid},#{classleader.clid})
+        insert into classes(cname,tid,clid) values (#{cname},#{teachers.tid},#{classleaders.clid})
     </insert>
     <delete id="deleteClasses" parameterType="int" >
         delete from classes where cid=#{cid}
     </delete>
     <update id="updateClasses" parameterType="classes">
-        update classes set cname=#{cname},tid=#{teacher.tid},clid=#{classleader.clid} where cid=#{cid}
+        update classes set cname=#{cname},tid=#{teacher.tid},clid=#{classleaders.clid} where cid=#{cid}
     </update>
     <select id="getClassByCid" parameterType="int" resultMap="classesMap" >
-        select * from classes inner join teacher on classes.tid=teacher.tid inner join classleader on classes.clid=classleader.clid and classes.cid=#{cid}
+        select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleader.clid and classes.cid=#{cid}
     </select>
     <select id="getClassesList" resultMap="classesMap">
-        select * from classes inner join teacher on classes.tid=teacher.tid inner join classleader on classes.clid=classleader.clid
+        select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleaders.clid
     </select>
 </mapper>
