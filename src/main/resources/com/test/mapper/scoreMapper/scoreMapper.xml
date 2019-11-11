@@ -3,15 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.scoreMapper.ScoreMapper">
-<!--    public int addScore(Score score);-->
-
-<!--    public int deleteScoreByScoreid(int scoreid);-->
-
-<!--    public int updateScore(Score score);-->
-
-<!--    public Score getScoreByScoreid(int scoreid);-->
-
-<!--    public List<Score> getScoreList();-->
     <insert id="addScore" parameterType="score">
         insert into scores(score,sid,stage,courseid) values (#{score},#{student.sid},)
     </insert>
