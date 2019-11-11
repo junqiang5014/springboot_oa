@@ -2,8 +2,32 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.mybatis.example.BlogMapper">
-    <select id="selectBlog" resultType="Blog">
-        select * from Blog where id = #{id}
+<mapper namespace="com.test.mapper.teacherMapper.TeacherMapper">
+
+    <resultMap id="teacherMap" type="teacher" >
+        <id property="tid" column="tid"></id>
+        <result property="tname" column="tname"></result>
+        <association property="user" column="uid" javaType="user">
+            <id property="uid" column="uid"></id>
+            <result property="uname" column="upwd"></result>
+            <result property="upwd" column="upwd"></result>
+            <result property="roleid" column="roleid"></result>
+        </association>
+    </resultMap>
+
+    <insert id="addTeacher" parameterType="teacher" useGeneratedKeys="true" keyProperty="tid">
+        insert into teachers(tid,tname,uid) values (#{tid},#{tname},#{user.uid})
+    </insert>
+    <delete id="deleteTeacher" parameterType="int" >
+        delete from teachers where tid=#{tid}
+    </delete>
+    <update id="updateTeacher" parameterType="teacher" >
+        update teachers set tname=#{tname},uid=#{user.uid} where tid=#{tid}
+    </update>
+    <select id="getTeacherByTid" parameterType="int" resultMap="teacherMap">
+        select * from teachers inner join user on teachers.uid=users.uid where tid=#{tid}
+    </select>
+    <select id="getTeacherList" resultMap="teacherMap">
+        select * from teacher inner join user on teachers.uid=users.uid
     </select>
 </mapper>
