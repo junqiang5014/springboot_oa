@@ -3,7 +3,9 @@ package com.test.service.userService;
 import com.test.mapper.userMapper.UsersMapper;
 import com.test.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersMapper usersMapper;
