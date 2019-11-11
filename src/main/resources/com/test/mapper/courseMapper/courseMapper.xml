@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.courseMapper.CourseMapper">
+
+    <resultMap id="courseMap" type="course">
+        <id property="courseid" column="courseid"></id>
+        <result property="coursename" column="coursename"></result>
+        <association property="teacher" column="teacher" javaType="teacher">
+            <id property="tid" column="tid"></id>
+            <result property="tname" column="tname"></result>
+        </association>
+    </resultMap>
+    <insert id="addCourse" parameterType="course" >
+        insert into course (coursename,tid) values (#{coursename},#{tid})
+    </insert>
+    <delete id="deleteCourseByCourseid" parameterType="int">
+        delete form course where courseid=#{courseid}
+    </delete>
+    <update id="updateCourse" parameterType="course">
+        update course set coursename=#{coursename},tid=#{teahcer.tid}
+    </update>
+    <select id="getCourseByCourseid" parameterType="int" resultMap="courseMap">
+        select * from course inner join teacher on course.tid=teacher.tid and courseid=#{courseid}
+    </select>
+    <select id="getCourseList" resultMap="courseMap">
+        select * from course inner join teacher on course.tid=teacher.tid
+    </select>
+</mapper>
