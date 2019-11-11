@@ -25,7 +25,7 @@
         update teachers set tname=#{tname},uid=#{user.uid} where tid=#{tid}
     </update>
     <select id="getTeacherByTid" parameterType="int" resultMap="teacherMap">
-        select * from teachers inner join user on teachers.uid=users.uid where tid=#{tid}
+        select * from teachers inner join user on teachers.uid=users.uid and tid=#{tid}
     </select>
     <select id="getTeacherList" resultMap="teacherMap">
         select * from teacher inner join user on teachers.uid=users.uid
