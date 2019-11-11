@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.userMapper.UsersMapper">
+
+    <select id="getUserByUname" parameterType="java.lang.String" resultMap="userMap">
+        select * from users where uname=#{uname}
+    </select>
+    <resultMap id="userMap" type="user">
+        <id property="uid" column="uid"></id>
+        <result property="uname" column="uanme"></result>
+        <result property="upwd" column="upwd"></result>
+        <association property="role" javaType="role" column="roleid" select="getrole"></association>
+    </resultMap>
+    <select id="getrole" resultType="role">
+        select * from roles where roleid=#{roleid}
+    </select>
+
+
+
+</mapper>

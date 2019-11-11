@@ -5,7 +5,8 @@ public class Student {
     private String stuname;
     private int stuage;
     private String stusex;
-    private Class aClass;
+    private Classes Classes;
+    private User user;
 
     @Override
     public String toString() {
@@ -14,7 +15,8 @@ public class Student {
                 ", stuname='" + stuname + '\'' +
                 ", stuage=" + stuage +
                 ", stusex='" + stusex + '\'' +
-                ", aClass=" + aClass +
+                ", Classes=" + Classes +
+                ", user=" + user +
                 '}';
     }
 
@@ -50,11 +52,19 @@ public class Student {
         this.stusex = stusex;
     }
 
-    public Class getaClass() {
-        return aClass;
+    public com.test.pojo.Classes getClasses() {
+        return Classes;
     }
 
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
+    public void setClasses(com.test.pojo.Classes classes) {
+        Classes = classes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

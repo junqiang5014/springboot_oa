@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.holidayMapper.HolidayMapper">
+<!--    public int addHoliday(Holiday holiday);-->
+
+<!--    public int deleteHolidayByHid(int hid);-->
+
+<!--    public int updateHoliday(Holiday holiday);-->
+
+<!--    public Holiday getHolidayByHid(int hid);-->
+
+<!--    public List<Holiday> getHolidayList();-->
+    <insert id="addHoliday" parameterType="holiday" useGeneratedKeys="true" keyProperty="hid">
+        insert into holiday (hid,reason,days,state) values (#{hid},#{reason},#{days},#{state})
+    </insert>
+    <delete id="deleteHolidayByHid" parameterType="int">
+        delete from holiday where hid=#{hid}
+    </delete>
+    <update id="updateHoliday" parameterType="holiday">
+        update holiday set reason=#{reason},days=#{days},state=#{state}
+    </update>
+    <select id="getHolidayByHid" parameterType="int" resultType="holiday">
+        select * from holiday where hid=#{hid}
+    </select>
+    <select id="getHolidayList" resultType="holiday" >
+        select * from holiday
+    </select>
+</mapper>

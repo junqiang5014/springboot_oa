@@ -1,33 +1,33 @@
 package com.test.pojo;
 
 public class Course {
-    private int courseId;
-    private String courseName;
+    private int courseid;
+    private String coursename;
     private Teacher teacher;
 
     @Override
     public String toString() {
         return "Course{" +
-                "courseId=" + courseId +
-                ", courseName='" + courseName + '\'' +
+                "courseid=" + courseid +
+                ", coursename='" + coursename + '\'' +
                 ", teacher=" + teacher +
                 '}';
     }
 
-    public int getCourseId() {
-        return courseId;
+    public int getCourseid() {
+        return courseid;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
+    public void setCourseid(int courseid) {
+        this.courseid = courseid;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getCoursename() {
+        return coursename;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCoursename(String coursename) {
+        this.coursename = coursename;
     }
 
     public Teacher getTeacher() {

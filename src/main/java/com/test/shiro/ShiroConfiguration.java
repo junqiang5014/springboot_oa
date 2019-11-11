@@ -1,6 +1,8 @@
 package com.test.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -23,7 +25,7 @@ public class ShiroConfiguration {
         Map<String, String> map = new HashMap<>();
         map.put("loginPage", "anon");
         map.put("login", "anon");
-        map.put("/**", "authc");
+//        map.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }
@@ -35,9 +37,17 @@ public class ShiroConfiguration {
     }
 
     @Bean(name = "myRealm")
-    public MyRealm getMyRealm(){
+    public MyRealm getMyRealm(CredentialsMatcher credentialsMatcher){
         MyRealm realm = new MyRealm();
+        realm.setCredentialsMatcher(credentialsMatcher);
         return realm;
+    }
+
+    @Bean("credentialsMatcher")
+    public CredentialsMatcher getCredentials(){
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        return hashedCredentialsMatcher;
     }
 
 
