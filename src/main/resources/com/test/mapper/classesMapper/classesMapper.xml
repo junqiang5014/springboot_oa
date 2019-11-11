@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.classesMapper.ClassesMapper">
+
+    <resultMap id="classesMap" type="classes">
+
+    </resultMap>
+    <insert id="addClass" parameterType="classes" useGeneratedKeys="true" keyProperty="cid">
+        insert into classes(cname,tid,clid) values (#{cname},#{teacher.tid},#{classleader.clid})
+    </insert>
+    <delete id="deleteClasses" parameterType="int" >
+        delete from classes where cid=#{cid}
+    </delete>
+    <update id="updateClasses" parameterType="classes">
+        update classes set cname=#{cname},tid=#{teacher.tid},clid=#{classleader.clid} where cid=#{cid}
+    </update>
+    <select id="getClassByCid" parameterType="int" resultMap="classesMap" >
+        select * from classes inner join teacher on classes.tid=teacher.tid inner join classleader on classes.clid=classleader.clid and classes.cid=#{cid}
+    </select>
+    <select id="getClassesList" resultMap="classesMap">
+        select * from classes inner join teacher on classes.tid=teacher.tid inner join classleader on classes.clid=classleader.clid
+    </select>
+</mapper>
