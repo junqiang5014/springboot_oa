@@ -5,6 +5,7 @@ import com.test.pojo.Classes;
 import java.util.List;
 
 public interface ClassesMapper {
+
     public int addClasses(Classes classes);//增加一个班级
 
     public int deleteClasses(int cid);//删除一个班级
