@@ -2,19 +2,23 @@ package com.test.pojo;
 
 public class Report {
     private int rid;
-    private String date;
+    private Student student;
+    private int month;
+    private int week;
+    private String title;
     private String content;
     private int score;
-    private Student student;
 
     @Override
     public String toString() {
         return "Report{" +
                 "rid=" + rid +
-                ", date='" + date + '\'' +
+                ", student=" + student +
+                ", month=" + month +
+                ", week=" + week +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", score=" + score +
-                ", student=" + student +
                 '}';
     }
 
@@ -26,12 +30,36 @@ public class Report {
         this.rid = rid;
     }
 
-    public String getDate() {
-        return date;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -48,13 +76,5 @@ public class Report {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 }

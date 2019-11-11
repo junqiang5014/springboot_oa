@@ -3,12 +3,16 @@ package com.test.pojo;
 public class Class {
     private int cid;
     private String cname;
+    private Teacher teacher;
+    private ClassLeader classLeader;
 
     @Override
     public String toString() {
         return "Class{" +
                 "cid=" + cid +
                 ", cname='" + cname + '\'' +
+                ", teacher=" + teacher +
+                ", classLeader=" + classLeader +
                 '}';
     }
 
@@ -26,5 +30,21 @@ public class Class {
 
     public void setCname(String cname) {
         this.cname = cname;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public ClassLeader getClassLeader() {
+        return classLeader;
+    }
+
+    public void setClassLeader(ClassLeader classLeader) {
+        this.classLeader = classLeader;
     }
 }

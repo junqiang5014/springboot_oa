@@ -4,6 +4,7 @@ public class Score {
     private int scoreid;
     private String score;
     private Student student;
+    private int stage;
     private Course course;
 
     @Override

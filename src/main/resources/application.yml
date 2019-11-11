@@ -6,6 +6,8 @@ spring:
     username: root
     password: 111111
     type: com.alibaba.druid.pool.DruidDataSource
+  activiti:
+    check-process-definitions: false #关闭自动部署
 
 #配置包别名
 mybatis:
@@ -21,10 +23,13 @@ logging:
 pagehelper:
   helper-dialect: mysql
 
+
 activiti:
-#  check-process-definitions: true # activti是否自动部署
+#  check-process-definitions: false # activti是否自动部署
 #  db-identity-used: true #是否使用activti自带的用户体系
   database-schema-update: true #是否每次都更新数据库
+
+
 
 
 
