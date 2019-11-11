@@ -38,4 +38,9 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> getTeacherList() {
         return teacherMapper.getTeacherList();
     }
+
+    @Override
+    public Teacher getTeacherByUid(int uid) {
+        return teacherMapper.getTeacherByUid(uid);
+    }
 }
