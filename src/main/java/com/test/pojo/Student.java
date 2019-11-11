@@ -5,7 +5,7 @@ public class Student {
     private String stuname;
     private int stuage;
     private String stusex;
-    private Class aClass;
+    private Classes Classes;
 
     @Override
     public String toString() {
@@ -14,7 +14,7 @@ public class Student {
                 ", stuname='" + stuname + '\'' +
                 ", stuage=" + stuage +
                 ", stusex='" + stusex + '\'' +
-                ", aClass=" + aClass +
+                ", Classes=" + Classes +
                 '}';
     }
 
@@ -50,11 +50,11 @@ public class Student {
         this.stusex = stusex;
     }
 
-    public Class getaClass() {
-        return aClass;
+    public Classes getaClasses() {
+        return Classes;
     }
 
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
+    public void setaClasses(Classes aClasses) {
+        this.Classes = aClasses;
     }
 }
