@@ -4,7 +4,7 @@ public class User {
     private int uid;
     private String uname;
     private String upwd;
-    private String rolename;
+    private Role role;
 
     @Override
     public String toString() {
@@ -12,7 +12,7 @@ public class User {
                 "uid=" + uid +
                 ", uname='" + uname + '\'' +
                 ", upwd='" + upwd + '\'' +
-                ", rolename='" + rolename + '\'' +
+                ", role=" + role +
                 '}';
     }
 
@@ -40,11 +40,11 @@ public class User {
         this.upwd = upwd;
     }
 
-    public String getRolename() {
-        return rolename;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
