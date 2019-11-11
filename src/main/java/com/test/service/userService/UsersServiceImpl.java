@@ -13,4 +13,5 @@ public class UsersServiceImpl implements UsersService {
     public User getUserByUname(String uname) {
         return usersMapper.getUserByUname(uname);
     }
+
 }
