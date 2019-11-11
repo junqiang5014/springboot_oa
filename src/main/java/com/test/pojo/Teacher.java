@@ -4,7 +4,6 @@ public class Teacher {
     private int tid;
     private String tname;
     private User user;
-    private Class aClass;
 
     @Override
     public String toString() {
@@ -12,7 +11,6 @@ public class Teacher {
                 "tid=" + tid +
                 ", tname='" + tname + '\'' +
                 ", user=" + user +
-                ", aClass=" + aClass +
                 '}';
     }
 
@@ -38,13 +36,5 @@ public class Teacher {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Class getaClass() {
-        return aClass;
-    }
-
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
     }
 }
