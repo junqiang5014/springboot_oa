@@ -2,13 +2,13 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/test" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1573287027531" name="" targetNamespace="http://www.activiti.org/test" typeLanguage="http://www.w3.org/2001/XMLSchema">
   <process id="student_holiday" isClosed="false" isExecutable="true" processType="None">
     <startEvent id="_2" name="StartEvent"/>
-    <userTask activiti:assignee="#{teacherName}" activiti:exclusive="true" id="teacher" name="教师批准"/>
+    <userTask activiti:assignee="#{teacherName}" activiti:exclusive="true" id="teacher" name="教师审批"/>
     <parallelGateway gatewayDirection="Unspecified" id="_4" name="ParallelGateway"/>
     <userTask activiti:assignee="#{classLeaderName}" activiti:exclusive="true" id="classLeader" name="班主任批准"/>
     <parallelGateway gatewayDirection="Unspecified" id="_6" name="ParallelGateway"/>
     <exclusiveGateway gatewayDirection="Unspecified" id="_7" name="ExclusiveGateway"/>
     <endEvent id="_8" name="EndEvent"/>
-    <userTask activiti:assignee="#{schoolManagerName}" activiti:exclusive="true" id="schoolManager" name="校长批准"/>
+    <userTask activiti:assignee="#{schoolManagerName}" activiti:exclusive="true" id="schoolManager" name="校长审批"/>
     <sequenceFlow id="_11" sourceRef="_4" targetRef="teacher"/>
     <sequenceFlow id="_12" sourceRef="_4" targetRef="classLeader"/>
     <sequenceFlow id="_13" sourceRef="classLeader" targetRef="_6"/>
