@@ -3,7 +3,7 @@ package com.test.pojo;
 public class Report {
     private int rid;
     private Student student;
-    private int month;
+    private int yue;
     private int week;
     private String title;
     private String content;
@@ -14,7 +14,7 @@ public class Report {
         return "Report{" +
                 "rid=" + rid +
                 ", student=" + student +
-                ", month=" + month +
+                ", yue=" + yue +
                 ", week=" + week +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
@@ -38,12 +38,12 @@ public class Report {
         this.student = student;
     }
 
-    public int getMonth() {
-        return month;
+    public int getYue() {
+        return yue;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
+    public void setYue(int yue) {
+        this.yue = yue;
     }
 
     public int getWeek() {

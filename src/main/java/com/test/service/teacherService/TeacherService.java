@@ -14,4 +14,6 @@ public interface TeacherService {
     public Teacher getTeacherByTid(int tid);//查找一个老师
 
     public List<Teacher> getTeacherList();//获取老师列表
+
+    public Teacher getTeacherByUid(int uid);//根据uid获取老师对象
 }
