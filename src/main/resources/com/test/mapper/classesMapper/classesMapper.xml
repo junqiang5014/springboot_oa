@@ -6,6 +6,7 @@
 
     <resultMap id="classesMap" type="classes">
 
+
     </resultMap>
     <insert id="addClass" parameterType="classes" useGeneratedKeys="true" keyProperty="cid">
         insert into classes(cname,tid,clid) values (#{cname},#{teacher.tid},#{classleader.clid})
