@@ -6,6 +6,8 @@ public class User {
     private String upwd;
     private Role role;
 
+    // test1 ---xin
+
     @Override
     public String toString() {
         return "User{" +
