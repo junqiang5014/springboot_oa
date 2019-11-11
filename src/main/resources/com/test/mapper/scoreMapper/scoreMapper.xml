@@ -13,6 +13,33 @@
 
 <!--    public List<Score> getScoreList();-->
     <insert id="addScore" parameterType="score">
-        insert into score(score,sid,stage,courseid) values (#{score},#{student.sid},)
+        insert into scores(score,sid,stage,courseid) values (#{score},#{student.sid},)
     </insert>
+    <delete id="deleteScoreByScoreid" parameterType="int" >
+        delete from scores where scoreid=#{scoreid}
+    </delete>
+    <update id="updateScore" parameterType="score" >
+        update scores set score=#{score},sid=#{student.sid},stage=#{stage},courseid=@{course.courseid}
+    </update>
+    <select id="getScoreByScoreid" parameterType="int" resultMap="scoreMap">
+        select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid and scores.scoreid=#{scoreid}
+    </select>
+    <select id="getScoreList" resultMap="scoreMap" >
+        select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid
+    </select>
+    <resultMap id="scoreMap" type="score">
+        <id property="scoreid" column="scoreid"></id>
+        <result property="score" column="score"></result>
+        <result property="stage" column="stage"></result>
+        <association property="student" column="sid" javaType="student">
+            <id property="stuid" column="stuid"></id>
+            <result property="stuname" column="stuname"></result>
+            <result property="stuage" column="stuage"></result>
+            <result property="stusex" column="stusex"></result>
+        </association>
+        <association property="ccourse" column="courseid" javaType="course">
+            <id property="courseid" column="coursename"></id>
+            <result property="coursename" column="coursename"></result>
+        </association>
+    </resultMap>
 </mapper>
