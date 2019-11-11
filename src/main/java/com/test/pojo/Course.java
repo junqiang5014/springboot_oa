@@ -3,12 +3,14 @@ package com.test.pojo;
 public class Course {
     private int courseId;
     private String courseName;
+    private Teacher teacher;
 
     @Override
     public String toString() {
-        return "Courses{" +
+        return "Course{" +
                 "courseId=" + courseId +
                 ", courseName='" + courseName + '\'' +
+                ", teacher=" + teacher +
                 '}';
     }
 
@@ -26,5 +28,13 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
