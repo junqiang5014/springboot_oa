@@ -41,4 +41,9 @@ public class ClassesServiceImpl implements ClassesService {
     public Classes getClassesByTid(int tid) {
         return classesMapper.getClassesByTid(tid);
     }
+
+    @Override
+    public Classes getClassByCid2(int cid) {
+        return classesMapper.getClassByCid2(cid);
+    }
 }
