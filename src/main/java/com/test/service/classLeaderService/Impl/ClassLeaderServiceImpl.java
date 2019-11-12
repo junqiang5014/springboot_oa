@@ -54,13 +54,16 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
         return classLeaderMapper.insertStudentMessage(student);
     }
 
+
     @Override
-    public List<Score> selectScoreByStuname(Student student) {
-        return classLeaderMapper.selectScoreByStuname(student);
+    public List<Score> selectScoreAvg(String cname) {
+        return classLeaderMapper.selectScoreAvg(cname);
     }
 
     @Override
-    public List<Score> selectScore() {
-        return classLeaderMapper.selectScore();
+    public Score selectScoreByStuname(String stuname) {
+        return classLeaderMapper.selectScoreByStuname(stuname);
     }
+
+
 }

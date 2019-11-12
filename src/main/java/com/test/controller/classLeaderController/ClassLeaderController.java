@@ -3,6 +3,7 @@ package com.test.controller.classLeaderController;
 
 import com.test.pojo.ClassLeader;
 import com.test.pojo.Report;
+import com.test.pojo.Score;
 import com.test.pojo.User;
 import com.test.service.classLeaderService.ClassLeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,14 @@ public class ClassLeaderController {
         return "success";
     }
 
+    @RequestMapping("selectScoreAvg")
+    @ResponseBody
+    public String selectScoreAvg( ) {
+        List<Score> scoreList= classLeaderService.selectScoreAvg("java");
+        System.out.println(scoreList);
+        return "success";
+    }
 
 }
+
+

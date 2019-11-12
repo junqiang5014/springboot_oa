@@ -23,9 +23,9 @@ public interface ClassLeaderService {
     //导入学生信息
     public int insertStudentMessage(Student student);
 
-    //查看单个学生的成绩
-    public List<Score> selectScoreByStuname(Student student);
+    //查看班级平均成绩
+    public List<Score> selectScoreAvg(String cname);
 
-    //查看所有学生的成绩
-    public List<Score> selectScore();
+    //查看学生成绩走势
+    public Score selectScoreByStuname(String stuname);
 }

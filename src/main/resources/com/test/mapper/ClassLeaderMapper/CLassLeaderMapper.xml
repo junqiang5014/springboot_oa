@@ -43,11 +43,37 @@
 
     <!--  导入学生信息 -->
    <insert id="insertStudentMessage" parameterType="student">
-       insert into students (stuname,stuage,stusex,cid) values(#{stuname},#{stuage},#{stusex},#{cid})
+       insert into students (stuname,stuage,stusex,cid) values(#{stuname},#{stuage},#{stusex},#{classes.cid})
    </insert>
-    <!--  查看单个学生的成绩 -->
-   <select id="selectScoreByStuname" resultType="score" parameterType="student">
-       select scoreid,score ,stage from scores  inner join students on scores.sid=students.stuid where stuname=#{stuname}
-   </select>
+
+    <!--查看班级平均成绩-->
+    <select id="selectScoreAvg" resultMap="Avg1">
+        select   c.cname ,stage,AVG(score) from scores a INNER JOIN students  b on a.stuid=b.stuid
+        INNER JOIN classes c on c.cid=b.cid where c.cname='java' GROUP BY  stage
+    </select>
+    <resultMap id="Avg1" type="score">
+        <id column="scoreid" property="scoreid"></id>
+        <result property="score" column="score"></result>
+        <result column="stage" property="stage"></result>
+        <association property="student" column="stuid" javaType="student" resultMap="stuAvg"></association>
+    </resultMap>
+    <resultMap id="stuAvg" type="student">
+        <id property="stuid" column="stuid"></id>
+        <result property="stuname" column="stuname"></result>
+        <result property="stuage" column="stuage"></result>
+        <result property="stusex" column="stusex"></result>
+        <result property="cid" column="cid"></result>
+        <association property="classes" javaType="classes" column="cid" resultMap="classAvg"></association>
+    </resultMap>
+    <resultMap id="classAvg" type="classes">
+        <id column="cid" property="cid"></id>
+        <result column="cname" property="cname"></result>
+    </resultMap>
+
+<!--
+
+    //查看学生成绩走势
+    public Score selectScoreByStuname(String stuname);-->
+
 
  </mapper>
