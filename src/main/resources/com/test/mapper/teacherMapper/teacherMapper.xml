@@ -33,4 +33,13 @@
     <select id="getTeacherByUid" parameterType="int" resultMap="teacherMap">
         select * from teachers inner join users on teachers.uid=users.uid
     </select>
+    <select id="getStudentListByTid" parameterType="int" resultMap="studentMap">
+        select * from teachers inner join classes on teachers.tid=classes.tid inner join students on classes.cid=students.cid
+    </select>
+    <resultMap id="studentMap" type="studnet">
+        <id property="sid" column="sid"></id>
+        <result property="sname" column="sname"/>
+        <result property="stuage" column="stuage"/>
+        <result property="stusex" column="stusex"/>
+    </resultMap>
 </mapper>
