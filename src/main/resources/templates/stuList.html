@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+   <table>
+       <tr>
+           <th>序号</th>
+           <th>姓名</th>
+           <th>年龄</th>
+           <th>性别</th>
+       </tr>
+       <tr th:each="student,var:${studentAndClassList}">
+           <td th:text="${var.count}"></td>
+           <td th:text="${student.stuname}"></td>
+           <td th:text="${student.stuage}"></td>
+           <td th:text="${student.stusex}"></td>
+       </tr>
+   </table>
+
+</body>
+</html>
