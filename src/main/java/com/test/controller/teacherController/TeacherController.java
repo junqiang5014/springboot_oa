@@ -234,7 +234,14 @@ public class TeacherController {
             int score = scoreService.getScoreByStuid_stage(stuid,stage);
             scoreList.add(score);
         }
-        model.addAttribute("scoreList", scoreList);
+        ArrayList<String> names = new ArrayList<>();
+        names.add("第1阶段");
+        names.add("第2阶段");
+        names.add("第3阶段");
+        names.add("第4阶段");
+        names.add("第5阶段");
+        model.addAttribute("names", names);
+        model.addAttribute("datas", scoreList);
         return "studentScoreList";
     }
 }
