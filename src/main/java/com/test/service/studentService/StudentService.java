@@ -12,6 +12,7 @@ public interface StudentService {
      * 修改学生个人信息
      * @param student
      * @return
+     *
      */
     public int updateStudentByUser(Student student, User user);
 
