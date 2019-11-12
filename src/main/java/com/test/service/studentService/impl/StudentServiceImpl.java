@@ -7,6 +7,8 @@ import com.test.service.studentService.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
@@ -30,5 +32,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentByUser(User user) {
         return studentMapper.getStudentByUser(user);
+    }
+
+    @Override
+    public List<Student> getStudentAndClassList() {
+        return studentMapper.getStudentAndClassList();
+    }
+
+    @Override
+    public int updateStudent(Student student) {
+        return studentMapper.updateStudent(student);
+    }
+
+    @Override
+    public Student getStudentByStuid(int stuid) {
+        return studentMapper.getStudentByStuid(stuid);
     }
 }

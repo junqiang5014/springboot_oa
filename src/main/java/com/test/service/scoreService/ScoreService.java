@@ -14,4 +14,6 @@ public interface ScoreService {
     public Score getScoreByScoreid(int scoreid);
 
     public List<Score> getScoreList();
+
+    public List<Score> getScoreListByStuid(int stuid);
 }

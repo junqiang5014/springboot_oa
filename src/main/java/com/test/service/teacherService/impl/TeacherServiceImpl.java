@@ -1,6 +1,7 @@
 package com.test.service.teacherService.impl;
 
 import com.test.mapper.teacherMapper.TeacherMapper;
+import com.test.pojo.Student;
 import com.test.pojo.Teacher;
 import com.test.service.teacherService.TeacherService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,5 +43,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher getTeacherByUid(int uid) {
         return teacherMapper.getTeacherByUid(uid);
+    }
+
+    @Override
+    public List<Student> getStudentListByTid(int tid) {
+        return teacherMapper.getStudentListByTid(tid);
     }
 }

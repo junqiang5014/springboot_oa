@@ -38,4 +38,9 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> getCourseList() {
         return courseMapper.getCourseList();
     }
+
+    @Override
+    public Course getCourseByTid(int tid) {
+        return courseMapper.getCourseByTid(tid);
+    }
 }

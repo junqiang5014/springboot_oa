@@ -1,11 +1,11 @@
 package com.test.controller.teacherController;
 
-import com.test.pojo.Holiday;
-import com.test.pojo.Report;
-import com.test.pojo.Teacher;
-import com.test.pojo.User;
+import com.test.pojo.*;
+import com.test.service.courseService.CourseService;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.reportService.ReportService;
+import com.test.service.scoreService.ScoreService;
+import com.test.service.studentService.StudentService;
 import com.test.service.teacherService.TeacherService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.awt.event.HierarchyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,9 +32,13 @@ public class TeacherController {
     @Autowired
     private ReportService reportService;
     @Autowired
-    private RuntimeService runtimeService;
-    @Autowired
     private HolidayService holidayService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private ScoreService scoreService;
 
     @RequestMapping("changeUpwdPage")
     public String changeUpwdPage(HttpSession session){
@@ -102,8 +105,34 @@ public class TeacherController {
     }
 
     @RequestMapping("approveHoliday")
-    public String approveHoliday(Holiday holiday){
-        holidayService.updateHoliday(holiday)
+    public String approveHoliday(int hid){
+        holidayService.changeStateByHid(hid);
+        return "redirect:holidayListPage";
     }
+
+    @RequestMapping("scoreStudentListPage")
+    public String scoreEnteringPage(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        //找到该老师所在班级的学生列表
+        List<Student> studentList = teacherService.getStudentListByTid(teacher.getTid());
+        //找到老师的课程
+//        Course course = courseService.getCourseByTid(teacher.getTid());
+        model.addAttribute("studentList", studentList);
+//        model.addAttribute("course", course);
+        return "scoreStudentList";
+    }
+
+    @RequestMapping("studentScoreListPage")
+    public String scoreEntering(int stuid,Model model){
+        //根据stuid找到该学生的成绩
+        List<Score> scoreList = scoreService.getScoreListByStuid(stuid);
+        if (scoreList.size()!=0){
+            model.addAttribute("scoreList", scoreList);
+        }
+        return "studentScoreList";
+    }
+
+
 
 }
