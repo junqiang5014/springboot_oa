@@ -13,7 +13,7 @@
 
 <!--    public List<Report> getReportList();-->
     <insert id="addReport" parameterType="report">
-        insert into reports(stuid,yue,week,title,content,score) values (#{student.stuid},#{yue},#{week},#{title},#{content},#{score})
+        insert into reports(stuid,yue,week,title,content) values (#{student.stuid},#{yue},#{week},#{title},#{content})
     </insert>
     <delete id="deleteReportByRid" parameterType="int">
         delete from reports where rid=#{rid}
