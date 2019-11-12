@@ -18,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.awt.event.HierarchyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +32,6 @@ public class TeacherController {
     private RuntimeService runtimeService;
     @Autowired
     private ReportService reportService;
-    @Autowired
-    private RuntimeService runtimeService;
     @Autowired
     private HolidayService holidayService;
     @Autowired
