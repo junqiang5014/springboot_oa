@@ -38,4 +38,9 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> getScoreList() {
         return scoreMapper.getScoreList();
     }
+
+    @Override
+    public List<Score> getScoreListByStuid(int stuid) {
+        return scoreMapper.getScoreListByStuid(stuid);
+    }
 }

@@ -4,6 +4,7 @@ import com.test.pojo.*;
 import com.test.service.courseService.CourseService;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.reportService.ReportService;
+import com.test.service.scoreService.ScoreService;
 import com.test.service.studentService.StudentService;
 import com.test.service.teacherService.TeacherService;
 import org.activiti.engine.RuntimeService;
@@ -36,6 +37,8 @@ public class TeacherController {
     private StudentService studentService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private ScoreService scoreService;
 
     @RequestMapping("changeUpwdPage")
     public String changeUpwdPage(HttpSession session){
@@ -120,9 +123,14 @@ public class TeacherController {
         return "scoreStudentList";
     }
 
-    @RequestMapping("studentScorePage")
-    public String scoreEntering(int stuid){
-        return "s";
+    @RequestMapping("studentScoreListPage")
+    public String scoreEntering(int stuid,Model model){
+        //根据stuid找到该学生的成绩
+        List<Score> scoreList = scoreService.getScoreListByStuid(stuid);
+        if (scoreList.size()!=0){
+            model.addAttribute("scoreList", scoreList);
+        }
+        return "studentScoreList";
     }
 
 
