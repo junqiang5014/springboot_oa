@@ -20,7 +20,7 @@
 
 
     <update id="updateCourse" parameterType="course">
-        update courses set coursename={coursename} where courseid=#{courseid}
+        update courses set coursename=#{coursename} where courseid=#{courseid}
     </update>
 
     <delete id="deleteCourse">
@@ -28,7 +28,7 @@
     </delete>
 
     <insert id="addCourse" parameterType="course">
-        insert into(coursename) values (#{coursename})
+        insert into courses(coursename) values (#{coursename})
     </insert>
 
 
