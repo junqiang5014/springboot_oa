@@ -20,4 +20,6 @@ public interface ClassesMapper {
 
 
 
+
+    public Classes getClassesByTid(int tid);//根据tid找到班级对象
 }
