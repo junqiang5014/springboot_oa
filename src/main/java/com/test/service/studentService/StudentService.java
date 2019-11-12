@@ -26,6 +26,9 @@ public interface StudentService {
     public Student getStudentByStuid(int stuid);
 
     public List<Student> getStudentAndClassList();
+
+    //根据cid找到学生列表
+    public List<Student> getStudentListByCid(int cid);
 }
 
 
