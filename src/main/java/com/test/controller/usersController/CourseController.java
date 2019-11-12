@@ -39,16 +39,28 @@ public class CourseController {
 
 
     @RequestMapping("deleteCourse")
-    public String deleteCourse(int courseid,int pageNum){
+    public String deleteCourse(String courseid,String pageNum){
 
-        System.out.println(courseid);
-        System.out.println(pageNum);
-        int i = courseService.deleteCourse(courseid);
+        int i = courseService.deleteCourse(Integer.parseInt(courseid));
         if(i>0){
             System.out.println("删除成功");
             return "redirect:/getallcourses?pageNum="+pageNum;
         }else
             return "redirect:/getallcourses?pageNum="+pageNum;
+    }
+
+    @RequestMapping("changeCourse")
+    public String changeCourse(Course course){
+        System.out.println(course);
+        courseService.updateCourse(course);
+        return "redirect:/getallcourses";
+    }
+
+
+    @RequestMapping("addCourse")
+    public String addCourse(Course course){
+        courseService.addCourse(course);
+        return "redirect:/getallcourses";
     }
 
 }
