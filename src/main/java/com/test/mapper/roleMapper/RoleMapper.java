@@ -14,4 +14,6 @@ public interface RoleMapper {
     public Role getRoleByRoleid(int roleid);
 
     public List<Role> getRoleList();
+
+//    public Role getRole();
 }
