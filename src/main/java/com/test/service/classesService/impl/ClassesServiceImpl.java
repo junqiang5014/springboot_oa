@@ -36,4 +36,9 @@ public class ClassesServiceImpl implements ClassesService {
     public List<Classes> getClassesList() {
         return classesMapper.getClassesList();
     }
+
+    @Override
+    public Classes getClassesByTid(int tid) {
+        return classesMapper.getClassesByTid(tid);
+    }
 }

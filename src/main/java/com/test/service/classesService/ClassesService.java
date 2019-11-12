@@ -14,4 +14,6 @@ public interface ClassesService {
     public Classes getClassByCid(int cid);//查看一个班级
 
     public List<Classes> getClassesList();//获取班级列表
+
+    public Classes getClassesByTid(int tid);//根据tid找到班级对象
 }
