@@ -13,18 +13,21 @@
         </association>
     </resultMap>
     <insert id="addCourse" parameterType="course" >
-        insert into course (coursename,tid) values (#{coursename},#{tid})
+        insert into courses (coursename,tid) values (#{coursename},#{tid})
     </insert>
     <delete id="deleteCourseByCourseid" parameterType="int">
-        delete form course where courseid=#{courseid}
+        delete form courses where courseid=#{courseid}
     </delete>
     <update id="updateCourse" parameterType="course">
-        update course set coursename=#{coursename},tid=#{teahcer.tid}
+        update courses set coursename=#{coursename},tid=#{teahcer.tid}
     </update>
     <select id="getCourseByCourseid" parameterType="int" resultMap="courseMap">
-        select * from course inner join teacher on course.tid=teacher.tid and courseid=#{courseid}
+        select * from courses inner join teachers on courses.tid=teachers.tid and courseid=#{courseid}
     </select>
     <select id="getCourseList" resultMap="courseMap">
-        select * from course inner join teacher on course.tid=teacher.tid
+        select * from courses inner join teachers on courses.tid=teachers.tid
+    </select>
+    <select id="getCourseByTid" resultMap="courseMap">
+        select * from courses inner join teachers on teachers.tid=courses.tid and teacher.tid=#{tid}
     </select>
 </mapper>

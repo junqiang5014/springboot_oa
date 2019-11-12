@@ -1,9 +1,7 @@
 package com.test.controller.teacherController;
 
-import com.test.pojo.Holiday;
-import com.test.pojo.Report;
-import com.test.pojo.Teacher;
-import com.test.pojo.User;
+import com.test.pojo.*;
+import com.test.service.courseService.CourseService;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.reportService.ReportService;
 import com.test.service.studentService.StudentService;
@@ -36,6 +34,8 @@ public class TeacherController {
     private HolidayService holidayService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private CourseService courseService;
 
     @RequestMapping("changeUpwdPage")
     public String changeUpwdPage(HttpSession session){
@@ -107,11 +107,24 @@ public class TeacherController {
         return "redirect:holidayListPage";
     }
 
-    @RequestMapping("scoreEnteringPage")
-    public String scoreEnteringPage(){
+    @RequestMapping("scoreStudentListPage")
+    public String scoreEnteringPage(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
         //找到该老师所在班级的学生列表
-        return "scoreEntering";
+        List<Student> studentList = teacherService.getStudentListByTid(teacher.getTid());
+        //找到老师的课程
+//        Course course = courseService.getCourseByTid(teacher.getTid());
+        model.addAttribute("studentList", studentList);
+//        model.addAttribute("course", course);
+        return "scoreStudentList";
     }
+
+    @RequestMapping("studentScorePage")
+    public String scoreEntering(int stuid){
+        return "s";
+    }
+
 
 
 }

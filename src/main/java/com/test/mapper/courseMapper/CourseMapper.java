@@ -14,4 +14,6 @@ public interface CourseMapper {
     public Course getCourseByCourseid(int courseid);
 
     public List<Course> getCourseList();
+
+    public Course getCourseByTid(int tid);//根据tid找到课程
 }
