@@ -5,7 +5,7 @@ import com.test.pojo.User;
 
 import java.util.List;
 
-public interface StudentMapper2 {
+public interface StudentMapper {
 
     public int updateStudentByUser(Student student);
 
