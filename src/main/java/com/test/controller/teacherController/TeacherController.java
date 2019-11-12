@@ -137,6 +137,7 @@ public class TeacherController {
      * @param stuid
      * @param model
      * @return
+     *
      */
     @RequestMapping("studentScoreListPage")
     public String scoreEntering(int stuid,Model model){
