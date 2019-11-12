@@ -38,4 +38,9 @@ public class HolidayServiceImpl implements HolidayService {
     public List<Holiday> getHolidayList() {
         return holidayMapper.getHolidayList();
     }
+
+    @Override
+    public int changeStateByHid(int hid) {
+        return holidayMapper.changeStateByHid(hid);
+    }
 }
