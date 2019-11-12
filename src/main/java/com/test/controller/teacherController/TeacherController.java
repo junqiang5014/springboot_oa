@@ -102,8 +102,9 @@ public class TeacherController {
     }
 
     @RequestMapping("approveHoliday")
-    public String approveHoliday(Holiday holiday){
-        holidayService.updateHoliday(holiday)
+    public String approveHoliday(int hid){
+        holidayService.changeStateByHid(hid);
+        return "redirect:holidayListPage";
     }
 
 }
