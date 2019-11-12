@@ -210,4 +210,31 @@ public class TeacherController {
         return "teacher/classAverageScore";
     }
 
+    /**
+     * 某名学生各阶段分数走势图的学生列表
+     */
+    @RequestMapping("studentListForScorePage")
+    public String studentList(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        Classes classes = classesService.getClassesByTid(teacher.getTid());
+        List<Student> studentList = studentService.getStudentListByCid(classes.getCid());
+        model.addAttribute("studentList", studentList);
+        return "studentListForScore";
+    }
+
+    /**
+     * 获取学生各个阶段的成绩list
+     */
+    @RequestMapping("studentScoreList")
+    public String studentScoreList(int stuid,Model model){
+        List<Integer> scoreList = new ArrayList<Integer>();
+        for (int i = 1;i < 6;i++){
+            int stage = i;
+            int score = scoreService.getScoreByStuid_stage(stuid,stage);
+            scoreList.add(score);
+        }
+        model.addAttribute("scoreList", scoreList);
+        return "studentScoreList";
+    }
 }
