@@ -4,7 +4,7 @@ import com.test.mapper.teacherMapper.TeacherMapper;
 import com.test.pojo.Student;
 import com.test.pojo.Teacher;
 import com.test.service.teacherService.TeacherService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
-    @Qualifier
+    @Autowired
     public TeacherMapper teacherMapper;
 
     @Override

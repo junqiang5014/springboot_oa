@@ -1,5 +1,6 @@
 package com.test.service.scoreService;
 
+import com.test.pojo.Classes;
 import com.test.pojo.Score;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface ScoreService {
 
     public List<Score> getScoreListByStuid(int stuid);
 
-    public List<Score> getScoreListByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
+    public int getScoreByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
+
+    public int getClassAverageScore(Classes classes, int stage);
 }
