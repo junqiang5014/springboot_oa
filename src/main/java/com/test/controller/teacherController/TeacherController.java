@@ -6,6 +6,7 @@ import com.test.pojo.Teacher;
 import com.test.pojo.User;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.reportService.ReportService;
+import com.test.service.studentService.StudentService;
 import com.test.service.teacherService.TeacherService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -36,6 +37,8 @@ public class TeacherController {
     private RuntimeService runtimeService;
     @Autowired
     private HolidayService holidayService;
+    @Autowired
+    private StudentService studentService;
 
     @RequestMapping("changeUpwdPage")
     public String changeUpwdPage(HttpSession session){
@@ -106,5 +109,12 @@ public class TeacherController {
         holidayService.changeStateByHid(hid);
         return "redirect:holidayListPage";
     }
+
+    @RequestMapping("scoreEnteringPage")
+    public String scoreEnteringPage(){
+        //找到该老师所在班级的学生列表
+        return "scoreEntering";
+    }
+
 
 }
