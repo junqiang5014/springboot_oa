@@ -1,5 +1,6 @@
 package com.test.mapper.teacherMapper;
 
+import com.test.pojo.Student;
 import com.test.pojo.Teacher;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface TeacherMapper {
     public Teacher getTeacherByUid(int uid);//根据uid获取老师对象
 
     public List<Teacher> getTeacherList();//获取老师列表
+
+    public List<Student> getStudentListByTid(int tid);//找到该老师所在班级的学生列表
 }
