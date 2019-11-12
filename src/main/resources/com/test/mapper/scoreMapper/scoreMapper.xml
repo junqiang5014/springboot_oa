@@ -22,7 +22,7 @@
         select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid and scores.sid=#{sid}
     </select>
     <select id="getScoreListByStuid_stage" resultMap="scoreMap" >
-
+        select * from scores where stuid=#{arge[0]} and stage=#{arge[1]}
     </select>
     <resultMap id="scoreMap" type="score">
         <id property="scoreid" column="scoreid"></id>
