@@ -5,7 +5,6 @@ package com.test.controller.classLeaderController;
 import com.test.pojo.ClassLeader;
 import com.test.pojo.Report;
 import com.test.pojo.Score;
-import com.test.pojo.User;
 import com.test.service.classLeaderService.ClassLeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,6 +52,8 @@ public class ClassLeaderController {
         System.out.println(scoreList);
         return "success";
     }
+
+
 
 }
 

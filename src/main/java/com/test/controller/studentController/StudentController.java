@@ -1,12 +1,15 @@
 package com.test.controller.studentController;
 
+import com.test.pojo.Report;
 import com.test.pojo.Student;
 import com.test.pojo.User;
+import com.test.service.reportService.ReportService;
 import com.test.service.studentService.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -15,6 +18,16 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private ReportService reportService;
+
+    public ReportService getReportService() {
+        return reportService;
+    }
+
+    public void setReportService(ReportService reportService) {
+        this.reportService = reportService;
+    }
 
     public StudentService getStudentService() {
         return studentService;
@@ -56,9 +69,45 @@ public class StudentController {
         model.addAttribute(student);
         return "update";
 
+    }
 
+
+
+    @RequestMapping("saveReport")
+    public String saveReport(){
+        return "add";
 
     }
+
+    @RequestMapping("addReport")
+        public String addReport(Report report){
+        int i = reportService.addReport(report);
+        if(i>0){
+            return "redirect:";
+        }
+        return "redirect:saveReport";
+    }
+
+    @RequestMapping("deleteReport")
+    @ResponseBody
+    public String deleteReport(int rid){
+        int i = reportService.deleteReportByRid(rid);
+        if(i>0){
+            return "success";
+
+        }
+        return "fail";
+
+    }
+
+    @RequestMapping("getReportList")
+    public String getReportList(Model model){
+        List<Report> reportList = reportService.getReportList();
+        model.addAttribute(reportList);
+        return "resportlist";
+    }
+
+
 
 
 
