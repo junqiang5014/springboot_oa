@@ -2,9 +2,7 @@
 package com.test.controller.classLeaderController;
 
 
-import com.test.pojo.ClassLeader;
-import com.test.pojo.Report;
-import com.test.pojo.Score;
+import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,9 +46,17 @@ public class ClassLeaderController {
     @RequestMapping("selectScoreAvg")
     @ResponseBody
     public String selectScoreAvg( ) {
-        List<Score> scoreList= classLeaderService.selectScoreAvg("java");
+        List<AllColumn> scoreList= classLeaderService.selectScoreAvg("java");
         System.out.println(scoreList);
         return "success";
+    }
+
+    @RequestMapping("selectScoreByStuname")
+    @ResponseBody
+    public String selectScoreByStuname() {
+      List<AllColumn> scoreList= classLeaderService.selectScoreByStuname("xin");
+      System.out.println(scoreList);
+      return "success";
     }
 
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head  >
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Bootstrap Dashboard</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="all,follow"/>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css"/>
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css"/>
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="css/fontastic.css"/>
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="css/grasp_mobile_progress_circle-1.0.0.min.css"/>
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"/>
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet"/>
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css"/>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+
+    <div class="page">
+      <!-- navbar-->
+      <div style="margin-left: 50px;margin-top: 50px" class="brand-text d-none d-md-inline-block"><strong class="text-primary">课程管理</strong></div></a></div>
+
+      <!-- Breadcrumb-->
+      <div class="breadcrumb-holder" style="width: 1000px;height: 70px">
+        <div class="container-fluid" style="width: 1000px;height: 80px">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a style="width: 120px;height:40px" href="index.html">强哥办公</a></li>
+            <li class="breadcrumb-item active" style="width: 120px;height: 40px">made by fulin       </li>
+          </ul>
+        </div>
+      </div>
+      <section>
+        <div class="container-fluid">
+          <!-- Page Header-->
+          <header> 
+            <h1 class="h3 display">Tables            </h1>
+          </header>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4>增加课程</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <p>
+                      <button data-toggle="modal" data-target="#myModal" id="addCourse" type="button" class="btn btn-primary">添加课程</button><br/><br/>
+                    </p>
+                    <p class="lead">强哥办公OA</p>
+                    <p class="lead">made by fulin</p>
+                    <img src="/img/dongtu.gif" style="width: 100%;height: 100%">
+
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title" id="myModalLabel">添加课程</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form action="addCourse">
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="添加课程" name="coursename"><br/>
+                                <button type="submit" class="btn btn-default">添加</button>
+                              </div>
+
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                          </div>
+
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal -->
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-header">
+                  <h4>课程列表</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>序号</th>
+                          <th>课程名称</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        查询的课程数据
+
+                          <tr th:each="i,var:${pageInfo.list}">
+                            <form action="changeCourse">
+                              <td >
+                                <input class="form-control" type="text" th:value="${var.count}" disabled />
+                                <input  type="hidden" name="courseid" th:value="${i.courseid}">
+                              </td>
+                              <td>
+                                <input class="form-control" type="text" name="coursename" th:value="${i.coursename}"/>
+                              </td>
+                              <td >
+                                <a class="btn btn-default" th:href="@{deleteCourse(pageNum=${pageNum},courseid=${i.courseid})}" th:text="删除"></a>
+                                <input  class="btn btn-default" type="submit" value="修改">
+                              </td>
+                            </form>
+                          </tr>
+
+                      </tbody>
+                    </table>
+                    <a th:href="@{getallcourses(pageNum=${pageInfo.navigateFirstPage})}" th:text="首页   "></a>
+
+                    <span th:if="${!pageInfo.hasPreviousPage}"  th:text="上一页  "></span>
+                    <a th:if="${pageInfo.hasPreviousPage}" th:href="@{getallcourses(pageNum=${pageInfo.prePage})}" th:text="上一页  "></a>&nbsp;&nbsp;
+
+                    <span th:each="i:${pageInfo.navigatepageNums}">
+                       <span th:if="${pageInfo.pageNum == i}" th:text="${i}+'   '"></span>
+                       <a   th:if="${pageInfo.pageNum != i}" th:href="@{getallcourses(pageNum=${i})  }" th:text="${i}+'   '"></a>
+                    </span>
+
+                    <span th:if="${!pageInfo.hasNextPage}" th:text="下一页  "></span>
+                    <a th:if="${pageInfo.hasNextPage}" th:href="@{getallcourses(pageNum=${pageInfo.nextPage})}" th:text="下一页  "></a>
+
+                    <a th:href="@{getallcourses(pageNum=${pageInfo.navigateLastPage})}" th:text="尾页  "></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </section>
+      <footer class="main-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Bootstrapious All rights reserved.  &copy; 2017-2019</p>
+            </div>
+            <div class="col-sm-6 text-right">
+               <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">强哥办公OA</a> - made by fulin <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+              
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- JavaScript files-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+  </body>
+</html>

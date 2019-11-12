@@ -49,32 +49,25 @@
 
     <!--查看班级平均成绩-->
     <select id="selectScoreAvg" resultMap="Avg1" parameterType="java.lang.String">
-        select   c.cname ,stage,AVG(score) from scores a INNER JOIN students  b on a.stuid=b.stuid
-        INNER JOIN classes c on c.cid=b.cid where c.cname=#{cname} GROUP BY  stage
+        select  cname, score,stage,AVG(score) from scores   INNER JOIN students  on scores.stuid=students.stuid
+        INNER JOIN classes  on classes.cid=students.cid where classes.cname=#{cname} GROUP BY  stage
     </select>
-    <resultMap id="Avg1" type="score">
-        <id column="scoreid" property="scoreid"></id>
-        <result property="score" column="score"></result>
-        <result column="stage" property="stage"></result>
-        <association property="student" column="stuid" javaType="student" resultMap="stuAvg"></association>
+    <resultMap id="Avg1" type="ALLColumn">
+        <id column="score" property="score"></id>
+        <result property="cname" column="cname"></result>
+        <result property="stage" column="stage"></result>
+        <result column="AVG(score)" property="AVG"></result>
     </resultMap>
-    <resultMap id="stuAvg" type="student">
-        <id property="stuid" column="stuid"></id>
+
+
+   <!--查看学生成绩走势-->
+    <select id="selectScoreByStuname" resultMap="selectScore1">
+        select  stuname,score,stage  from students  INNER JOIN scores   on students.stuid=scores.stuid  where stuname=#{stuname}
+    </select>
+    <resultMap id="selectScore1" type="ALLColumn">
         <result property="stuname" column="stuname"></result>
-        <result property="stuage" column="stuage"></result>
-        <result property="stusex" column="stusex"></result>
-        <result property="cid" column="cid"></result>
-        <association property="classes" javaType="classes" column="cid" resultMap="classAvg"></association>
+        <result column="score" property="score"></result>
+        <result column="stage" property="stage"></result>
     </resultMap>
-    <resultMap id="classAvg" type="classes">
-        <id column="cid" property="cid"></id>
-        <result column="cname" property="cname"></result>
-    </resultMap>
-
-<!--
-
-    //查看学生成绩走势
-    public Score selectScoreByStuname(String stuname);-->
-
 
  </mapper>

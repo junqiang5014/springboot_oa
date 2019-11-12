@@ -4,7 +4,6 @@ import com.test.mapper.ClassLeaderMapper.CLassLeaderMapper;
 import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,13 +55,14 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
 
 
     @Override
-    public List<Score> selectScoreAvg(String cname) {
+    public List<AllColumn> selectScoreAvg(String cname) {
         return classLeaderMapper.selectScoreAvg(cname);
     }
 
     @Override
-    public Score selectScoreByStuname(String stuname) {
+    public List<AllColumn> selectScoreByStuname(String stuname) {
         return classLeaderMapper.selectScoreByStuname(stuname);
     }
+
 
 }
