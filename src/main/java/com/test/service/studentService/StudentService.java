@@ -3,6 +3,8 @@ package com.test.service.studentService;
 import com.test.pojo.Student;
 import com.test.pojo.User;
 
+import java.util.List;
+
 public interface StudentService {
 
     /**
@@ -18,4 +20,14 @@ public interface StudentService {
      * @return
      */
     public Student getStudentByUser(User user);
+
+    /**
+     * 查询学生班级列表
+     * @return
+     */
+    public List<Student> getStudentAndClassList();
+
+    public int updateStudent(Student student);
+
+    public Student getStudentByStuid(int stuid);
 }
