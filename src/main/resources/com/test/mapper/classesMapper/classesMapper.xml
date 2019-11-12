@@ -31,6 +31,9 @@
     <select id="getClassesList" resultMap="classesMap">
         select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleaders.clid
     </select>
+    <select id="getClassByCid2" parameterType="int">
+        select * from classes where cid=#{cid}
+    </select>
     <select id="getClassesByTid" resultType="classes">
         select * from classes where tid=#{tid}
     </select>
