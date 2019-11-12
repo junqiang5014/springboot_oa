@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.scoreMapper.ScoreMapper">
     <insert id="addScore" parameterType="score">
-        insert into scores(score,sid,stage,courseid) values (#{score},#{student.sid},)
+        insert into scores(score,sid,stage,courseid) values (#{score},#{student.sid},#{stage},#{course.courseid})
     </insert>
     <delete id="deleteScoreByScoreid" parameterType="int" >
         delete from scores where scoreid=#{scoreid}
@@ -17,6 +17,12 @@
     </select>
     <select id="getScoreList" resultMap="scoreMap" >
         select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid
+    </select>
+    <select id="getScoreListByStuid" resultMap="scoreMap">
+        select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid and scores.sid=#{sid}
+    </select>
+    <select id="getScoreListByStuid_stage" resultMap="scoreMap" >
+        select * from scores where stuid=#{arge[0]} and stage=#{arge[1]}
     </select>
     <resultMap id="scoreMap" type="score">
         <id property="scoreid" column="scoreid"></id>

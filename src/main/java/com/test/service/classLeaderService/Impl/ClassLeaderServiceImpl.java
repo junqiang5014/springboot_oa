@@ -1,10 +1,7 @@
 package com.test.service.classLeaderService.Impl;
 
 import com.test.mapper.ClassLeaderMapper.CLassLeaderMapper;
-import com.test.pojo.ClassLeader;
-import com.test.pojo.Report;
-import com.test.pojo.Score;
-import com.test.pojo.Student;
+import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Configuration
+@Service
 public class ClassLeaderServiceImpl implements ClassLeaderService {
 
     public CLassLeaderMapper getcLassLeaderMapper() {
@@ -25,6 +22,11 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
 
     @Autowired
     private CLassLeaderMapper classLeaderMapper;
+
+    @Override
+    public List<User> selectUser() {
+        return classLeaderMapper.selectUser();
+    }
 
     @Override
     public ClassLeader selectMessage(int clid) {
@@ -52,13 +54,16 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
         return classLeaderMapper.insertStudentMessage(student);
     }
 
+
     @Override
-    public List<Score> selectScoreByStuname(Student student) {
-        return classLeaderMapper.selectScoreByStuname(student);
+    public List<Score> selectScoreAvg(String cname) {
+        return classLeaderMapper.selectScoreAvg(cname);
     }
 
     @Override
-    public List<Score> selectScore() {
-        return classLeaderMapper.selectScore();
+    public Score selectScoreByStuname(String stuname) {
+        return classLeaderMapper.selectScoreByStuname(stuname);
     }
+
+
 }

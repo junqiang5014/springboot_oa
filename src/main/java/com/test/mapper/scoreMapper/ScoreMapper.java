@@ -14,4 +14,8 @@ public interface ScoreMapper {
     public Score getScoreByScoreid(int scoreid);
 
     public List<Score> getScoreList();
+
+    public List<Score> getScoreListByStuid(int stuid);
+
+    public List<Score> getScoreListByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
 }

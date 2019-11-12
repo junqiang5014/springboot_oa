@@ -38,4 +38,9 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> getRoleList() {
         return roleMapper.getRoleList();
     }
+
+    @Override
+    public Role getRole() {
+        return roleMapper.getRole();
+    }
 }
