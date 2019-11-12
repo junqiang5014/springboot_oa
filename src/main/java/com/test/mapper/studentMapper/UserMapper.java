@@ -1,12 +1,10 @@
-package com.test.mapper.userMapper;
+package com.test.mapper.studentMapper;
 
 import com.test.pojo.User;
 
 import java.util.List;
 
-public interface UsersMapper {
-
-    public User getUserByUname(String uname);//aa
+public interface UserMapper {
 
     /**
      * 根据角色修改密码

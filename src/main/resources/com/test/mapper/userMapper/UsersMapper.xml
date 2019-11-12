@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.userMapper.UsersMapper">
 
+    <update id="updateUpwdByUser" parameterType="user">
+        update users set upwd=#{upwd} where roleid=#{roles.roleid}
+    </update>
+    <select id="getUpwdByUname" parameterType="java.lang.String">
+        select upwd from users where uname=#{uname}
+    </select>
+    <select id="getUserAndRole" resultType="user" resultMap="userMap">
+        select * from users
+    </select>
     <select id="getUserByUname" parameterType="java.lang.String" resultMap="userMap">
         select * from users where uname=#{uname}
     </select>

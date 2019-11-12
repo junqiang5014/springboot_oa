@@ -3,13 +3,10 @@ package com.test.mapper.studentMapper;
 import com.test.pojo.Student;
 import com.test.pojo.User;
 
+import java.util.List;
+
 public interface StudentMapper {
 
-    /**
-     * 修改学生个人信息
-     * @param student
-     * @return
-     */
     public int updateStudentByUser(Student student);
 
     /**
@@ -18,4 +15,14 @@ public interface StudentMapper {
      * @return
      */
     public Student getStudentByUser(User user);
+
+    /**
+     * 查询学生班级列表
+     * @return
+     */
+    public List<Student> getStudentAndClassList();
+
+    public int updateStudent(Student student);
+
+    public Student getStudentByStuid(int stuid);
 }

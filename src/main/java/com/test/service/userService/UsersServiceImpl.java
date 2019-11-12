@@ -5,6 +5,8 @@ import com.test.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersServiceImpl implements UsersService {
     @Autowired
@@ -12,6 +14,26 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public User getUserByUname(String uname) {
         return usersMapper.getUserByUname(uname);
+    }
+
+    @Override
+    public String getUpwdByUname(String uname) {
+        return usersMapper.getUpwdByUname(uname);
+    }
+
+    @Override
+    public String getRoleByUname(String uname) {
+        return usersMapper.getRoleByUname(uname);
+    }
+
+    @Override
+    public List<User> getUserAndRole() {
+        return usersMapper.getUserAndRole();
+    }
+
+    @Override
+    public int updateUpwdByUser(User user) {
+        return usersMapper.updateUpwdByUser(user);
     }
 
 }

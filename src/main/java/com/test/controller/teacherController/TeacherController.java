@@ -1,6 +1,7 @@
 package com.test.controller.teacherController;
 
 import com.test.pojo.*;
+import com.test.service.classesService.ClassesService;
 import com.test.service.courseService.CourseService;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.reportService.ReportService;
@@ -39,6 +40,8 @@ public class TeacherController {
     private CourseService courseService;
     @Autowired
     private ScoreService scoreService;
+    @Autowired
+    private ClassesService classesService;
 
     @RequestMapping("changeUpwdPage")
     public String changeUpwdPage(HttpSession session){
@@ -110,6 +113,12 @@ public class TeacherController {
         return "redirect:holidayListPage";
     }
 
+    /**
+     * 老师所在班级的学生列表
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping("scoreStudentListPage")
     public String scoreEnteringPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
@@ -123,6 +132,12 @@ public class TeacherController {
         return "scoreStudentList";
     }
 
+    /**
+     * 学生的所有成绩列表
+     * @param stuid
+     * @param model
+     * @return
+     */
     @RequestMapping("studentScoreListPage")
     public String scoreEntering(int stuid,Model model){
         //根据stuid找到该学生的成绩
@@ -133,6 +148,13 @@ public class TeacherController {
         return "studentScoreList";
     }
 
+    /**
+     * 添加一个学生成绩页面
+     * @param stuid
+     * @param courseid
+     * @param model
+     * @return
+     */
     @RequestMapping("addScorePage")
     public String addScore(int stuid,int courseid,Model model){
         Score score = new Score();
@@ -142,6 +164,13 @@ public class TeacherController {
         return "addScore";
     }
 
+    /**
+     * 添加一个学生成绩
+     * @param score
+     * @param stuid
+     * @param couresid
+     * @return
+     */
     @RequestMapping("addScore")
     public String addScore(Score score,int stuid,int couresid){
         Student student = studentService.getStudentByStuid(stuid);
@@ -152,6 +181,15 @@ public class TeacherController {
         return "scoreStudentListPage";
     }
 
-
+    /**
+     * 找到本班级各阶段平均成绩
+     */
+    @RequestMapping("classAverageScore")
+    public String classAverageScore(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        Classes classes = classesService.getClassesByTid(teacher.getTid());
+        return "";
+    }
 
 }
