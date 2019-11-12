@@ -15,5 +15,5 @@ public interface RoleMapper {
 
     public List<Role> getRoleList();
 
-//    public Role getRole();
+    public Role getRole();
 }
