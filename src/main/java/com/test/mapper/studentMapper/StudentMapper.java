@@ -25,4 +25,8 @@ public interface StudentMapper {
     public int updateStudent(Student student);
 
     public Student getStudentByStuid(int stuid);
+
+    //根据cid找到学生列表
+    public List<Student> getStudentListByCid(int cid);
+
 }

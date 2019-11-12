@@ -1,6 +1,7 @@
 package com.test.service.scoreService.impl;
 
 import com.test.mapper.scoreMapper.ScoreMapper;
+import com.test.pojo.Classes;
 import com.test.pojo.Course;
 import com.test.pojo.Score;
 import com.test.pojo.Student;
@@ -56,5 +57,11 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<Score> getScoreListByStuid_stage(int stuid, int stage) {
         return scoreMapper.getScoreListByStuid_stage(stuid,stage);
+    }
+
+    @Override
+    public int getClassAverageScore(Classes classes, int stage) {
+
+        return 0;
     }
 }
