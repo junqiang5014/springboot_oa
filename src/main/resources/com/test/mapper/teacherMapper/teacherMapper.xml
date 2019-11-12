@@ -36,7 +36,7 @@
     <select id="getStudentListByTid" parameterType="int" resultMap="studentMap">
         select * from teachers inner join classes on teachers.tid=classes.tid inner join students on classes.cid=students.cid
     </select>
-    <resultMap id="studentMap" type="studnet">
+    <resultMap id="studentMap" type="student">
         <id property="sid" column="sid"></id>
         <result property="sname" column="sname"/>
         <result property="stuage" column="stuage"/>
