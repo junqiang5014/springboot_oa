@@ -48,55 +48,7 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
         return classLeaderMapper.selectStudent();
 
     }
-//@Configuration
-public class ClassLeaderServiceImpl {
 
-//    public CLassLeaderMapper getcLassLeaderMapper() {
-//        return classLeaderMapper;
-//    }
-//
-//    public void setcLassLeaderMapper(CLassLeaderMapper cLassLeaderMapper) {
-//        this.classLeaderMapper = cLassLeaderMapper;
-//    }
-//
-//    @Autowired
-//    private CLassLeaderMapper classLeaderMapper;
-//
-//    @Override
-//    public ClassLeader selectMessage(int clid) {
-//        return classLeaderMapper.selectMessage(clid);
-//    }
-//
-//    @Override
-//    public List<Report> selectReport() {
-//        return classLeaderMapper.selectReport();
-//    }
-//
-//    @Override
-//    public List<Report> selectReportByStuname(String stuname) {
-//        return classLeaderMapper.selectReportByStuname(stuname);
-//    }
-//
-//    @Override
-//    public List<Student> selectStudent() {
-//        return classLeaderMapper.selectStudent();
-//
-//    }
-//
-//    @Override
-//    public int insertStudentMessage(Student student) {
-//        return classLeaderMapper.insertStudentMessage(student);
-//    }
-//
-//    @Override
-//    public List<Score> selectScoreByStuname(Student student) {
-//        return classLeaderMapper.selectScoreByStuname(student);
-//    }
-//
-//    @Override
-//    public List<Score> selectScore() {
-//        return classLeaderMapper.selectScore();
-//    }
     @Override
     public int insertStudentMessage(Student student) {
         return classLeaderMapper.insertStudentMessage(student);
@@ -112,6 +64,5 @@ public class ClassLeaderServiceImpl {
     public Score selectScoreByStuname(String stuname) {
         return classLeaderMapper.selectScoreByStuname(stuname);
     }
-
 
 }

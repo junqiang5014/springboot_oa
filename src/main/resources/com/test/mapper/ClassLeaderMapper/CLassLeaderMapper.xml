@@ -36,6 +36,7 @@
   </resultMap>
 
 
+
     <!-- 学生信息查看 -->
     <select id="selectStudent" resultType="student" >
         select stuname,stuage,stusex from students
@@ -47,9 +48,9 @@
    </insert>
 
     <!--查看班级平均成绩-->
-    <select id="selectScoreAvg" resultMap="Avg1">
+    <select id="selectScoreAvg" resultMap="Avg1" parameterType="java.lang.String">
         select   c.cname ,stage,AVG(score) from scores a INNER JOIN students  b on a.stuid=b.stuid
-        INNER JOIN classes c on c.cid=b.cid where c.cname='java' GROUP BY  stage
+        INNER JOIN classes c on c.cid=b.cid where c.cname=#{cname} GROUP BY  stage
     </select>
     <resultMap id="Avg1" type="score">
         <id column="scoreid" property="scoreid"></id>
