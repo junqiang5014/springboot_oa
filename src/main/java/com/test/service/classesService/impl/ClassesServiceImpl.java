@@ -4,9 +4,11 @@ import com.test.mapper.classesMapper.ClassesMapper;
 import com.test.pojo.Classes;
 import com.test.service.classesService.ClassesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClassesServiceImpl implements ClassesService {
 
     @Autowired
