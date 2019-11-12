@@ -18,7 +18,7 @@
         <result property="stuname" column="stuname"></result>
         <result property="stuage" column="stuage"></result>
         <result property="stusex" column="stusex"></result>
-        <association property="cid" column="cid" javaType="class"
+        <association property="classes" column="cid" javaType="classes"
                      select="com.test.mapper.classesMapper.ClassMapper.getClassByCid">
         </association>
     </resultMap>
