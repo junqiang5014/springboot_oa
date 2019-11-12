@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springboot_oa?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://10.30.155.19:3306/springboot_oa?serverTimezone=Asia/Shanghai&characterEncoding=UTF-8&useSSL=false&nullCatalogMeansCurrent=true
     username: root
     password: 111111
     type: com.alibaba.druid.pool.DruidDataSource

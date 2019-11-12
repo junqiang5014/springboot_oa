@@ -1,13 +1,13 @@
-package com.test.service.classLeaderService;
+package com.test.mapper.ClassLeaderMapper;
 
+import com.sun.org.apache.bcel.internal.generic.LSTORE;
 import com.test.pojo.*;
 
 import java.util.List;
 
-public interface ClassLeaderService {
+public interface CLassLeaderMapper {
 
     public List<User> selectUser();
-
     //班主任查看个人资料
     public ClassLeader selectMessage(int clid);
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.ClassLeaderMapper.CLassLeaderMapper">
+    <!-- 查看班主任信息 -->
+    <select id="selectMessage" resultType="com.test.pojo.ClassLeader" parameterType="int">
+    select clid,clname from classleaders  where clid = #{clid}
+    </select>
+
+       <!--查看周报-->
+      <select id="selectReport" resultType="com.test.pojo.Report"  >
+          select yue,week,title,content,score from reports
+      </select>
+
+    <!-- 筛选周报  -->
+  <select id="selectReportByStuname"  resultMap="reports1" parameterType="java.lang.String">
+      select rid,yue,week,title,content,score from reports inner join students on  reports.stuid=students.stuid
+       where  students.stuname=#{stuname}
+  </select>
+  <resultMap id="reports1" type="report">
+      <id column="rid" property="rid"></id>
+      <result column="yue" property="yue"></result>
+      <result column="week" property="week"></result>
+      <result column="title" property="title"></result>
+      <result column="content" property="content"></result>
+      <result column="score" property="score"></result>
+      <association property="student" javaType="student" column="stuid" resultMap="student1"></association>
+  </resultMap>
+  <resultMap id="student1" type="student">
+      <id property="stuid" column="stuid"></id>
+      <result property="stuname" column="stuname"></result>
+      <result property="stuage" column="stuage"></result>
+      <result property="stusex" column="stusex"></result>
+      <result property="cid" column="cid"></result>
+  </resultMap>
+
+
+    <!-- 学生信息查看 -->
+    <select id="selectStudent" resultType="student" >
+        select stuname,stuage,stusex from students
+    </select>
+
+    <!--  导入学生信息 -->
+   <insert id="insertStudentMessage" parameterType="student">
+       insert into students (stuname,stuage,stusex,cid) values(#{stuname},#{stuage},#{stusex},#{classes.cid})
+   </insert>
+
+    <!--查看班级平均成绩-->
+    <select id="selectScoreAvg" resultMap="Avg1">
+        select   c.cname ,stage,AVG(score) from scores a INNER JOIN students  b on a.stuid=b.stuid
+        INNER JOIN classes c on c.cid=b.cid where c.cname='java' GROUP BY  stage
+    </select>
+    <resultMap id="Avg1" type="score">
+        <id column="scoreid" property="scoreid"></id>
+        <result property="score" column="score"></result>
+        <result column="stage" property="stage"></result>
+        <association property="student" column="stuid" javaType="student" resultMap="stuAvg"></association>
+    </resultMap>
+    <resultMap id="stuAvg" type="student">
+        <id property="stuid" column="stuid"></id>
+        <result property="stuname" column="stuname"></result>
+        <result property="stuage" column="stuage"></result>
+        <result property="stusex" column="stusex"></result>
+        <result property="cid" column="cid"></result>
+        <association property="classes" javaType="classes" column="cid" resultMap="classAvg"></association>
+    </resultMap>
+    <resultMap id="classAvg" type="classes">
+        <id column="cid" property="cid"></id>
+        <result column="cname" property="cname"></result>
+    </resultMap>
+
+<!--
+
+    //查看学生成绩走势
+    public Score selectScoreByStuname(String stuname);-->
+
+
+ </mapper>
