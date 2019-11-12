@@ -16,6 +16,8 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public int addScore(Score score) {
+        //根据学生id和stage去重
+
         return scoreMapper.addScore(score);
     }
 

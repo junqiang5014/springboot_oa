@@ -133,6 +133,25 @@ public class TeacherController {
         return "studentScoreList";
     }
 
+    @RequestMapping("addScorePage")
+    public String addScore(int stuid,int courseid,Model model){
+        Score score = new Score();
+        score.setStudent(studentService.getStudentByStuid(stuid));
+        score.setCourse(courseService.getCourseByCourseid(courseid));
+        model.addAttribute("score", score);
+        return "addScore";
+    }
+
+    @RequestMapping("addScore")
+    public String addScore(Score score,int stuid,int couresid){
+        Student student = studentService.getStudentByStuid(stuid);
+        Course course = courseService.getCourseByCourseid(couresid);
+        score.setStudent(student);
+        score.setCourse(course);
+        int i = scoreService.addScore(score);
+        return "scoreStudentListPage";
+    }
+
 
 
 }
