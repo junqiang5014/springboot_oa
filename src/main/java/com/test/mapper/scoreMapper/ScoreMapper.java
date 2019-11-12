@@ -17,7 +17,7 @@ public interface ScoreMapper {
 
     public List<Score> getScoreListByStuid(int stuid);
 
-    public List<Score> getScoreListByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
+    public int getScoreByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
 
     public List<List> getClassesScoreAVG(String className);//获取本班级各阶段平均成绩对比
 

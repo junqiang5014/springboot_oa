@@ -12,6 +12,7 @@ public interface StudentService {
      * 修改学生个人信息
      * @param student
      * @return
+     *
      */
     public int updateStudentByUser(Student student, User user);
 
@@ -25,6 +26,9 @@ public interface StudentService {
     public Student getStudentByStuid(int stuid);
 
     public List<Student> getStudentAndClassList();
+
+    //根据cid找到学生列表
+    public List<Student> getStudentListByCid(int cid);
 }
 
 

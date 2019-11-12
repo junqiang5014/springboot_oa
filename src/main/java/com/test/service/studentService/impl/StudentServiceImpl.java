@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+
     //
     @Autowired
     private StudentMapper studentMapper;
@@ -44,5 +45,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getStudentAndClassList() {
         return studentMapper.getStudentAndClassList();
+    }
+
+    @Override
+    public List<Student> getStudentListByCid(int cid) {
+        return studentMapper.getStudentListByCid(cid);
     }
 }
