@@ -15,4 +15,9 @@ public interface ClassesMapper {
     public Classes getClassByCid(int cid);//查看一个班级
 
     public List<Classes> getClassesList();//获取班级列表
+
+    public Classes getClassByCid2(int cid);//查看一个班级
+
+
+
 }
