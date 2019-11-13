@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface CLassLeaderMapper {
 
-    public List<User> selectUser();
+/*    //班主任修改密码
+    public int updateUpwdByClassLeader(User user);*/
+
     //班主任查看个人资料
     public ClassLeader selectMessage(int clid);
 

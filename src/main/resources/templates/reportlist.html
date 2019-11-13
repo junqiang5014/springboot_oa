@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8"/>
+    <title>周报列表</title>
+    <script th:src="@{js/jquery-1.12.4.js}"></script>
+    <script>
+        $(function(){
+            $(".delBtn").click(function(){
+                var rid = $(this).attr("data");
+                $.post("deleteReport",{rid:rid},function(data){
+                    if(data == "success"){
+                        $("#tr" + rid).remove();
+                    }else{
+                        alert("删除失败");
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>序号</th>
+            <th>月份</th>
+            <th>星期</th>
+            <th>标题</th>
+            <th>内容</th>
+            <th>分数</th>
+            <th>操作</th>
+        </tr>
+        <tr th:id="tr+${report.rid}" th:each="report,var:${reportList}">
+            <td th:text="${var.count}"></td>
+            <td th:text="${report.yue}"></td>
+            <td th:text="${report.week}"></td>
+            <td th:text="${report.title}"></td>
+            <td th:text="${report.content}"></td>
+            <td th:text="${report.score}"></td>
+
+            <td><a href="javascript:void(0)" th:data="${report.rid}" th:text="删除" class="delBtn"></a>
+        </tr>
+
+
+    </table>
+
+
+</body>
+</html>

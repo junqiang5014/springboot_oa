@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <title>个人基本信息修改</title>
 </head>
 <body>
-    <form action="editstudent" method="post">
+    <form action="updatestudent" method="post">
         姓名：<input type="text" name="stuname" th:value="${student.stuname}"/><br/>
         性别：
         <span th:if="${student.stusex=='男'}">

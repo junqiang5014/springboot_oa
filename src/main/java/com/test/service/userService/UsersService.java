@@ -35,6 +35,15 @@ public interface UsersService {
      */
     public int updateUpwdByUser(User user);
 
+    /**
+     * 修改用户密码
+     * @param password 输入没有加密的旧密码
+     * @param newPwd 输入没有加密的新密码
+     * @param cfgPwd 确认密码
+     * @return
+     */
+    public int updateUserPwd(String password,String newPwd,String cfgPwd);
+
 
     //根据uid来删除用户
     public int deleteUser(int uid);

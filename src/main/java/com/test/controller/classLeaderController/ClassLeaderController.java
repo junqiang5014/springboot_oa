@@ -4,6 +4,8 @@ package com.test.controller.classLeaderController;
 
 import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import java.util.List;
 public class ClassLeaderController {
     @Autowired
     private ClassLeaderService classLeaderService;
+    @Autowired
+    private SecurityManager securityManager;
 
     @RequestMapping("selectMessage")
     public String selectMessage(Model model){
@@ -23,6 +27,21 @@ public class ClassLeaderController {
         model.addAttribute("classLeader",classLeader);
         return "viewstu";
     }
+
+   /* @RequestMapping("updateUpwd")
+    @ResponseBody
+    public String updateUpwd(){
+       // session.getAttribute()
+        String uname="classLeader";
+        String upwd="1234";
+        Md5Hash md5Hash =new Md5Hash(upwd);
+        String upwd1 = md5Hash.toString();
+        User user =new User();
+        user.setUpwd(upwd1);
+        user.setUname(uname);
+        classLeaderService.updateUpwdByClassLeader(user);
+        return "success";
+    }*/
 
 
     @RequestMapping("selectReport")
