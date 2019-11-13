@@ -51,7 +51,7 @@
           <!-- Page Header-->
           <br/>
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
               <div class="card">
                 <div class="card-header">
                   <h4>搜索用户</h4>
@@ -59,7 +59,10 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <p>
-                      <button data-toggle="modal" data-target="#myModal" id="addCourse" type="button" class="btn btn-primary">添加角色</button><br/><br/>
+                      <button data-toggle="modal" data-target="#myModal" id="addCourse" type="button" class="btn btn-primary">搜索用户</button><br/><br/>
+                    </p>
+                    <p>
+                      <button  type="button" class="btn btn-primary" onclick="getAllUser()">全部用户</button><br/><br/>
                     </p>
                     <p class="lead">强哥办公OA</p>
                     <p class="lead">made by fulin</p>
@@ -73,7 +76,7 @@
                             <h4 class="modal-title" id="myModalLabel">搜索用户</h4>
                           </div>
                           <div class="modal-body">
-                            <form action="">
+                            <form action="getUserByLikeUname">
                               <div class="form-group">
                                 <input type="text" class="form-control" placeholder="请输入用户名" name="uname"><br/>
                                 <button type="submit" class="btn btn-default">搜索</button>
@@ -93,10 +96,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
               <div class="card">
                 <div class="card-header">
-                  <h4>用户列表</h4>
+                  <h4>用户列表(如需修改密码,直接输入想修改的密码即可)</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -105,7 +108,7 @@
                         <tr>
                           <th>序号</th>
                           <th>用户名</th>
-                          <th>密码</th>
+                          <th>密码(加密后)</th>
                           <th>角色</th>
                           <th>操作</th>
                         </tr>
@@ -114,22 +117,22 @@
                         查询的用户数据
 
                           <tr th:each="i,var:${pageInfo.list}">
-                            <form action="">
+                            <form action="changeUpwd1">
                               <td >
                                 <input class="form-control" type="text" th:value="${var.count}" disabled />
-                                <input  type="hidden" name="roleid" th:value="${i.uid}">
+                                <input  type="hidden" name="uid" th:value="${i.uid}">
                               </td>
                               <td>
-                                <input class="form-control" type="text" name="uname" th:value="${i.uname}"/>
+                                <input class="form-control" type="text" name="uname" th:value="${i.uname}" disabled/>
                               </td>
                               <td>
                                 <input class="form-control" type="text" name="upwd" th:value="${i.upwd}"/>
                               </td>
                               <td>
-                                <input class="form-control" type="text" name="upwd" th:value="${i.role.rolename}"/>
+                                <input class="form-control" type="text" name="upwd" th:value="${i.role.rolename}" disabled />
                               </td>
                               <td >
-                                <a class="btn btn-default" th:href="@{(pageNum=${pageNum},uid=${i.uid})}" th:text="删除"></a>
+                                <a class="btn btn-default" th:href="@{deleteUser1(pageNum=${pageNum},uid=${i.uid})}" th:text="删除用户"></a>
                                 <input  class="btn btn-default" type="submit" value="修改密码">
                               </td>
                             </form>
@@ -137,20 +140,42 @@
 
                       </tbody>
                     </table>
-<!--                    <a th:href="@{getallcourses(pageNum=${pageInfo.navigateFirstPage})}" th:text="首页   "></a>-->
 
-<!--                    <span th:if="${!pageInfo.hasPreviousPage}"  th:text="上一页  "></span>-->
-<!--                    <a th:if="${pageInfo.hasPreviousPage}" th:href="@{getallroles(pageNum=${pageInfo.prePage})}" th:text="上一页  "></a>&nbsp;&nbsp;-->
+                    <span th:if="${like == null}">
+                        <a th:href="@{getAllUser(pageNum=${pageInfo.navigateFirstPage})}" th:text="首页   "></a>
 
-<!--                    <span th:each="i:${pageInfo.navigatepageNums}">-->
-<!--                       <span th:if="${pageInfo.pageNum == i}" th:text="${i}+'   '"></span>-->
-<!--                       <a   th:if="${pageInfo.pageNum != i}" th:href="@{getallroles(pageNum=${i})  }" th:text="${i}+'   '"></a>-->
-<!--                    </span>-->
+                      <span th:if="${!pageInfo.hasPreviousPage}"  th:text="上一页  "></span>
+                      <a th:if="${pageInfo.hasPreviousPage}" th:href="@{getAllUser(pageNum=${pageInfo.prePage})}" th:text="上一页  "></a>&nbsp;&nbsp;
 
-<!--                    <span th:if="${!pageInfo.hasNextPage}" th:text="下一页  "></span>-->
-<!--                    <a th:if="${pageInfo.hasNextPage}" th:href="@{getallroles(pageNum=${pageInfo.nextPage})}" th:text="下一页  "></a>-->
+                      <span th:each="i:${pageInfo.navigatepageNums}">
+                         <span th:if="${pageInfo.pageNum == i}" th:text="${i}+'   '"></span>
+                         <a   th:if="${pageInfo.pageNum != i}" th:href="@{getAllUser(pageNum=${i})  }" th:text="${i}+'   '"></a>
+                      </span>
 
-<!--                    <a th:href="@{getallroles(pageNum=${pageInfo.navigateLastPage})}" th:text="尾页  "></a>-->
+                      <span th:if="${!pageInfo.hasNextPage}" th:text="下一页  "></span>
+                      <a th:if="${pageInfo.hasNextPage}" th:href="@{getAllUser(pageNum=${pageInfo.nextPage})}" th:text="下一页  "></a>
+
+                      <a th:href="@{getAllUser(pageNum=${pageInfo.navigateLastPage})}" th:text="尾页  "></a>
+                    </span>
+
+                    <span th:if="${like != null}">
+                        <a th:href="@{getUserByLikeUname(pageNum=${pageInfo.navigateFirstPage},uname=${uname})}" th:text="首页搜索 "></a>
+
+                      <span th:if="${!pageInfo.hasPreviousPage}"  th:text="上一页  "></span>
+                      <a th:if="${pageInfo.hasPreviousPage}" th:href="@{getUserByLikeUname(pageNum=${pageInfo.prePage},uname=${uname})}" th:text="上一页  "></a>&nbsp;&nbsp;
+
+                      <span th:each="i:${pageInfo.navigatepageNums}">
+                         <span th:if="${pageInfo.pageNum == i}" th:text="${i}+'   '"></span>
+                         <a   th:if="${pageInfo.pageNum != i}" th:href="@{getUserByLikeUname(pageNum=${i},uname=${uname})}" th:text="${i}+'   '"></a>
+                      </span>
+
+                      <span th:if="${!pageInfo.hasNextPage}" th:text="下一页  "></span>
+                      <a th:if="${pageInfo.hasNextPage}" th:href="@{getUserByLikeUname(pageNum=${pageInfo.nextPage},uname=${uname})}" th:text="下一页  "></a>
+
+                      <a th:href="@{getUserByLikeUname(pageNum=${pageInfo.navigateLastPage},uname=${uname})}" th:text="尾页  "></a>
+                    </span>
+
+
                   </div>
                 </div>
               </div>
@@ -175,6 +200,11 @@
         </div>
       </footer>
     </div>
+    <script>
+      function getAllUser() {
+        window.location.href="getAllUser";
+      }
+    </script>
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>

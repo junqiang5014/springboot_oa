@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.student_holidayMapper.Student_holidayMapper">
+    <insert id="addHoliday" parameterType="int">
+        insert into student_holiday (stuid,hid) values (#{args[0]},#{args[1]})
+    </insert>
+
+    <resultMap id="stu_holidayMap" type="student_holiday">
+        <association property="student" column="stuid" javaType="student" select="com.test.mapper.studentMapper.StudentMapper.getStudentBystuid"></association>
+        <association property="holiday" column="hid" javaType="holiday" select="com.test.mapper.holidayMapper.HolidayMapper.getHolidayByHid"></association>
+    </resultMap>
+</mapper>

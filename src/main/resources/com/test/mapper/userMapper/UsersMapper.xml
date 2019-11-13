@@ -31,11 +31,11 @@
     <delete id="deleteUser" parameterType="int">
         delete from users where uid=#{uid}
     </delete>
-    <update id="updatePassword" parameterType="int">
-        update users set upwd={upwd} where uid=#{uid}
+    <update id="updatePassword" parameterType="user">
+        update users set upwd=#{upwd} where uid=#{uid}
     </update>
-    <select id="selectUserByLikeUname" parameterType="java.lang.String" resultMap="userMap">
-        select * from user where uname like '%${uname}%'
+    <select id="getUserByLikeUname" parameterType="java.lang.String" resultMap="userMap">
+        select * from users where uname like '%${uname}%'
     </select>
 
 

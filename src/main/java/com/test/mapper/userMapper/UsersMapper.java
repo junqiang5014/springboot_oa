@@ -51,7 +51,7 @@ public interface UsersMapper {
     /**
      * 修改密码
      */
-    public int updatePassword(int uid);
+    public int updatePassword(User user);
 
 
 

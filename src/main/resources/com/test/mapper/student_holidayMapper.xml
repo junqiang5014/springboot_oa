@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.student_holidayMapper.Student_holidayMapper">
+<!--    public int add(Student_holiday student_holiday);-->
+<!--    public List<Student_holiday> getStudent_holidayListByStuid(int stuid);-->
+
+<!--    public Student_holiday getStudent_holidayByHid(int hid);-->
+    <insert id="add" parameterType="student_holiday">
+        insert into student_holiday (hid,stuid) values (#{holiday.hid},#{student.stuid})
+    </insert>
+    <select id="getStudent_holidayListByStuid" parameterType="int" resultMap="student_holidayMap">
+        select * from student inner join student_holiday on student.stuid=student_holiday.stuid
+        inner join holiday on student_holiday.hid=holiday.hid and stuid=#{stuid}
+    </select>
+    <select id="getStudent_holidayByHid" resultMap="student_holidayMap" parameterType="int">
+        select * from student inner join student_holiday on student.stuid=student_holiday.stuid
+        inner join holiday on student_holiday.hid=holiday.hid and hid=#{hid}
+    </select>
+    <resultMap id="student_holidayMap" type="student_holiday">
+        <association property="student" javaType="student" column="stuid" select="com.test.mapper.studentMapper.StudentMapper.getStudentByStuid"/>
+        <association property="holiday" javaType="holiday" column="hid" select="com.test.mapper.holidayMapper.HolidayMapper.getHolidayByHid"/>
+    </resultMap>
+</mapper>
