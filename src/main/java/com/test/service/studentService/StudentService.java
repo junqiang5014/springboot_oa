@@ -18,10 +18,10 @@ public interface StudentService {
 
     /**
      * 根据角色查询学生信息
-     * @param user
+     * @param uid
      * @return
      */
-    public Student getStudentByUser(User user);
+    public Student getStudentByUid(int uid);
 
     public Student getStudentByStuid(int stuid);
 
