@@ -5,7 +5,7 @@
 <mapper namespace="com.test.mapper.userMapper.UsersMapper">
 
     <update id="updateUpwdByUser" parameterType="user">
-        update users set upwd=#{upwd} where roleid=#{roles.roleid}
+        update users set uname=#{uname},upwd=#{upwd} where uname=#{uname}
     </update>
     <select id="getUpwdByUname" parameterType="java.lang.String">
         select upwd from users where uname=#{uname}
