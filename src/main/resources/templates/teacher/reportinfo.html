@@ -184,18 +184,19 @@
                                     <tr>
                                         <th>内容</th><td th:text="${report.content}"></td>
                                     </tr>
-                                    <form action="/teacher/updateReport" method="post">
-                                        <input type="hidden" name="rid" th:value="${report.rid}"/>
-                                        <input type="hidden" name="stuid" th:value="${report.student.stuid}"/>
-                                        <input type="hidden" name="yue" th:value="${report.yue}"/>
-                                        <input type="hidden" name="week" th:value="${report.week}"/>
-                                        <input type="hidden" name="title" th:value="${report.title}"/>
-                                        <input type="hidden" name="content" th:value="${report.content}"/>
                                     <tr>
-                                        <th>分数</th><td><input type="text" name="score"></td>
-                                        <th><input type="submit" value="确认" colspan="2"></th>
+                                        <form action="/teacher/updateReport" method="post">
+                                            <input type="hidden" name="rid" th:value="${report.rid}"/>
+                                            <input type="hidden" name="stuid" th:value="${report.student.stuid}"/>
+                                            <input type="hidden" name="yue" th:value="${report.yue}"/>
+                                            <input type="hidden" name="week" th:value="${report.week}"/>
+                                            <input type="hidden" name="title" th:value="${report.title}"/>
+                                            <input type="hidden" name="content" th:value="${report.content}"/>
+                                                <th>分数</th><td><input type="text" name="score"></td>
+                                                <th><input type="submit" value="确认" colspan="2"></th>
+                                        </form>
                                     </tr>
-                                    </form>
+
                                     </tbody>
                                 </table>
                             </div>
