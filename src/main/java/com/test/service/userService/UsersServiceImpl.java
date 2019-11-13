@@ -60,7 +60,8 @@ public class UsersServiceImpl implements UsersService {
         //先获取用户的登陆身份通过shiro认证管理工具获得
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Md5Hash md5Hash=new Md5Hash(upwd);
-//        //sh.toHex()是将加密后的密码转换为16进制
+
+        //sh.toHex()是将加密后的密码转换为16进制
 //        if(!user.getUpwd().equals(md5Hash.toHex())){
 //            throw new IllegalArgumentException("输入的旧密码不正确！");
 //        }
