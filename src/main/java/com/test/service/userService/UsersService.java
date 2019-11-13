@@ -52,7 +52,7 @@ public interface UsersService {
     public List<User> getUserByLikeUname(String uname);
 
     //根据uid修改密码
-    public int updatePassword(int uid);
+    public int updatePassword(User user);
 
 
 }
