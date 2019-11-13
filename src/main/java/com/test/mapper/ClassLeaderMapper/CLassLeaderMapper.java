@@ -1,6 +1,5 @@
 package com.test.mapper.ClassLeaderMapper;
 
-import com.sun.org.apache.bcel.internal.generic.LSTORE;
 import com.test.pojo.*;
 
 import java.util.List;
@@ -24,8 +23,8 @@ public interface CLassLeaderMapper {
     public int insertStudentMessage(Student student);
 
     //查看班级平均成绩
-    public List<Score> selectScoreAvg(String cname);
+    public List<AllColumn> selectScoreAvg(String cname);
 
     //查看学生成绩走势
-    public Score selectScoreByStuname(String stuname);
+    public List<AllColumn> selectScoreByStuname(String stuname);
 }

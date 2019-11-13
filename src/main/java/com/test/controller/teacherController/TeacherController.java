@@ -186,11 +186,62 @@ public class TeacherController {
      * 找到本班级各阶段平均成绩
      */
     @RequestMapping("classAverageScore")
-    public String classAverageScore(HttpSession session){
+    public String classAverageScore(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         Teacher teacher = teacherService.getTeacherByUid(user.getUid());
         Classes classes = classesService.getClassesByTid(teacher.getTid());
-        return "";
+        List<Integer> datas = new ArrayList<Integer>();
+        //根据班级找到学生的成绩
+        for (int i = 1;i<6;i++){
+            int stage = i;
+//            找到各阶段的班级平均分
+            int scoreAve = scoreService.getClassAverageScore(classes,stage);
+            datas.add(scoreAve);
+        }
+        ArrayList<String> names = new ArrayList<>();
+        names.add("第1阶段");
+        names.add("第2阶段");
+        names.add("第3阶段");
+        names.add("第4阶段");
+        names.add("第5阶段");
+        model.addAttribute("names", names);
+        model.addAttribute("datas", datas);
+        //获取班级各阶段的平均分
+        return "teacher/classAverageScore";
     }
 
+    /**
+     * 某名学生各阶段分数走势图的学生列表
+     */
+    @RequestMapping("studentListForScorePage")
+    public String studentList(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        Classes classes = classesService.getClassesByTid(teacher.getTid());
+        List<Student> studentList = studentService.getStudentListByCid(classes.getCid());
+        model.addAttribute("studentList", studentList);
+        return "studentListForScore";
+    }
+
+    /**
+     * 获取学生各个阶段的成绩list
+     */
+    @RequestMapping("studentScoreList")
+    public String studentScoreList(int stuid,Model model){
+        List<Integer> scoreList = new ArrayList<Integer>();
+        for (int i = 1;i < 6;i++){
+            int stage = i;
+            int score = scoreService.getScoreByStuid_stage(stuid,stage);
+            scoreList.add(score);
+        }
+        ArrayList<String> names = new ArrayList<>();
+        names.add("第1阶段");
+        names.add("第2阶段");
+        names.add("第3阶段");
+        names.add("第4阶段");
+        names.add("第5阶段");
+        model.addAttribute("names", names);
+        model.addAttribute("datas", scoreList);
+        return "studentScoreList";
+    }
 }

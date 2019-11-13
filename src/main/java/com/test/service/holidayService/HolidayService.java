@@ -16,4 +16,6 @@ public interface HolidayService {
     public List<Holiday> getHolidayList();
 
     public int changeStateByHid(int hid);
+
+    public int addHoliday(Holiday holiday, int id);
 }

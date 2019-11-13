@@ -12,6 +12,9 @@
     <select id="getStudentByUser" parameterType="user" resultMap="studentMap">
         select * from students where uid=#{uid}
     </select>
+    <select id="getStudentListByCid" resultType="student">
+        select * from students where cid=#{cid}
+    </select>
 
     <resultMap id="studentMap" type="student">
         <id property="stuid" column="stuid"></id>
