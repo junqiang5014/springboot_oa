@@ -8,8 +8,10 @@
    <form action="editUpwd" method="post">
        <input type="hidden" name="uid" th:value="${user.uid}"/>
        用户名：<input type="text" name="uname" th:value="${user.uname}"/><br/>
-       密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>
-            <input type="submit"/>
+       请输入旧密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>
+       请输入新密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>
+       确认新密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>
+                 <input type="submit"/>
 
    </form>
 

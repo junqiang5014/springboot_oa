@@ -127,8 +127,8 @@ public class StudentController {
     }
 
     @RequestMapping("updateUpwd")
-    public String editUpwd(User user){
-        int i = usersService.updateUpwdByUser(user);
+    public String editUpwd(String upwd, String newPwd, String cfgPwd){
+        int i = usersService.updateUserPwd(upwd,newPwd,cfgPwd);
         if(i>0){
             return "redirect:index";
         }
