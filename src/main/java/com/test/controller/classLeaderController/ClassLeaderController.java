@@ -45,21 +45,19 @@ public class ClassLeaderController {
 
 
     @RequestMapping("selectReport")
-    @ResponseBody
-    public String selectReport( ){
+    public String selectReport(Model model){
         List<Report> reportList = classLeaderService.selectReport();
         System.out.println(reportList);
-       // model.addAttribute("reportList",reportList);
-        return "success";
+        model.addAttribute("reportList",reportList);
+        return "reportlist";
     }
 
     @RequestMapping("selectReportByStuname")
-    @ResponseBody
-    public String selectReportByStuname( ){
+    public String selectReportByStuname(Model model){
         List<Report> reportList = classLeaderService.selectReportByStuname("xin");
         System.out.println(reportList);
-        // model.addAttribute("reportList",reportList);
-        return "success";
+        model.addAttribute("reportList",reportList);
+        return "reportList";
     }
 
     @RequestMapping("selectScoreAvg")
