@@ -38,6 +38,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student getStudentByUser(User user) {
+        return studentMapper.getStudentByUser(user);
+    }
+
+    @Override
     public Student getStudentByStuid(int stuid) {
         return studentMapper.getStudentByStuid(stuid);
     }

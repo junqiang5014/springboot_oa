@@ -23,6 +23,8 @@ public interface StudentService {
      */
     public Student getStudentByUid(int uid);
 
+    public Student getStudentByUser(User user);
+
     public Student getStudentByStuid(int stuid);
 
     public List<Student> getStudentAndClassList();
