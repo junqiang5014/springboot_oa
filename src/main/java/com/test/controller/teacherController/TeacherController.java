@@ -117,7 +117,7 @@ public class TeacherController {
     public String repotrPage(int rid,Model model){
         Report report = reportService.getReportByRid(rid);
         model.addAttribute("report", report);
-        return "teacher/reportListPage";
+        return "teacher/reportinfo";
     }
 
     /**
