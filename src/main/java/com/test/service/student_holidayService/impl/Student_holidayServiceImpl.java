@@ -1,4 +1,4 @@
-package com.test.service.student_holidayService.Impl;
+package com.test.service.student_holidayService.impl;
 
 import com.test.mapper.student_holidayMapper.Student_holidayMapper;
 import com.test.pojo.Student_holiday;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class Student_holidayServiceImpl implements Student_holidayService {
-//
+
     @Autowired
     private Student_holidayMapper student_holidayMapper;
 
