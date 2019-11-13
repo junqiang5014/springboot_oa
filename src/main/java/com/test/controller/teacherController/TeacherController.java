@@ -172,9 +172,9 @@ public class TeacherController {
      */
     @RequestMapping("holidayPage")
     public String holidayPage(int hid,Model model){
-        Holiday holiday = holidayService.getHolidayByHid(hid);
-        model.addAttribute("holiday", holiday);
-        return "holiday";
+        Student_holiday student_holiday = student_holidayService.getStudent_holidayByHid(hid);
+        model.addAttribute("student_holiday", student_holiday);
+        return "holidayinfo";
     }
 
     /**
