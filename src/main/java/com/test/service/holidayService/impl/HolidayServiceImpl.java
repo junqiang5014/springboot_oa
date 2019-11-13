@@ -5,6 +5,7 @@ import com.test.mapper.teacherMapper.TeacherMapper;
 import com.test.pojo.Holiday;
 import com.test.pojo.Teacher;
 import com.test.service.holidayService.HolidayService;
+import com.test.service.teacher_holidayService.Teacher_holidayService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Task;
@@ -26,6 +27,8 @@ public class HolidayServiceImpl implements HolidayService {
     private RuntimeService runtimeService;
     @Autowired
     private TeacherMapper teacherMapper;
+    @Autowired
+    private Teacher_holidayService teacher_holidayService;
 
     @Override
     public int addHoliday(Holiday holiday) {
@@ -61,12 +64,13 @@ public class HolidayServiceImpl implements HolidayService {
     }
 
     @Override
-    public int addHoliday(Holiday holiday, int id) {
+    public int addteacherHoliday(Holiday holiday, int id) {
         Teacher teacher = teacherMapper.getTeacherByTid(id);
         Map<String, Object> map = new HashMap<>();
         map.put("teachername", teacher.getTname());
         map.put("schoolManagerName", "schoolManager");
         runtimeService.startProcessInstanceByKey("teacher_classLeader_holiday",map);
-        return holidayMapper.addHoliday(holiday);
+        holidayMapper.addHoliday(holiday);
+        return teacher_holidayService.add(id,holiday.getHid());
     }
 }
