@@ -8,6 +8,11 @@
     select clid,clname from classleaders  where clid = #{clid}
     </select>
 
+    <!-- 班主任修改密码
+    <update id="updateUpwdByClassLeader" parameterType="user">
+        update users set upwd=#{upwd} where uname=#{uname}
+    </update> -->
+
        <!--查看周报-->
       <select id="selectReport" resultType="com.test.pojo.Report"  >
           select yue,week,title,content,score from reports
@@ -34,8 +39,6 @@
       <result property="stusex" column="stusex"></result>
       <result property="cid" column="cid"></result>
   </resultMap>
-
-
 
     <!-- 学生信息查看 -->
     <select id="selectStudent" resultType="student" >

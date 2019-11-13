@@ -22,11 +22,12 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
     @Autowired
     private CLassLeaderMapper classLeaderMapper;
 
-    @Override
-    public List<User> selectUser() {
-        return classLeaderMapper.selectUser();
-    }
 
+  /*  @Override
+    public int updateUpwdByClassLeader(User user) {
+        return classLeaderMapper.updateUpwdByClassLeader(user);
+    }
+*/
     @Override
     public ClassLeader selectMessage(int clid) {
         return classLeaderMapper.selectMessage(clid);
