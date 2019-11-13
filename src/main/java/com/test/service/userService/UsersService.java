@@ -36,4 +36,14 @@ public interface UsersService {
     public int updateUpwdByUser(User user);
 
 
+    //根据uid来删除用户
+    public int deleteUser(int uid);
+
+    //根据用户名进行模糊搜索
+    public List<User> getUserByLikeUname(String uname);
+
+    //根据uid修改密码
+    public int updatePassword(int uid);
+
+
 }
