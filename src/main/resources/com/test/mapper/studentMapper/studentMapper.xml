@@ -9,7 +9,7 @@
     <update id="updateStudentByUser" parameterType="student">
         update students set uid=#{user.uid},stuname=#{stuname},stuage=#{stuage},stusex=#{stusex} where stuid=#{stuid}
     </update>
-    <select id="getStudentByUser" parameterType="user" resultMap="studentMap">
+    <select id="getStudentByUid" parameterType="user" resultMap="studentMap">
         select * from students where uid=#{uid}
     </select>
     <select id="getStudentByStuid" parameterType="int" resultMap="studentMap">
