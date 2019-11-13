@@ -4,9 +4,11 @@ import com.test.mapper.teacher_holidayMapper.Teacher_holidayMapper;
 import com.test.pojo.Teacher_holiday;
 import com.test.service.teacher_holidayService.Teacher_holidayService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class Teacher_holidayServiceImpl implements Teacher_holidayService {
 
     @Autowired
