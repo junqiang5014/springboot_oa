@@ -30,7 +30,7 @@
         select * from teachers inner join users on teachers.uid=users.uid
     </select>
     <select id="getTeacherByUid" parameterType="int" resultMap="teacherMap">
-        select * from teachers inner join users on teachers.uid=users.uid where user.uid=#{uid}
+        select * from teachers inner join users on teachers.uid=users.uid and user.uid=#{uid}
     </select>
     <select id="getStudentListByTid" parameterType="int" resultMap="studentMap">
         select * from teachers inner join classes on teachers.tid=classes.tid inner join students on classes.cid=students.cid
