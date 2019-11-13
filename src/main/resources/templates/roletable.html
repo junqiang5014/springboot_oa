@@ -35,7 +35,7 @@
 
     <div class="page">
       <!-- navbar-->
-      <div style="margin-left: 50px;margin-top: 50px" class="brand-text d-none d-md-inline-block"><strong class="text-primary">课程管理</strong></div></a></div>
+      <div style="margin-left: 50px;margin-top: 50px" class="brand-text d-none d-md-inline-block"><strong class="text-primary">角色管理</strong></div></a></div>
 
       <!-- Breadcrumb-->
       <div class="breadcrumb-holder" style="width: 1000px;height: 70px">
@@ -49,9 +49,7 @@
       <section>
         <div class="container-fluid">
           <!-- Page Header-->
-          <header> 
-            <h1 class="h3 display">Tables            </h1>
-          </header>
+          <br/>
           <div class="row">
             <div class="col-lg-6">
               <div class="card">
@@ -131,7 +129,7 @@
 
                       </tbody>
                     </table>
-                    <a th:href="@{getallcourses(pageNum=${pageInfo.navigateFirstPage})}" th:text="首页   "></a>
+                    <a th:href="@{getallroles(pageNum=${pageInfo.navigateFirstPage})}" th:text="首页   "></a>
 
                     <span th:if="${!pageInfo.hasPreviousPage}"  th:text="上一页  "></span>
                     <a th:if="${pageInfo.hasPreviousPage}" th:href="@{getallroles(pageNum=${pageInfo.prePage})}" th:text="上一页  "></a>&nbsp;&nbsp;

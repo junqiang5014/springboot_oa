@@ -39,6 +39,10 @@
         $("body").on("click","#role",function(){
           $(".dv_content").attr("src","getallroles");
         });
+
+        $("body").on("click","#user",function(){
+          $(".dv_content").attr("src","getAllUser");
+        });
         // $("body").on("click","#showGoods",function(){
         //   $(".dv_content").attr("src","BackGoodsServlet");
         // });
@@ -90,7 +94,7 @@
               </ul>
             </li>
 
-            <li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>用户管理</a>
+            <li><a id="user" href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>用户管理</a>
             <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
               <li><a href="#">搜索用户</a></li>
               <li><a href="#">删除用户</a></li>
