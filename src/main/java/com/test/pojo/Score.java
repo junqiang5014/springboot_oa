@@ -21,6 +21,7 @@ public class Score {
                 "scoreid=" + scoreid +
                 ", score='" + score + '\'' +
                 ", student=" + student +
+                ", stage=" + stage +
                 ", course=" + course +
                 '}';
     }
