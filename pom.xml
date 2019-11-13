@@ -114,9 +114,9 @@
       <resource>
         <directory>src/main/resources</directory>
         <includes>
-          <include>**/*.xml</include>
-          <include>**/*.bpmn</include>
-          <include>**/*.yml</include>
+<!--          <include>**/*.xml</include>-->
+<!--          <include>**/*.bpmn</include>-->
+<!--          <include>**/*.yml</include>-->
         </includes>
       </resource>
     </resources>
