@@ -49,6 +49,12 @@ public class TeacherController {
     @Autowired
     private Teacher_holidayService teacher_holidayService;
 
+    /**
+     * 更改密码
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping("changeUpwdPage")
     public String changeUpwdPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
@@ -56,6 +62,12 @@ public class TeacherController {
         return "changeupwd";
     }
 
+    /**
+     * 带审批周报列表
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping("reportListPage")
     public String reportListPage(HttpSession session, Model model){
         User user = (User) session.getAttribute("user");
@@ -75,6 +87,12 @@ public class TeacherController {
         return "teacher/reportList";
     }
 
+    /**
+     * 单个周报页面
+     * @param rid
+     * @param model
+     * @return
+     */
     @RequestMapping("reportPage")
     public String repotrPage(int rid,Model model){
         Report report = reportService.getReportByRid(rid);
@@ -82,12 +100,23 @@ public class TeacherController {
         return "teacher/report";
     }
 
+    /**
+     * 审批周报
+     * @param report
+     * @return
+     */
     @RequestMapping("updateReport")
     public String updateReport(Report report){
         int i = reportService.updateReport(report);
         return "teacher/success";
     }
 
+    /**
+     * 假条列表页面
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping("holidayListPage")
     public String holidayListPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
@@ -107,6 +136,12 @@ public class TeacherController {
         return "teacher/holidayList";
     }
 
+    /**
+     * 单个假条页面
+     * @param hid
+     * @param model
+     * @return
+     */
     @RequestMapping("holidayPage")
     public String holidayPage(int hid,Model model){
         Holiday holiday = holidayService.getHolidayByHid(hid);
@@ -114,6 +149,11 @@ public class TeacherController {
         return "holiday";
     }
 
+    /**
+     * 审批假条
+     * @param hid
+     * @return
+     */
     @RequestMapping("approveHoliday")
     public String approveHoliday(int hid){
         holidayService.changeStateByHid(hid);
