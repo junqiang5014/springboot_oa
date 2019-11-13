@@ -36,4 +36,19 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.updateUpwdByUser(user);
     }
 
+    @Override
+    public int deleteUser(int uid) {
+        return usersMapper.deleteUser(uid);
+    }
+
+    @Override
+    public List<User> getUserByLikeUname(String uname) {
+        return usersMapper.getUserByLikeUname(uname);
+    }
+
+    @Override
+    public int updatePassword(int uid) {
+        return usersMapper.updatePassword(uid);
+    }
+
 }
