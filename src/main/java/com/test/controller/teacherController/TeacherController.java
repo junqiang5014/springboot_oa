@@ -9,6 +9,7 @@ import com.test.service.scoreService.ScoreService;
 import com.test.service.studentService.StudentService;
 import com.test.service.teacherService.TeacherService;
 import com.test.service.teacher_holidayService.Teacher_holidayService;
+import com.test.service.userService1.UserService1;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Controller("teacher")
+@Controller("/teacher")
 public class TeacherController {
 
     @Autowired
@@ -48,6 +49,19 @@ public class TeacherController {
     private ClassesService classesService;
     @Autowired
     private Teacher_holidayService teacher_holidayService;
+    @Autowired
+    private UserService1 userService1;
+
+    /**
+     * 老师主页
+     */
+    @RequestMapping("index")
+    public String index(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        model.addAttribute("teacher", teacher);
+        return "teacher/index";
+    }
 
     /**
      * 更改密码
@@ -59,8 +73,14 @@ public class TeacherController {
     public String changeUpwdPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "changeupwd";
+        return "user/changeupwd";
     }
+
+//    @RequestMapping("changeUpwd")
+//    public String changeUpwd(User user){
+//        userService1.updateUser(user);
+//        return "redirect:teacher/index";
+//    }
 
     /**
      * 带审批周报列表
@@ -97,7 +117,7 @@ public class TeacherController {
     public String repotrPage(int rid,Model model){
         Report report = reportService.getReportByRid(rid);
         model.addAttribute("report", report);
-        return "teacher/report";
+        return "teacher/reportListPage";
     }
 
     /**
