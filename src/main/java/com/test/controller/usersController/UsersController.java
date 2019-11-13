@@ -8,7 +8,6 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -64,22 +63,6 @@ public class UsersController {
         return "loginPage";
     }
 
-    @RequestMapping("editUpwd")
-    public String editUpwd(HttpSession session, Model model){
-        User user = (User) session.getAttribute("user1");
-        String upwd = usersService.getUpwdByUname(user.getUname());
-        model.addAttribute(upwd);
-        return "updateUpwd";
-    }
 
-    @RequestMapping("updateUpwd")
-    public String updateUpwd(User user){
-        int i = usersService.updateUpwdByUser(user);
-        if(i>0){
-            return "redirect:index";
-        }
-        return "redirect:editUpwd?uid="+user.getUid();
-
-    }
 
 }
