@@ -1,4 +1,5 @@
-package com.test.service.student_holidayService.Impl;
+package com.test.service.student_holidayService.impl;
+
 import com.test.mapper.student_holidayMapper.Student_holidayMapper;
 import com.test.pojo.Student_holiday;
 import com.test.service.student_holidayService.Student_holidayService;
@@ -13,7 +14,6 @@ public class Student_holidayServiceImpl implements Student_holidayService {
     @Autowired
     private Student_holidayMapper student_holidayMapper;
 
-    //
     @Override
     public int add(Student_holiday student_holiday) {
         return student_holidayMapper.add(student_holiday);
@@ -34,3 +34,4 @@ public class Student_holidayServiceImpl implements Student_holidayService {
         return student_holidayMapper.addHoliday(stuid,hid);
     }
 }
+
