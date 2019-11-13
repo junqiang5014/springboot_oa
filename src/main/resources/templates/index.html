@@ -43,6 +43,9 @@
         $("body").on("click","#user",function(){
           $(".dv_content").attr("src","getAllUser");
         });
+        $("body").on("click","#employee",function(){
+          $(".dv_content").attr("src","info");
+        });
         // $("body").on("click","#showGoods",function(){
         //   $(".dv_content").attr("src","BackGoodsServlet");
         // });
@@ -111,7 +114,7 @@
               </ul>
             </li>
 
-            <li><a href="#exampledropdownDropdown4" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>员工管理</a>
+            <li><a id="employee" href="#exampledropdownDropdown4" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>员工管理</a>
               <ul id="exampledropdownDropdown4" class="collapse list-unstyled ">
                 <li><a href="#">查看员工信息</a></li>
                 <li><a href="#">删除员工信息</a></li>

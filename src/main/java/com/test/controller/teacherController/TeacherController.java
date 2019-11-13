@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Controller("/teacher")
+@Controller
+@RequestMapping("teacher")
 public class TeacherController {
 
     @Autowired
