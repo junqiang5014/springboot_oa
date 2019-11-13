@@ -1,6 +1,7 @@
 package com.test.mapper.userMapper;
 
 import com.test.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,11 +10,12 @@ public interface UsersMapper {
     public User getUserByUname(String uname);//aa
 
     /**
-     * 根据角色修改密码
-     * @param user
+     * 修改密码
+     * @param uname
+     * @param upwd
      * @return
      */
-    public int updateUpwdByUser(User user);
+    public int updateUpwdByUser(@Param("uname") String uname,@Param("upwd") String upwd);
 
     /**
      * 根据姓名查询密码
