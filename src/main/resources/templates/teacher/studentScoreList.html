@@ -36,7 +36,7 @@
         <!-- Sidebar Header    -->
         <div class="sidenav-header d-flex align-items-center justify-content-center">
             <!-- User Info-->
-            <div class="sidenav-header-inner text-center"><img src="../img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
+            <div class="sidenav-header-inner text-center"><img src="img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
                 <h2 class="h5">Nathan Andrews</h2><span>Web Developer</span>
             </div>
             <!-- Small Brand information, appears on minimized sidebar-->
@@ -133,8 +133,8 @@
                         <!-- Languages dropdown    -->
                         <li class="nav-item dropdown"><a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/GB.png" alt="English"><span class="d-none d-sm-inline-block">English</span></a>
                             <ul aria-labelledby="languages" class="dropdown-menu">
-                                <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/DE.png" alt="English" class="mr-2"><span>German</span></a></li>
-                                <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" alt="English" class="mr-2"><span>French                                                         </span></a></li>
+                                <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="../img/flags/16/DE.png" alt="English" class="mr-2"><span>German</span></a></li>
+                                <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="../img/flags/16/FR.png" alt="English" class="mr-2"><span>French                                                         </span></a></li>
                             </ul>
                         </li>
                         <!-- Log out-->
@@ -170,33 +170,15 @@
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <th>姓名</th><td th:text="${report.student.stuname}"></td>
+                                        <th>学生姓名</th><th>阶段</th><th>科目</th><th>分数</th>
                                     </tr>
-                                    <tr>
-                                        <th>月份</th><td th:text="${report.yue}"></td>
+                                    <tr th:each="score:${scoreList}">
+                                        <td th:text="${score.student.stuname}"></td>
+                                        <td th:text="${score.stage}"></td>
+                                        <td th:text="${score.course.coursename}"></td>
+                                        <td th:text="${score.score}"></td>
                                     </tr>
-                                    <tr>
-                                        <th>周次</th><td th:text="${report.week}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>标题</th><td th:text="${report.title}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>内容</th><td th:text="${report.content}"></td>
-                                    </tr>
-                                    <tr>
-                                        <form action="/teacher/updateReport" method="post">
-                                            <input type="hidden" name="rid" th:value="${report.rid}"/>
-                                            <input type="hidden" name="stuid" th:value="${report.student.stuid}"/>
-                                            <input type="hidden" name="yue" th:value="${report.yue}"/>
-                                            <input type="hidden" name="week" th:value="${report.week}"/>
-                                            <input type="hidden" name="title" th:value="${report.title}"/>
-                                            <input type="hidden" name="content" th:value="${report.content}"/>
-                                                <th>分数</th><td><input type="text" name="score"></td>
-                                                <th><input type="submit" value="确认" colspan="2"></th>
-                                        </form>
-                                    </tr>
-
+                                    <tr><td><a th:href="@{teacher/addScorePage(stuid=${stuid})}">添加成绩</a> </td></tr>
                                     </tbody>
                                 </table>
                             </div>
