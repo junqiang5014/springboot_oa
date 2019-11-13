@@ -7,6 +7,14 @@ public class Score {
     private int stage;
     private Course course;
 
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
     @Override
     public String toString() {
         return "Score{" +
