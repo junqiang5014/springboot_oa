@@ -86,8 +86,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public int updatePassword(int uid) {
-        return usersMapper.updatePassword(uid);
+    public int updatePassword(User user) {
+        return usersMapper.updatePassword(user);
     }
 
 }
