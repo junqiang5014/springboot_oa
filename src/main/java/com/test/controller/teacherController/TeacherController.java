@@ -7,6 +7,7 @@ import com.test.service.holidayService.HolidayService;
 import com.test.service.reportService.ReportService;
 import com.test.service.scoreService.ScoreService;
 import com.test.service.studentService.StudentService;
+import com.test.service.student_holidayService.Student_holidayService;
 import com.test.service.teacherService.TeacherService;
 import com.test.service.teacher_holidayService.Teacher_holidayService;
 import com.test.service.userService1.UserService1;
@@ -51,6 +52,8 @@ public class TeacherController {
     private Teacher_holidayService teacher_holidayService;
     @Autowired
     private UserService1 userService1;
+    @Autowired
+    private Student_holidayService student_holidayService;
 
     /**
      * 老师主页
@@ -144,6 +147,7 @@ public class TeacherController {
         List<Task> taskList = taskService.createTaskQuery().taskAssignee(teacher.getTname()).list();
         if (taskList.size() != 0) {
             ArrayList<Holiday> holidays = new ArrayList<>();
+            List<Student_holiday> student_holidays = new ArrayList<>();
             for (Task task : taskList) {
                 ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
                         .processInstanceId(task.getProcessInstanceId()).singleResult();
@@ -151,7 +155,11 @@ public class TeacherController {
                 Holiday holiday = holidayService.getHolidayByHid(hid);
                 holidays.add(holiday);
             }
-            model.addAttribute("holidayList", holidays);
+            for (Holiday holiday: holidays){
+                Student_holiday student_holiday = student_holidayService.getStudent_holidayByHid(holiday.getHid());
+                student_holidays.add(student_holiday);
+            }
+            model.addAttribute("student_holidays", student_holidays);
         }
         return "teacher/holidayList";
     }
