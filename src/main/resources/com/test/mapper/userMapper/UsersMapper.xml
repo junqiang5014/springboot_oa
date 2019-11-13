@@ -10,7 +10,7 @@
     <select id="getUpwdByUname" parameterType="java.lang.String">
         select upwd from users where uname=#{uname}
     </select>
-    <select id="getUserAndRole" resultType="user" resultMap="userMap">
+    <select id="getUserAndRole"  resultMap="userMap">
         select * from users
     </select>
     <select id="getUserByUname" parameterType="java.lang.String" resultMap="userMap">
@@ -18,7 +18,7 @@
     </select>
     <resultMap id="userMap" type="user">
         <id property="uid" column="uid"></id>
-        <result property="uname" column="uanme"></result>
+        <result property="uname" column="uname"></result>
         <result property="upwd" column="upwd"></result>
         <association property="role" javaType="role" column="roleid" select="getrole"></association>
     </resultMap>
@@ -26,6 +26,17 @@
         select * from roles where roleid=#{roleid}
     </select>
 
+
+
+    <delete id="deleteUser" parameterType="int">
+        delete from users where uid=#{uid}
+    </delete>
+    <update id="updatePassword" parameterType="int">
+        update users set upwd={upwd} where uid=#{uid}
+    </update>
+    <select id="selectUserByLikeUname" parameterType="java.lang.String" resultMap="userMap">
+        select * from user where uname like '%${uname}%'
+    </select>
 
 
 </mapper>
