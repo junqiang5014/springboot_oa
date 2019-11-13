@@ -1,5 +1,6 @@
 package com.test.mapper.student_holidayMapper;
 
+import com.test.pojo.Holiday;
 import com.test.pojo.Student_holiday;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface Student_holidayMapper {
      * @return
      */
     public int addHoliday(int stuid,int hid);
+
+    public int addHoliday(Holiday holiday);
 }
