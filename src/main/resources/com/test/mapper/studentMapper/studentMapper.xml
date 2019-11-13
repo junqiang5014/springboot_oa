@@ -9,8 +9,11 @@
     <update id="updateStudentByUser" parameterType="student">
         update students set uid=#{user.uid},stuname=#{stuname},stuage=#{stuage},stusex=#{stusex} where stuid=#{stuid}
     </update>
-    <select id="getStudentByUid" parameterType="user" resultMap="studentMap">
-        select * from students where uid=#{uid}
+    <select id="getStudentByUid" parameterType="int" resultMap="studentMap">
+        select * from students where uid=#{user.uid}
+    </select>
+    <select id="getStudentByUser" parameterType="user" resultMap="studentMap">
+        select * from students where uid=#{user.uid}
     </select>
     <select id="getStudentByStuid" parameterType="int" resultMap="studentMap">
         select * from students inner join users on student.uid=users.uid and stuid=#{stuid}
