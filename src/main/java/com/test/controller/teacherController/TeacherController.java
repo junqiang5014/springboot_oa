@@ -8,6 +8,7 @@ import com.test.service.reportService.ReportService;
 import com.test.service.scoreService.ScoreService;
 import com.test.service.studentService.StudentService;
 import com.test.service.teacherService.TeacherService;
+import com.test.service.teacher_holidayService.Teacher_holidayService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -18,7 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller("teacher")
@@ -42,10 +46,13 @@ public class TeacherController {
     private ScoreService scoreService;
     @Autowired
     private ClassesService classesService;
+    @Autowired
+    private Teacher_holidayService teacher_holidayService;
 
     @RequestMapping("changeUpwdPage")
-    public String changeUpwdPage(HttpSession session){
-//        User user = (User) session.getAttribute("user");
+    public String changeUpwdPage(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "changeupwd";
     }
 
@@ -65,20 +72,20 @@ public class TeacherController {
             }
             model.addAttribute("reportList", list);
         }
-        return "reportList";
+        return "teacher/reportList";
     }
 
     @RequestMapping("reportPage")
     public String repotrPage(int rid,Model model){
         Report report = reportService.getReportByRid(rid);
         model.addAttribute("report", report);
-        return "report";
+        return "teacher/report";
     }
 
     @RequestMapping("updateReport")
     public String updateReport(Report report){
         int i = reportService.updateReport(report);
-        return "success";
+        return "teacher/success";
     }
 
     @RequestMapping("holidayListPage")
@@ -97,7 +104,7 @@ public class TeacherController {
             }
             model.addAttribute("holidayList", holidays);
         }
-        return "holidayList";
+        return "teacher/holidayList";
     }
 
     @RequestMapping("holidayPage")
@@ -110,7 +117,7 @@ public class TeacherController {
     @RequestMapping("approveHoliday")
     public String approveHoliday(int hid){
         holidayService.changeStateByHid(hid);
-        return "redirect:holidayListPage";
+        return "redirect:teacher/holidayListPage";
     }
 
     /**
@@ -129,7 +136,7 @@ public class TeacherController {
 //        Course course = courseService.getCourseByTid(teacher.getTid());
         model.addAttribute("studentList", studentList);
 //        model.addAttribute("course", course);
-        return "scoreStudentList";
+        return "teacher/scoreStudentList";
     }
 
     /**
@@ -146,7 +153,7 @@ public class TeacherController {
         if (scoreList.size()!=0){
             model.addAttribute("scoreList", scoreList);
         }
-        return "studentScoreList";
+        return "teacher/studentScoreList";
     }
 
     /**
@@ -162,7 +169,7 @@ public class TeacherController {
         score.setStudent(studentService.getStudentByStuid(stuid));
         score.setCourse(courseService.getCourseByCourseid(courseid));
         model.addAttribute("score", score);
-        return "addScore";
+        return "teacher/addScore";
     }
 
     /**
@@ -179,7 +186,7 @@ public class TeacherController {
         score.setStudent(student);
         score.setCourse(course);
         int i = scoreService.addScore(score);
-        return "scoreStudentListPage";
+        return "teacher/scoreStudentListPage";
     }
 
     /**
@@ -220,7 +227,7 @@ public class TeacherController {
         Classes classes = classesService.getClassesByTid(teacher.getTid());
         List<Student> studentList = studentService.getStudentListByCid(classes.getCid());
         model.addAttribute("studentList", studentList);
-        return "studentListForScore";
+        return "teacher/studentListForScore";
     }
 
     /**
@@ -242,6 +249,62 @@ public class TeacherController {
         names.add("第5阶段");
         model.addAttribute("names", names);
         model.addAttribute("datas", scoreList);
-        return "studentScoreList";
+        return "teacher/studentScoreList";
+    }
+
+    /**
+     * 教师请假
+     */
+    @RequestMapping("teacherHolidayPage")
+    public String teacherHolidayPage(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        model.addAttribute("teacher",teacher);
+        return "teacher/teacherHolidayPage";
+    }
+
+    /**
+     * 发起教师请假
+     */
+    @RequestMapping("teacherHoliday")
+    public String teacherHoliday(String reason,String startDate,String endDate,int tid){
+        Holiday holiday = new Holiday();
+        holiday.setReason(reason);
+        int days = getDays(startDate, endDate);
+        holiday.setDays(days);
+        holidayService.addteacherHoliday(holiday,tid);
+        return "redirect:teacher/myHolidayPage?tid="+tid;
+    }
+
+
+    /**
+     * 根据日期获取天数
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    private int getDays(String startDate, String endDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = null;
+        Date end = null;
+        try {
+            start = simpleDateFormat.parse(startDate);
+            end = simpleDateFormat.parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long daysTime = end.getTime() - start.getTime();
+        int days = (int)daysTime/(24*60*60*1000);
+        return days;
+    }
+
+    /**
+     * 个人假条页面
+     */
+    @RequestMapping("myHolidayPage")
+    public String myHolidayPage(int tid,Model model){
+        List<Teacher_holiday> teacher_holidayList = teacher_holidayService.getTeacher_holidayByTid(tid);
+        model.addAttribute("t_hList", teacher_holidayList);
+        return "teacher/myHolidayPage";
     }
 }
