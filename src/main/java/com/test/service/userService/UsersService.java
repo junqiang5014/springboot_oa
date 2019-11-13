@@ -37,12 +37,12 @@ public interface UsersService {
 
     /**
      * 修改用户密码
-     * @param password 输入没有加密的旧密码
+     * @param upwd 输入没有加密的旧密码
      * @param newPwd 输入没有加密的新密码
      * @param cfgPwd 确认密码
      * @return
      */
-    public int updateUserPwd(String password,String newPwd,String cfgPwd);
+    public int updateUserPwd(String upwd,String newPwd,String cfgPwd);
 
 
 }
