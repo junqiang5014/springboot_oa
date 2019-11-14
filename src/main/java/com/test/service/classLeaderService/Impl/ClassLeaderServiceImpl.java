@@ -106,6 +106,11 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
         return classLeaderMapper.insertStudentMessage(student);
     }
 
+    @Override
+    public List<Student> export() {
+        return classLeaderMapper.export();
+    }
+
 //    public CLassLeaderMapper getcLassLeaderMapper() {
 //        return classLeaderMapper;
 //    }
