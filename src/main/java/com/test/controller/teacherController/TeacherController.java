@@ -312,8 +312,9 @@ public class TeacherController {
         List<Integer> scoreList = new ArrayList<Integer>();
         for (int i = 1;i < 6;i++){
             int stage = i;
-            int score = scoreService.getScoreByStuid_stage(stuid,stage);
-            scoreList.add(score);
+            Score score = scoreService.getScoreByStuid_stage(stuid,stage);
+            int j = score.getScore();
+            scoreList.add(j);
         }
         ArrayList<String> names = new ArrayList<>();
         names.add("第1阶段");
