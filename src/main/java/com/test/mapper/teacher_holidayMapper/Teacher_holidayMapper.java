@@ -8,4 +8,6 @@ public interface Teacher_holidayMapper {
     public int add(int tid,int hid);
 
     public List<Teacher_holiday> getTeacher_holidayByTid(int tid);
+
+    public Teacher_holiday getTeacher_holidayByHid(int hid);
 }
