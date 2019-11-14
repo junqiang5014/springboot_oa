@@ -54,5 +54,8 @@ public interface UsersService {
     //根据uid修改密码
     public int updatePassword(User user);
 
+    //增加用户
+    public int addUser(User user);
+
 
 }
