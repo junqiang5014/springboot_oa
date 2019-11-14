@@ -2,8 +2,7 @@ package com.test.service.holidayService.impl;
 
 import com.test.mapper.holidayMapper.HolidayMapper;
 import com.test.mapper.teacherMapper.TeacherMapper;
-import com.test.pojo.Holiday;
-import com.test.pojo.Teacher;
+import com.test.pojo.*;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.teacher_holidayService.Teacher_holidayService;
 import org.activiti.engine.RuntimeService;
@@ -73,4 +72,21 @@ public class HolidayServiceImpl implements HolidayService {
         holidayMapper.addHoliday(holiday);
         return teacher_holidayService.add(id,holiday.getHid());
     }
+
+    @Override
+    public Student getStudentByHid(int hid) {
+        return holidayMapper.getStudentByHid(hid);
+    }
+
+    @Override
+    public Teacher getTeacherByHid(int hid) {
+        return holidayMapper.getTeacherByHid(hid);
+    }
+
+    @Override
+    public ClassLeader getClassLeaderByHid(int hid) {
+        return holidayMapper.getClassLeaderByHid(hid);
+    }
+
+
 }
