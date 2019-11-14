@@ -15,6 +15,10 @@
         select * from teacher_holiday t_h inner join teachers on teacher.tid=t_h.tid
         inner join holiday on holiday.hid=t_h.hid and hid=#{hid}
     </select>
+
+    <select id="getTeacherByHid" parameterType="int" resultMap="t_hMap">
+        select * from teachers inner join teacher_holiday on teachers.tid=teacher_holiday.tid where hid=#{hid}
+    </select>
     <resultMap id="t_hMap" type="teacher_holiday">
         <association property="teacher" column="tid" javaType="teacher" select="com.test.mapper.teacherMapper.TeacherMapper.getTeacherByTid"></association>
         <association property="holiday" column="hid" javaType="holiday" select="com.test.mapper.holidayMapper.HolidayMapper.getHolidayByHid"></association>
