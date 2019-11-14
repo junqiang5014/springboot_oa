@@ -100,12 +100,12 @@
 
    <!--查看学生成绩走势-->
     <select id="selectScoreByStuname" resultMap="selectScore1">
-        select  stuname,score,stage  from students  INNER JOIN scores   on students.stuid=scores.stuid  where stuname=#{stuname}
+        select  score  from students  INNER JOIN scores   on students.stuid=scores.stuid  where stuname=#{stuname}
     </select>
     <resultMap id="selectScore1" type="ALLColumn">
         <result property="stuname" column="stuname"></result>
         <result column="score" property="score"></result>
         <result column="stage" property="stage"></result>
     </resultMap>
-
+<!--test-->
  </mapper>
