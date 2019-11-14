@@ -18,7 +18,7 @@
             <result property="upwd" column="upwd"></result>
         </association>
     </resultMap>
-
+//
     <!--查看班级平均成绩-->
     <select id="selectScoreAvg" resultMap="Avg1" parameterType="java.lang.String">
         select  cname, score,stage,AVG(score) from scores   INNER JOIN students  on scores.stuid=students.stuid
