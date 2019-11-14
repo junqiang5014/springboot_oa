@@ -26,5 +26,5 @@ public interface ScoreMapper {
      * @param stuid
      * @return
      */
-    public List<Score> getScoreByStuid(int stuid);
+    public Score getScoreByStuid(int stuid);
 }
