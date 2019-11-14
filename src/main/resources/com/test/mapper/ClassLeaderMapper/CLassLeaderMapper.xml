@@ -64,7 +64,7 @@
 
     <!--  导入学生信息 -->
    <insert id="insertStudentMessage" parameterType="student">
-       insert into students (stuname,stuage,stusex,cid) values(#{stuname},#{stuage},#{stusex},#{cid})
+       insert into students (stuname,stuage,stusex) values(#{stuname},#{stuage},#{stusex})
    </insert>
 
     <!--导出学生信息-->
