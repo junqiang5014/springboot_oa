@@ -53,7 +53,7 @@ public class SchoolManagerController {
      * @param cfgPwd
      * @return
      */
-    @RequestMapping("updateUpwd")
+    @RequestMapping("updateUpwd2")
     public String editUpwd(String upwd, String newPwd, String cfgPwd){
         int i = usersService.updateUserPwd(upwd,newPwd,cfgPwd);
         if(i>0){
