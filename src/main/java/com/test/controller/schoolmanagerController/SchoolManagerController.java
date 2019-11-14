@@ -36,6 +36,7 @@ public class SchoolManagerController {
     @Autowired
     private Student_holidayService student_holidayService;
 
+
     /**
      * 跳转到修改密码页面
      * @param session
@@ -88,13 +89,12 @@ public class SchoolManagerController {
                 holidays.add(holiday);
             }
             for (Holiday holiday: holidays){
-                Student_holiday student_holiday= student_holidayService.getStudent_holidayByHid(holiday.getHid());
-                student_holidays.add(student_holiday);
-                int days = student_holiday.getHoliday().getDays();
                 String name=null;
-                if((name=student_holidayService.getStudent_holidayByHid().getStudent().getStuname()!=null)){
 
-                }else if(name=teacher_holidayService.getTeacher_holidayByHid().getTeacher().getTname()!=null){
+                if((name=student_holidayService.getStudent_holidayByHid(holiday.getHid()).getStudent().getStuname())!=null){
+                    return "";
+
+                }else if((name=teacher_holidayService.getTeacher_holidayByHid(holiday.getHid()).getTeacher().getTname())!=null){
 
                 }
             }
@@ -115,6 +115,31 @@ public class SchoolManagerController {
         Task task = taskService.createTaskQuery().processInstanceBusinessKey(hid + "").taskAssignee(user.getUname()).singleResult();
         taskService.complete(task.getId());
         return "redirect:schoolmanager/holidayListPage";
+    }
+
+    //查看班级平均成绩
+    @RequestMapping("echarts_class")
+    public String selectScoreAvg(Model model,String classname) {
+        List<Double> avgList =new ArrayList<Double>();
+        List<AllColumn> scoreList= schoolManagerService.selectScoreAvg(classname);
+        for (AllColumn avg : scoreList){
+            avgList.add(avg.getAVG());
+        }
+        model.addAttribute("avgList",avgList);
+        return "classLeader/echarts_class";
+    }
+
+    //查看学生成绩走势
+    @RequestMapping("echarts")
+    public String echarts(Model model,String stuname){
+        List<Integer> studentList =new ArrayList<Integer>();
+        List<AllColumn> allColumnList=schoolManagerService.selectScoreByStuname(stuname);
+        System.out.println(allColumnList);
+        for (AllColumn a :allColumnList){
+            studentList.add(a.getScore());
+        }
+        model.addAttribute("studentList",studentList);
+        return "classLeader/echarts";
     }
 
 
