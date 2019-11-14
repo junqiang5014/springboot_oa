@@ -101,26 +101,35 @@
 <div class="page">
     <div class="page_main" style="width: auto;height: auto">
         <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>个人资料</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th>姓名</th><td th:text="${teacher.tname}"></td>
-                                <th>操作</th><td><a href="/teacher/changeUpwdPage">更改密码</a> </td>
-                            </tr>
-                            </tbody>
-                        </table>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>个人资料</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <form action="changeUpwd" method="post">
+                                    <input type="hidden" name="uid" th:value="${user.uid}">
+                                <tbody>
+                                <tr>
+                                    <th>用户名</th><td><input type="text" name="uname" th:value="${user.uname}"/></td>
+                                </tr>
+                                <tr>
+                                    <th>密码</th><td><input type="password" name="upwd" /></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2"><input type="submit" value="修改"/></th>
+                                </tr>
+                                </tbody>
+                                </form>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 
