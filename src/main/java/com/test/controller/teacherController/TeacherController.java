@@ -64,7 +64,7 @@ public class TeacherController {
         User user = (User) session.getAttribute("user");
         Teacher teacher = teacherService.getTeacherByUid(user.getUid());
         model.addAttribute("teacher", teacher);
-        return "teacher/index";
+        return "teacher/teacherindex";
     }
 
     /**
@@ -303,6 +303,7 @@ public class TeacherController {
     }
 
     /**
+     *
      * 获取学生各个阶段的成绩list
      */
     @RequestMapping("studentScoreList")
