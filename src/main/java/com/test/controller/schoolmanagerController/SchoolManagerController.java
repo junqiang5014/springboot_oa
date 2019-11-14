@@ -43,7 +43,7 @@ public class SchoolManagerController {
         User user = (User) session.getAttribute("user");
         SchoolManager schoolManager = schoolManagerService.getSchoolManagerByUid(user.getUid());
         model.addAttribute("schoolManager",schoolManager);
-        return "redirect:updateUpwd";
+        return "redirect:updateUpwd2";
     }
 
     /**
@@ -59,7 +59,7 @@ public class SchoolManagerController {
         if(i>0){
             return "redirect:index";
         }
-        return "redirect:editUpwd";
+        return "redirect:editUpwd2";
 
     }
 
