@@ -6,7 +6,6 @@ import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
 import com.test.util.ExcleUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,9 +34,7 @@ public class ClassLeaderController {
 
     public String selectMessage(Model model, HttpSession session){
         User user = (User) session.getAttribute("user");
-
         ClassLeader classLeader= classLeaderService.selectMessage(user.getUid());
-
         model.addAttribute("classLeader",classLeader);
         return "classLeader/index";
     }
@@ -59,12 +56,7 @@ public class ClassLeaderController {
         return "success";
     }*/
 
-    @RequestMapping("echarts")
-    public String echarts(Model model,String stuname){
-        List<AllColumn> allColumnList=classLeaderService.selectScoreByStuname("stuname");
-        model.addAttribute("allColumnList",allColumnList);
-        return "echarts";
-    }
+
 
 
         //查看周报
@@ -85,22 +77,31 @@ public class ClassLeaderController {
         return "reportList";
     }
     //查看班级平均成绩
-    @RequestMapping("selectScoreAvg")
-    @ResponseBody
-    public String selectScoreAvg( ) {
-        List<AllColumn> scoreList= classLeaderService.selectScoreAvg("java");
-        System.out.println(scoreList);
-        return "success";
+    @RequestMapping("echarts_class")
+    public String selectScoreAvg(Model model,String classname) {
+        List<Double> avgList =new ArrayList<Double>();
+        List<AllColumn> scoreList= classLeaderService.selectScoreAvg(classname);
+        for (AllColumn avg : scoreList){
+            avgList.add(avg.getAVG());
+        }
+        model.addAttribute("avgList",avgList);
+        return "classLeader/echarts_class";
     }
 
     //查看学生成绩走势
-    @RequestMapping("selectScoreByStuname")
-    @ResponseBody
-    public String selectScoreByStuname() {
-      List<AllColumn> scoreList= classLeaderService.selectScoreByStuname("xin");
-      System.out.println(scoreList);
-      return "success";
+    @RequestMapping("echarts")
+    public String echarts(Model model,String stuname){
+        List<Integer> studentList =new ArrayList<Integer>();
+        List<AllColumn> allColumnList=classLeaderService.selectScoreByStuname(stuname);
+        System.out.println(allColumnList);
+        for (AllColumn a :allColumnList){
+            studentList.add(a.getScore());
+        }
+        model.addAttribute("studentList",studentList);
+        return "classLeader/echarts";
     }
+
+
     //查看学生信息
     @RequestMapping("selectStudent")
     public String selectStudent(Model model) {
@@ -175,6 +176,9 @@ public class ClassLeaderController {
             ex.printStackTrace();
         }
     }
+
+
+
 
 
 }
