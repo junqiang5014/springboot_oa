@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("user")
 public class UserController1 {
@@ -14,7 +16,8 @@ public class UserController1 {
     private UserService1 userService1;
 
     @RequestMapping("changeUpwd")
-    public String changeUpwd(User user){
+    public String changeUpwd(HttpSession session){
+        User user = (User) session.getAttribute("user");
         userService1.updateUser(user);
         return "index";
     }

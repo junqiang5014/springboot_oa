@@ -18,7 +18,7 @@ public interface ScoreService {
 
     public List<Score> getScoreListByStuid(int stuid);
 
-    public int getScoreByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
+    public Score getScoreByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
 
     public int getClassAverageScore(Classes classes, int stage);
 

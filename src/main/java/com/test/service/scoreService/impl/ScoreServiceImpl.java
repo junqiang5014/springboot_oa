@@ -25,7 +25,8 @@ public class ScoreServiceImpl implements ScoreService {
         //根据学生id和stage去重
         Student student = score.getStudent();
         Course course = score.getCourse();
-        int i = getScoreByStuid_stage(student.getStuid(), course.getCourseid());
+        Score s = getScoreByStuid_stage(student.getStuid(), course.getCourseid());
+        int i = s.getScore();
         if (i == -1){
             return i;
         }
@@ -58,7 +59,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public int getScoreByStuid_stage(int stuid, int stage) {
+    public Score getScoreByStuid_stage(int stuid, int stage) {
         return scoreMapper.getScoreByStuid_stage(stuid,stage);
     }
 
@@ -68,8 +69,9 @@ public class ScoreServiceImpl implements ScoreService {
         int sum = 0;
         int count = 0;
         for (Student student:studentList){
-            int score = scoreMapper.getScoreByStuid_stage(student.getStuid(), stage);
-            sum += score;
+            Score score = scoreMapper.getScoreByStuid_stage(student.getStuid(), stage);
+            int i = score.getScore();
+            sum += i;
             count++;
         }
         int a = sum/count;

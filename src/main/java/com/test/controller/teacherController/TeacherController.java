@@ -77,14 +77,14 @@ public class TeacherController {
     public String changeUpwdPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "user/changeupwd";
+        return "teacher/teacherChangeUpwd";
     }
 
-//    @RequestMapping("changeUpwd")
-//    public String changeUpwd(User user){
-//        userService1.updateUser(user);
-//        return "redirect:teacher/index";
-//    }
+    @RequestMapping("changeUpwd")
+    public String changeUpwd(User user){
+        userService1.updateUser(user);
+        return "redirect:teacher/index";
+    }
 
     /**
      * 带审批周报列表
@@ -223,7 +223,8 @@ public class TeacherController {
         if (scoreList.size()!=0){
             model.addAttribute("scoreList", scoreList);
         }
-        return "teacher/studentScoreList?stuid=" + stuid;
+        model.addAttribute("stuid", stuid);
+        return "teacher/studentScoreList";
     }
 
     /**
