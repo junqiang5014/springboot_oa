@@ -3,6 +3,8 @@ package com.test.pojo;
 public class Holiday {
     private int hid;
     private String reason;
+    private String startdate;
+    private String enddate;
     private int days;
     private int state;
 
@@ -11,6 +13,8 @@ public class Holiday {
         return "Holiday{" +
                 "hid=" + hid +
                 ", reason='" + reason + '\'' +
+                ", startdate='" + startdate + '\'' +
+                ", enddate='" + enddate + '\'' +
                 ", days=" + days +
                 ", state=" + state +
                 '}';
@@ -30,6 +34,22 @@ public class Holiday {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 
     public int getDays() {

@@ -70,9 +70,14 @@ public class ScoreServiceImpl implements ScoreService {
         int count = 0;
         for (Student student:studentList){
             Score score = scoreMapper.getScoreByStuid_stage(student.getStuid(), stage);
-            int i = score.getScore();
-            sum += i;
-            count++;
+            if (score != null){
+                int i = score.getScore();
+                sum += i;
+                count++;
+            }
+        }
+        if (count == 0){
+            return 0;
         }
         int a = sum/count;
         return a;
