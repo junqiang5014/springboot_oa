@@ -38,7 +38,7 @@ public class SchoolManagerController {
      * @param session
      * @return
      */
-    @RequestMapping("editUpwd")
+    @RequestMapping("editUpwd2")
     public String updateUpwd(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         SchoolManager schoolManager = schoolManagerService.getSchoolManagerByUid(user.getUid());
