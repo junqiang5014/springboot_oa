@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.SchoolManagerMapper.SchoolManagerMapper">
+    <select id="getSchoolManagerByUid" parameterType="int" resultMap="schoolmanagerMap">
+        select * from schoolmanager inner join users on schoolmanager.uid=uses.uid and users.uid=#{uid}
+    </select>
+    <update id="updateSchoolManager" parameterType="schoolmanager">
+        update schoolmanager set smname=#{smname},uid=#{user.uid} where smid=#{smid}
+    </update>
+    <resultMap id="schoolmanagerMap" type="schoolmanager">
+        <id property="smid" column="smin"></id>
+        <result property="smname" column="smname"></result>
+        <association property="user" column="uid" javaType="user">
+            <id property="uid" column="uid"></id>
+            <result property="uname" column="uname"></result>
+            <result property="upwd" column="upwd"></result>
+        </association>
+    </resultMap>
+</mapper>
