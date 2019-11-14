@@ -90,11 +90,11 @@ public class SchoolManagerController {
             for (Holiday holiday: holidays){
                 Student_holiday student_holiday= student_holidayService.getStudent_holidayByHid(holiday.getHid());
                 student_holidays.add(student_holiday);
+                int days = student_holiday.getHoliday().getDays();
+                String name=null;
+                if((name=student_holidayService.getStudent_holidayByHid().getStudent().getStuname()!=null)){
 
-
-                if(holiday.equals("teachername")){
-
-                }else if(holiday.equals("studentname")){
+                }else if(name=teacher_holidayService.getTeacher_holidayByHid().getTeacher().getTname()!=null){
 
                 }
             }
