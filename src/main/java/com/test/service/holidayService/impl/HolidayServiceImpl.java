@@ -73,20 +73,7 @@ public class HolidayServiceImpl implements HolidayService {
         return teacher_holidayService.add(id,holiday.getHid());
     }
 
-    @Override
-    public Student getStudentByHid(int hid) {
-        return holidayMapper.getStudentByHid(hid);
-    }
 
-    @Override
-    public Teacher getTeacherByHid(int hid) {
-        return holidayMapper.getTeacherByHid(hid);
-    }
-
-    @Override
-    public ClassLeader getClassLeaderByHid(int hid) {
-        return holidayMapper.getClassLeaderByHid(hid);
-    }
 
 
 }
