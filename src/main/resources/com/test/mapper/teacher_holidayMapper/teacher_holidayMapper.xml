@@ -10,6 +10,7 @@
         select * from teacher_holiday t_h inner join teachers on teacher.tid=t_h.tid
         inner join holiday on holiday.hid=t_h.hid and tid=#{tid}
     </select>
+
     <select id="getTeacher_holidayByHid" parameterType="int" resultMap="t_hMap">
         select * from teacher_holiday t_h inner join teachers on teacher.tid=t_h.tid
         inner join holiday on holiday.hid=t_h.hid and hid=#{hid}
