@@ -24,6 +24,9 @@ public interface ClassLeaderService {
     //导入学生信息
     public int insertStudentMessage(Student student);
 
+    //导出学生信息
+    public List<Student> export();
+
     //查看班级平均成绩
     public List<AllColumn> selectScoreAvg(String cname);
 

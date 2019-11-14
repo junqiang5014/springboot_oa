@@ -101,47 +101,26 @@
 <div class="page">
     <div class="page_main" style="width: auto;height: auto">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>增加成绩</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>个人资料</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
                             <tbody>
                             <tr>
-                                <th>姓名</th><td th:text="${score.student.stuname}"></td>
-                            </tr>
-                            <tr>
-                                <th>科目</th><td th:text="${score.course.coursename}"></td>
-                            </tr>
-                            <form action="/teacher/addScore" method="post">
-                                <input name="scoreid" th:value="${score.scoreid}" type="hidden">
-                                <input type="hidden" name="stuid" th:value="${score.student.stuid}">
-                                <input type="hidden" name="courseid" th:value="${score.course.courseid}">
-                                <tr>
-                                    <th>成绩</th><td><input type="text" name="score" /></td>
-                                </tr>
-                                <tr>
-                                    <th>阶段</th>
-                                    <td>
-                                        <select th:each="i:${#numbers.sequence(1,5)}" name="stage">
-                                            <option th:value="${i}" name="stage"></option>
-                                        </select>
-                                    </td>
-                                <tr>
-                                    <td><input type="submit" value="增加"></td>
-                                </tr>
-                            </form>
+                                <th>姓名</th><td th:text="${teacher.tname}"></td>
+                                <th>操作</th><td><a th:href="@{changeUpwdPage}">更改密码</a> </td>
                             </tr>
                             </tbody>
-
-                            </table>
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 

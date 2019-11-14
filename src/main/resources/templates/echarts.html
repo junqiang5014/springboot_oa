@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script th:src="@{js/echarts.min.js}"></script>
+</head>
+<body>
+    <div id="main" style="width: 400px;height: 400px"></div>
+    <!--
+    /*[[…]]*/表达式的理解如下：
+
+    /*…*/中的内容在用浏览器打开静态 网页时，会被忽略
+    Thymeleaf解析时，会解析/*[[…]]*/的内容，并把获得的值替换掉/*[[…]]*/后面的内容
+    前提条件：
+    script代码必须放在html文件中，并且设定th:inline="javascript"
+    -->
+<script th:inline="javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: /*[[${names}]]*/null
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: /*[[${datas}]]*/null
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -21,4 +21,10 @@ public interface ScoreMapper {
 
     public List<List> getClassesScoreAVG(String className);//获取本班级各阶段平均成绩对比
 
+    /**
+     * 根据stuid查询出周报分数
+     * @param stuid
+     * @return
+     */
+    public Score getScoreByStuid(int stuid);
 }
