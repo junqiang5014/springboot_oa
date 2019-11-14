@@ -101,26 +101,26 @@
 <div class="page">
     <div class="page_main" style="width: auto;height: auto">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>假条列表</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                <tr th:each="student_holiday,var:${student_holidays}">
-                                    <th>姓名</th><td th:text="${student_holiday.student.stuname}"></td>
-                                    <th>详情</th><td><a th:href="@{teacher/holidayPage(hid=${student_holiday.holiday.hid})}" </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>个人资料</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>姓名</th><td th:text="${teacher.tname}"></td>
+                                <th>操作</th><td><a href="/teacher/changeUpwdPage">更改密码</a> </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 

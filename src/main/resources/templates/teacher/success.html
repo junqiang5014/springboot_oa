@@ -6,5 +6,37 @@
 </head>
 <body>
 操作成功
+
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Basic Table</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>学生姓名</th><th>阶段</th><th>科目</th><th>分数</th>
+                        </tr>
+                        <tr th:each="score:${scoreList}">
+                            <td th:text="${score.student.stuname}"></td>
+                            <td th:text="${score.stage}"></td>
+                            <td th:text="${score.course.coursename}"></td>
+                            <td th:text="${score.score}"></td>
+                        </tr>
+                        <tr><td><a th:href="@{teacher/addScorePage(stuid=${stuid})}">添加成绩</a> </td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

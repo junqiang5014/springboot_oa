@@ -9,7 +9,7 @@
         <result property="tname" column="tname"></result>
         <association property="user" column="uid" javaType="user">
             <id property="uid" column="uid"></id>
-            <result property="uname" column="upwd"></result>
+            <result property="uname" column="uname"></result>
             <result property="upwd" column="upwd"></result>
         </association>
     </resultMap>

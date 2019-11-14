@@ -23,4 +23,9 @@ public class Teacher_holidayServiceImpl implements Teacher_holidayService {
     public List<Teacher_holiday> getTeacher_holidayByTid(int tid) {
         return teacher_holidayMapper.getTeacher_holidayByTid(tid);
     }
+
+    @Override
+    public Teacher_holiday getTeacher_holidayByHid(int hid) {
+        return teacher_holidayMapper.getTeacher_holidayByHid(hid);
+    }
 }

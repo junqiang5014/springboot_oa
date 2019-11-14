@@ -64,7 +64,7 @@ public class TeacherController {
         User user = (User) session.getAttribute("user");
         Teacher teacher = teacherService.getTeacherByUid(user.getUid());
         model.addAttribute("teacher", teacher);
-        return "teacher/index";
+        return "teacher/teacherindex";
     }
 
     /**
@@ -77,14 +77,14 @@ public class TeacherController {
     public String changeUpwdPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
-        return "user/changeupwd";
+        return "teacher/teacherChangeUpwd";
     }
 
-//    @RequestMapping("changeUpwd")
-//    public String changeUpwd(User user){
-//        userService1.updateUser(user);
-//        return "redirect:teacher/index";
-//    }
+    @RequestMapping("changeUpwd")
+    public String changeUpwd(User user){
+        userService1.updateUser(user);
+        return "redirect:teacher/index";
+    }
 
     /**
      * 带审批周报列表
@@ -223,7 +223,8 @@ public class TeacherController {
         if (scoreList.size()!=0){
             model.addAttribute("scoreList", scoreList);
         }
-        return "teacher/studentScoreList?stuid=" + stuid;
+        model.addAttribute("stuid", stuid);
+        return "teacher/studentScoreList";
     }
 
     /**
@@ -303,6 +304,7 @@ public class TeacherController {
     }
 
     /**
+     *
      * 获取学生各个阶段的成绩list
      */
     @RequestMapping("studentScoreList")
@@ -310,8 +312,9 @@ public class TeacherController {
         List<Integer> scoreList = new ArrayList<Integer>();
         for (int i = 1;i < 6;i++){
             int stage = i;
-            int score = scoreService.getScoreByStuid_stage(stuid,stage);
-            scoreList.add(score);
+            Score score = scoreService.getScoreByStuid_stage(stuid,stage);
+            int j = score.getScore();
+            scoreList.add(j);
         }
         ArrayList<String> names = new ArrayList<>();
         names.add("第1阶段");

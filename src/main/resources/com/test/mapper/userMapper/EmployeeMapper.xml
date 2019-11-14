@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mapper.userMapper.EmployeeMapper">
+
+<!--    public List<Teacher> getTeacher();-->
+<!--    public List<ClassLeader> getClassLeader();-->
+<!--    public List<SchoolManager> getSchoolManager();-->
+
+    <select id="getTeacher" resultMap="teacherMap">
+        select * from teachers
+    </select>
+    <resultMap id="teacherMap" type="teacher">
+        <id property="tid" column="tid"></id>
+        <result property="tname" column="tname"></result>
+        <association property="user" javaType="user" column="uid" select="selectUser"></association>
+    </resultMap>
+    <select id="selectUser" resultMap="userMap">
+        select * from users where uid=#{uid}
+    </select>
+    <resultMap id="userMap" type="user">
+        <id property="uid" column="uid"></id>
+        <result property="uname" column="uname"></result>
+        <result property="upwd" column="upwd"></result>
+        <association property="role" javaType="role" column="roleid" select="getrole"></association>
+    </resultMap>
+    <select id="getrole" resultType="role">
+        select * from roles where roleid=#{roleid}
+    </select>
+
+
+    <select id="getClassLeader" resultMap="classLeaderMap">
+        select * from classleaders
+    </select>
+    <resultMap id="classLeaderMap" type="classLeader">
+        <id property="clid" column="clid"></id>
+        <result property="clname" column="clname"></result>
+        <association property="user" javaType="user" column="uid" select="selectUser"></association>
+    </resultMap>
+
+    <select id="getSchoolManager" resultMap="schoolManagerMap">
+        select * from schoolmanager
+    </select>
+    <resultMap id="schoolManagerMap" type="schoolManager">
+        <id property="smid" column="smid"></id>
+        <result property="smname" column="smname"></result>
+        <association property="user" javaType="user" column="uid" select="selectUser"></association>
+    </resultMap>
+
+<!--    /**-->
+<!--    * 模糊查询员工信息-->
+<!--    * @return-->
+<!--    */-->
+<!--    public List<Teacher> getTeacherByLike();-->
+<!--    public List<ClassLeader> getClassLeaderByLike();-->
+<!--    public List<SchoolManager> getSchoolManagerByLike();-->
+    <select id="getTeacherByLike" parameterType="java.lang.String" resultMap="teacherMap">
+        select * from teachers where tname like '%${tname}%'
+    </select>
+    <select id="getClassLeaderByLike" parameterType="java.lang.String" resultMap="classLeaderMap">
+        select * from classleaders where clname like '%${clname}%'
+    </select>
+    <select id="getSchoolManagerByLike" parameterType="java.lang.String" resultMap="schoolManagerMap">
+        select * from schoolmanager where smname like '%${smname}%'
+    </select>
+
+
+<!--    /**-->
+<!--    * 删除员工信息-->
+<!--    * @param tid-->
+<!--    * @return-->
+<!--    */-->
+<!--    public int deleteTeacher(int tid);-->
+<!--    public int deleteClassLeader(int clid);-->
+<!--    public int deleteSchoolManager(int smid);-->
+    <delete id="deleteTeacher" parameterType="int">
+        delete from teachers where tid=#{tid}
+    </delete>
+    <delete id="deleteClassLeader" parameterType="int">
+        delete from classleaders where clid=#{clid}
+    </delete>
+    <delete id="deleteSchoolManager" parameterType="int">
+        delete from schoolmanager where smid=#{smid}
+    </delete>
+
+
+<!--    /**-->
+<!--    * 修改员工信息-->
+<!--    */-->
+<!--    public int updateTeacher(Teacher teacher);-->
+<!--    public int updateClassLeader(ClassLeader classLeader);-->
+<!--    public int updateSchoolManager(SchoolManager schoolManager);-->
+    <update id="updateTeacher" parameterType="teacher">
+        update teachers set tname=#{tname} where tid=#{tid}
+    </update>
+    <update id="updateClassLeader" parameterType="classLeader">
+        update classleaders set clname=#{clname} where clid=#{clid}
+    </update>
+    <update id="updateSchoolManager" parameterType="schoolManager">
+        update schoolmanager set smname=#{smname} where smid=#{smid}
+    </update>
+
+<!--    /**-->
+<!--    * 添加员工信息-->
+<!--    */-->
+<!--    public int addTeacher(Teacher teacher);-->
+<!--    public int addClassLeader(ClassLeader classLeader);-->
+<!--    public int addSchoolManager(SchoolManager schoolManager);-->
+    <insert id="addTeacher" parameterType="teacher">
+        insert into teachers(tname,uid) values (#{tname},#{user.uid})
+    </insert>
+    <insert id="addClassLeader" parameterType="classLeader">
+        insert into classleaders(clname,uid) values (#{clname},#{user.uid})
+    </insert>
+    <insert id="addSchoolManager" parameterType="schoolManager">
+        insert into schoolmanager(smname,uid) values (#{smname},#{user.uid})
+    </insert>
+
+
+
+</mapper>

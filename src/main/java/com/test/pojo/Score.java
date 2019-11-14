@@ -2,7 +2,7 @@ package com.test.pojo;
 
 public class Score {
     private int scoreid;
-    private String score;
+    private int score;
     private Student student;
     private int stage;
     private Course course;
@@ -34,11 +34,11 @@ public class Score {
         this.scoreid = scoreid;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
