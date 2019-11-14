@@ -10,7 +10,7 @@
         delete from scores where scoreid=#{scoreid}
     </delete>
     <update id="updateScore" parameterType="score" >
-        update scores set score=#{score},sid=#{student.sid},stage=#{stage},courseid=@{course.courseid}
+        update scores set score=#{score},stuid=#{student.stuid},stage=#{stage},courseid=@{course.courseid}
     </update>
     <select id="getScoreByScoreid" parameterType="int" resultMap="scoreMap">
         select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid and scores.scoreid=#{scoreid}
@@ -20,6 +20,9 @@
     </select>
     <select id="getScoreListByStuid" resultMap="scoreMap">
         select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid and scores.sid=#{sid}
+    </select>
+    <select id="getScoreByStuid" resultMap="scoreMap">
+        select * from scores inner join students on scores.stuid=students.stuid inner join reports on scores.stuid=reports.stuid and students.stuid=#{stuid}
     </select>
     <select id="getScoreByStuid_stage" resultMap="scoreMap" >
         select * from scores where stuid=#{arge[0]} and stage=#{arge[1]}

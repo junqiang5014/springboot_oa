@@ -209,7 +209,7 @@ public class TeacherController {
     }
 
     /**
-     * 学生的所有成绩列表
+     * 学生的已有成绩列表
      * @param stuid
      * @param model
      * @return
@@ -217,26 +217,29 @@ public class TeacherController {
      */
     @RequestMapping("studentScoreListPage")
     public String scoreEntering(int stuid,Model model){
+
         //根据stuid找到该学生的成绩
         List<Score> scoreList = scoreService.getScoreListByStuid(stuid);
         if (scoreList.size()!=0){
             model.addAttribute("scoreList", scoreList);
         }
-        return "teacher/studentScoreList";
+        return "teacher/studentScoreList?stuid=" + stuid;
     }
 
     /**
      * 添加一个学生成绩页面
      * @param stuid
-     * @param courseid
      * @param model
      * @return
      */
     @RequestMapping("addScorePage")
-    public String addScore(int stuid,int courseid,Model model){
+    public String addScore(int stuid,Model model,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        Course course = courseService.getCourseByTid(teacher.getTid());
         Score score = new Score();
         score.setStudent(studentService.getStudentByStuid(stuid));
-        score.setCourse(courseService.getCourseByCourseid(courseid));
+        score.setCourse(course);
         model.addAttribute("score", score);
         return "teacher/addScore";
     }
@@ -255,7 +258,7 @@ public class TeacherController {
         score.setStudent(student);
         score.setCourse(course);
         int i = scoreService.addScore(score);
-        return "teacher/scoreStudentListPage";
+        return "redirect:teacher/scoreStudentListPage";
     }
 
     /**

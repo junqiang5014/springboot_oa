@@ -75,4 +75,9 @@ public class ScoreServiceImpl implements ScoreService {
         int a = sum/count;
         return a;
     }
+
+    @Override
+    public Score getScoreByStuid(int stuid) {
+        return scoreMapper.getScoreByStuid(stuid);
+    }
 }

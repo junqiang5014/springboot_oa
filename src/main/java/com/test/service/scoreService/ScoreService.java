@@ -21,4 +21,11 @@ public interface ScoreService {
     public int getScoreByStuid_stage(int stuid, int stage);//根据stuid和stage去重复
 
     public int getClassAverageScore(Classes classes, int stage);
+
+    /**
+     * 根据stuid查询出周报分数
+     * @param stuid
+     * @return
+     */
+    public Score getScoreByStuid(int stuid);
 }

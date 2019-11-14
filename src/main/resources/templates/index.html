@@ -44,7 +44,7 @@
           $(".dv_content").attr("src","getAllUser");
         });
         $("body").on("click","#employee",function(){
-          $(".dv_content").attr("src","info");
+          $(".dv_content").attr("src","getAllEmployee");
         });
         // $("body").on("click","#showGoods",function(){
         //   $(".dv_content").attr("src","BackGoodsServlet");
@@ -88,7 +88,7 @@
               </ul>
             </li>
 
-            <li><a id="role" href="#exampledropdownDropdown1" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>角色管理</a>
+            <li><a id="role" href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>角色管理</a>
               <ul id="exampledropdownDropdown1" class="collapse list-unstyled ">
                 <li><a href="#">添加角色</a></li>
                 <li><a href="#">查看所有的角色</a></li>
@@ -123,11 +123,13 @@
             </li>
 
           </ul>
+
           <ul shiro:hasRole="schoolboss" id="side-main-menu1" class="side-menu list-unstyled">
             <li><a href="index.html"> <i class="icon-home"></i>个人资料管理</a></li>
             <li><a href="forms.html"> <i class="icon-form"></i>请假审批</a></li>
             <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>成绩查看</a></li>
           </ul>
+
           <ul shiro:hasRole="classboss" id="side-main-menu2" class="side-menu list-unstyled">
             <li><a href="index.html"> <i class="icon-home"></i>个人资料管理</a></li>
             <li><a href="forms.html"> <i class="icon-form"></i>请假审批</a></li>
@@ -135,12 +137,24 @@
             <li><a href="index.html"> <i class="icon-home"></i>学生信息管理</a></li>
             <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>成绩查看</a></li>
           </ul>
+
           <ul shiro:hasRole="teacher" id="side-main-menu3" class="side-menu list-unstyled">
-            <li><a href="index.html"> <i class="icon-home"></i>个人资料管理</a></li>
-            <li><a href="index.html"> <i class="icon-home"></i>周报查看</a></li>
-            <li><a href="forms.html"> <i class="icon-form"></i>请假审批</a></li>
-            <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>成绩查看</a></li>
+            <li><a href="teacher/index"> <i class="icon-home"></i>个人资料管理</a></li>
+            <li><a href="teacher/reportListPage"> <i class="icon-home"></i>周报查看</a></li>
+            <li><a href="#exampledropdownDropdown11" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>假条 </a>
+              <ul id="exampledropdownDropdown11" class="collapse list-unstyled ">
+                <li><a href="teacher/holidayListPage">待审批假条</a></li>
+                <li><a href="teacher/myHolidayPage">我的假条</a></li>
+              </ul>
+            </li>
+            <li><a href="#exampledropdownDropdown12" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>成绩查看 </a>
+              <ul id="exampledropdownDropdown12" class="collapse list-unstyled ">
+                <li><a href="#">班级成绩分析图</a></li>
+                <li><a href="#">我的学生列表</a></li>
+              </ul>
+            </li>
           </ul>
+
           <ul shiro:hasRole="student" id="side-main-menu4" class="side-menu list-unstyled">
             <li><a href="index.html"> <i class="icon-home"></i>个人资料管理</a></li>
             <li><a href="forms.html"> <i class="icon-form"></i>周报管理</a></li>
@@ -220,8 +234,8 @@
           </div>
         </nav>
       </header>
-      <div class="page_main" style="width: auto;height:900px">
-        <iframe shiro:hasRole="admin" style="width: 100%;height: 100%" class="dv_content" frameborder="0" scrolling="no" src="getallcourses" >
+      <div class="page_main" style="width: auto;height: auto">
+        <iframe shiro:hasRole="admin" style="width: 100%;height: 1200px" class="dv_content" frameborder="0" scrolling="no" src="getallcourses" >
         </iframe>
         <iframe shiro:hasRole="teacher" style="width: 100%;height: 100%" class="dv_content" frameborder="0" scrolling="no" src="teacher/index">
         </iframe>
@@ -244,7 +258,8 @@
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/charts-home.js"></script>
-    <!-- Main File-->
+
+    <!-- Main File  -->
     <script src="js/front.js"></script>
   </body>
 </html>
