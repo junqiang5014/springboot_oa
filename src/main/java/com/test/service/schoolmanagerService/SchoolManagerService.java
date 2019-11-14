@@ -9,4 +9,11 @@ public interface SchoolManagerService {
      * @return
      */
     public SchoolManager getSchoolManagerByUid(int uid);
+
+    /**
+     * 修改校长
+     * @param schoolManager
+     * @return
+     */
+    public int updateSchoolManager(SchoolManager schoolManager);
 }

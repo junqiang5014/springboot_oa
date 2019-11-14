@@ -23,4 +23,9 @@ public class SchoolManagerServiceImpl implements SchoolManagerService {
     public SchoolManager getSchoolManagerByUid(int uid) {
         return schoolManagerMapper.getSchoolManagerByUid(uid);
     }
+
+    @Override
+    public int updateSchoolManager(SchoolManager schoolManager) {
+        return schoolManagerMapper.updateSchoolManager(schoolManager);
+    }
 }
