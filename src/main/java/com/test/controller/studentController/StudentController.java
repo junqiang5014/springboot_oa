@@ -141,8 +141,8 @@ public class StudentController {
      */
     @RequestMapping("deleteReport")
     @ResponseBody
-    public String deleteReport(int rid){
-        int i = reportService.deleteReportByRid(rid);
+    public String deleteReport(int rid,Student student){
+        int i = reportService.deleteReportByRid(rid,student);
         if(i>0){
             return "success";
 
