@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.studentMapper.StudentMapper">
-      <select id="getStudentAndClassList" resultMap="studentMap">
+    <select id="getStudentAndClassList" resultMap="studentMap">
           select * from students
-      </select>
+    </select>
     <update id="updateStudentByUser" parameterType="student">
-        update students set uid=#{user.uid},stuname=#{stuname},stuage=#{stuage},stusex=#{stusex} where stuid=#{stuid}
+        update students set stuname=#{stuname},stuage=#{stuage},stusex=#{stusex} where stuid=#{stuid}
     </update>
     <select id="getStudentByUid" parameterType="int" resultMap="studentMap">
         select * from students where uid=#{user.uid}
@@ -31,5 +31,6 @@
                      select="com.test.mapper.classesMapper.ClassMapper.getClassByCid">
         </association>
     </resultMap>
+
 
 </mapper>
