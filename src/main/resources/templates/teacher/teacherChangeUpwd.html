@@ -84,7 +84,7 @@
                 <li><a href="#exampledropdownDropdown11" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>假条 </a>
                     <ul id="exampledropdownDropdown11" class="collapse list-unstyled ">
                         <li><a href="/teacher/holidayListPage">待审批假条</a></li>
-                        <li><a href="/teacher/teacherHolidayPage">我的假条</a></li>
+                        <li><a href="/teacher/myHolidayPage">我的假条</a></li>
                     </ul>
                 </li>
                 <li><a href="#exampledropdownDropdown12" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>成绩查看 </a>
@@ -99,32 +99,34 @@
     </div>
 </nav>
 <div class="page">
+
     <div class="page_main" style="width: auto;height: auto">
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>个人资料</h4>
+                        <h4>周报列表</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-
+                            <form action="changeUpwd" method="post">
                             <table class="table">
-                                <form action="changeUpwd" method="post">
+
                                     <input type="hidden" name="uid" th:value="${user.uid}">
-                                <tbody>
-                                <tr>
-                                    <th>用户名</th><td><input type="text" name="uname" th:value="${user.uname}"/></td>
-                                </tr>
-                                <tr>
-                                    <th>密码</th><td><input type="password" name="upwd" /></td>
-                                </tr>
-                                <tr>
-                                    <th colspan="2"><input type="submit" value="修改"/></th>
-                                </tr>
-                                </tbody>
-                                </form>
+                                    <tbody>
+                                    <tr>
+                                        <th>用户名</th><td><input type="text" name="uname" th:value="${user.uname}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>密码</th><td><input type="password" name="upwd" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2"><input type="submit" value="修改"/></th>
+                                    </tr>
+                                    </tbody>
+
                             </table>
+                            </form>
                         </div>
                     </div>
                 </div>

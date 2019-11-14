@@ -173,28 +173,32 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4>周报列表</h4>
+                        <h4>老师添加假条</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <form action="/teacher/teacherHoliday" method="post">
+
+
                             <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>学生姓名</th>
-                                    <th>标题</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
                                 <tbody>
-                                <tr th:each="report,var:${reportList}" >
-                                    <th th:text="${var.count}"></th>
-                                    <td th:text="${report.student.stuname}"></td>
-                                    <td th:text="${report.title}"></td>
-                                    <td><a th:href="@{reportPage(rid=${report.rid})}">详情</a> </td>
-                                </tr>
+
+                                    <tr>
+                                        <th>起始日期</th><td><input type="date" name="startdate"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>结束日期</th><td><input type="date" value="enddate" ></td>
+                                    </tr>
+                                    <tr>
+                                        <th>原因</th><td><input type="text" name="reason"></td>
+                                    </tr>
+                                    <tr>
+                                        <th><input type="hidden" name="tid" th:value="${teacher.tid}"><input type="submit" value="提交"> </th>
+                                    </tr>
+
                                 </tbody>
                             </table>
+                            </form>
                         </div>
                     </div>
                 </div>
