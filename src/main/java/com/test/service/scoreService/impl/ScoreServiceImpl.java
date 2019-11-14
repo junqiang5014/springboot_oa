@@ -78,6 +78,6 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public List<Score> getScoreByStuid(int stuid) {
-        return scoreMapper.getScoreByStuid(stuid);
+        return scoreMapper.getScoreListByStuid(stuid);
     }
 }
