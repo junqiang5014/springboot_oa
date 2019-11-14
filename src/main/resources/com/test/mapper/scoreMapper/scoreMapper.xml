@@ -21,6 +21,9 @@
     <select id="getScoreListByStuid" resultMap="scoreMap">
         select * from scores inner join students on scores.stuid=students.stuid inner join courses on scores.courseid=courses.courseid and scores.sid=#{sid}
     </select>
+    <select id="getScoreByStuid" resultMap="scoreMap">
+        select * from scores inner join students on scores.stuid=students.stuid inner join reports on scores.stuid=reports.stuid and students.stuid=#{stuid}
+    </select>
     <select id="getScoreByStuid_stage" resultMap="scoreMap" >
         select * from scores where stuid=#{arge[0]} and stage=#{arge[1]}
     </select>
