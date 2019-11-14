@@ -3,6 +3,7 @@ package com.test.controller.schoolmanagerController;
 import com.test.pojo.*;
 import com.test.service.holidayService.HolidayService;
 import com.test.service.schoolmanagerService.SchoolManagerService;
+import com.test.service.student_holidayService.Student_holidayService;
 import com.test.service.teacher_holidayService.Teacher_holidayService;
 import com.test.service.userService.UsersService;
 import org.activiti.engine.RuntimeService;
@@ -32,6 +33,8 @@ public class SchoolManagerController {
     private HolidayService holidayService;
     @Autowired
     private Teacher_holidayService teacher_holidayService;
+    @Autowired
+    private Student_holidayService student_holidayService;
 
     /**
      * 跳转到修改密码页面
@@ -76,7 +79,7 @@ public class SchoolManagerController {
         List<Task> taskList = taskService.createTaskQuery().taskAssignee(schoolManager.getSmname()).list();
         if (taskList.size() != 0) {
             ArrayList<Holiday> holidays = new ArrayList<>();
-            List<Teacher_holiday> teacher_holidays = new ArrayList<>();
+            List<Student_holiday> student_holidays = new ArrayList<>();
             for (Task task : taskList) {
                 ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
                         .processInstanceId(task.getProcessInstanceId()).singleResult();
@@ -85,10 +88,17 @@ public class SchoolManagerController {
                 holidays.add(holiday);
             }
             for (Holiday holiday: holidays){
-                Teacher_holiday teacher_holiday= teacher_holidayService.getTeacher_holidayByHid(holiday.getHid());
-                teacher_holidays.add(teacher_holiday);
+                Student_holiday student_holiday= student_holidayService.getStudent_holidayByHid(holiday.getHid());
+                student_holidays.add(student_holiday);
+
+
+                if(holiday.equals("teachername")){
+
+                }else if(holiday.equals("studentname")){
+
+                }
             }
-            model.addAttribute("teacher_holidays", teacher_holidays);
+            model.addAttribute("student_holidays", student_holidays);
         }
         return "schoolmanager/holidayList";
     }
@@ -99,8 +109,11 @@ public class SchoolManagerController {
      * @return
      */
     @RequestMapping("approveHoliday")
-    public String approveHoliday(int hid){
+    public String approveHoliday(int hid,User user){
+        //完成任务
         holidayService.changeStateByHid(hid);
+        Task task = taskService.createTaskQuery().processInstanceBusinessKey(hid + "").taskAssignee(user.getUname()).singleResult();
+        taskService.complete(task.getId());
         return "redirect:schoolmanager/holidayListPage";
     }
 
