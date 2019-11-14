@@ -2,6 +2,7 @@ package com.test.service.classLeaderService;
 
 import com.test.pojo.*;
 
+import java.io.InputStream;
 import java.util.List;
 
 public interface ClassLeaderService {
@@ -32,4 +33,6 @@ public interface ClassLeaderService {
 
     //查看学生成绩走势
     public List<AllColumn> selectScoreByStuname(String stuname);
+
+    public List getBankListByExcel(InputStream in, String fileName) throws Exception;
 }
