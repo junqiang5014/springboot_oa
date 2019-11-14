@@ -6,6 +6,10 @@
     <insert id="addHoliday" parameterType="int">
         insert into student_holiday (stuid,hid) values (#{args[0]},#{args[1]})
     </insert>
+    <select id="getStudentByHid" parameterType="int" resultMap="stu_holidayMap">
+        select * from students inner join on student_holiday.stuid=students.stuid where hid=#{hid}
+    </select>
+
 
     <resultMap id="stu_holidayMap" type="student_holiday">
         <association property="student" column="stuid" javaType="student" select="com.test.mapper.studentMapper.StudentMapper.getStudentBystuid"></association>
