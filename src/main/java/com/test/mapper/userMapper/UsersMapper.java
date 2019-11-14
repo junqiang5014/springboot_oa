@@ -54,5 +54,11 @@ public interface UsersMapper {
     public int updatePassword(User user);
 
 
+    /**
+     * 添加员工信息后自动添加账户,该uid和相应员工对应
+     */
+    public int addUser(User user);
+
+
 
 }
