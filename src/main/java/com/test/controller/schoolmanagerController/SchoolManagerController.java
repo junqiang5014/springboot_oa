@@ -90,7 +90,6 @@ public class SchoolManagerController {
             }
             for (Holiday holiday: holidays){
                 String name=null;
-
                 if((name=student_holidayService.getStudent_holidayByHid(holiday.getHid()).getStudent().getStuname())!=null){
                     return "";
 
@@ -126,7 +125,7 @@ public class SchoolManagerController {
             avgList.add(avg.getAVG());
         }
         model.addAttribute("avgList",avgList);
-        return "classLeader/echarts_class";
+        return "student/echarts_class";
     }
 
     //查看学生成绩走势
@@ -139,7 +138,7 @@ public class SchoolManagerController {
             studentList.add(a.getScore());
         }
         model.addAttribute("studentList",studentList);
-        return "classLeader/echarts";
+        return "student/echarts";
     }
 
 
