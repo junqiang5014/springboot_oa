@@ -2,6 +2,8 @@ package com.test.mapper.holidayMapper;
 
 import com.test.pojo.ClassLeader;
 import com.test.pojo.Holiday;
+import com.test.pojo.Student;
+import com.test.pojo.Teacher;
 
 import java.util.List;
 
@@ -20,8 +22,11 @@ public interface HolidayMapper {
 
 
 
-
-
-
     public ClassLeader getClassLeaderByHid(int hid);
+
+    public Student getStudentByHid(int hid);
+
+    public Teacher getTeacherByHid(int hid);
+
+
 }
