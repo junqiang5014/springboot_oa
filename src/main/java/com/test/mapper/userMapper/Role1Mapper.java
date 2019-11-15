@@ -23,7 +23,7 @@ public interface Role1Mapper {
      * @param roleid
      * @return
      */
-    public int updateRole(int roleid);
+    public int updateRole(Role role);
 
     /**
      * 获取所有的角色名

@@ -1,5 +1,6 @@
 package com.test.mapper.userMapper;
 
+import com.test.pojo.Role;
 import com.test.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -58,6 +59,18 @@ public interface UsersMapper {
      * 添加员工信息后自动添加账户,该uid和相应员工对应
      */
     public int addUser(User user);
+
+    /**
+     * 根据用户id查询角色id
+     */
+
+    public int getRoleById(int uid);
+
+    /**
+     * 根据角色id查询角色姓名
+     */
+
+    public String getRoleNameByRoleId(int roleid);
 
 
 
