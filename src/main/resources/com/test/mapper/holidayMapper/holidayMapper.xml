@@ -13,13 +13,13 @@
 
 <!--    public List<Holiday> getHolidayList();-->
     <insert id="addHoliday" parameterType="holiday" useGeneratedKeys="true" keyProperty="hid">
-        insert into holiday (hid,reason,days,state) values (#{hid},#{reason},#{days},#{state})
+        insert into holiday (hid,reason,startdate,enddate,datys) values (#{hid},#{reason},#{startdate},#{enddate},#{days})
     </insert>
     <delete id="deleteHolidayByHid" parameterType="int">
         delete from holiday where hid=#{hid}
     </delete>
     <update id="updateHoliday" parameterType="holiday">
-        update holiday set reason=#{reason},days=#{days},state=#{state}
+        update holiday set reason=#{reason},days=#{days},state=#{state} where hid=#{hid}
     </update>
     <select id="getHolidayByHid" parameterType="int" resultType="holiday">
         select * from holiday where hid=#{hid}

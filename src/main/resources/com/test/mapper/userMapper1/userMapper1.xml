@@ -6,8 +6,8 @@
     <update id="updateUser" parameterType="user">
         update users set uname=#{uname},upwd=#{upwd} where uid=#{uid}
     </update>
-    <select id="getUserByUid" parameterType="int">
-        select * from user where uid=#{uid}
+    <select id="getUserByUid" parameterType="int" resultMap="userM">
+        select * from users where uid=#{uid}
     </select>
     <resultMap id="userM" type="user">
         <id property="uid" column="uid"/>
