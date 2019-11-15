@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface CLassLeaderMapper {
 
-/*    //班主任修改密码
-    public int updateUpwdByClassLeader(User user);*/
+    //班主任修改密码
+    public int updateUpwdByClassLeader(User user);
 
     //班主任查看个人资料
     public ClassLeader selectMessage(int clid);
@@ -35,4 +35,6 @@ public interface CLassLeaderMapper {
     public List<AllColumn> selectScoreByStuname(String stuname);
 
     public List getBankListByExcel(InputStream in, String fileName);
+
+    public ClassLeader getClassLeaderByClid(int clid);
 }

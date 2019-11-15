@@ -149,10 +149,10 @@
 
             <ul shiro:hasRole="classboss" id="side-main-menu2" class="side-menu list-unstyled">
                 <li><a href="selectMessage"> <i class="icon-home"></i>个人资料管理</a></li>
-                <li><a href="forms.html"> <i class="icon-form"></i>请假审批</a></li>
+                <li><a href=""> <i class="icon-form"></i>请假审批</a></li>
                 <li><a href="selectReport"> <i class="icon-home"></i>查看周报</a></li>
-                <li><a href="index.html"> <i class="icon-home"></i>学生信息管理</a></li>
-                <li><a href="cc"> <i class="fa fa-bar-chart"></i>成绩查看</a></li>
+                <li><a href="selectStudent"> <i class="icon-home"></i>学生信息管理</a></li>
+                <li><a href="echarts1"> <i class="fa fa-bar-chart"></i>成绩查看</a></li>
             </ul>
 
             <ul shiro:hasRole="teacher" id="side-main-menu3" class="side-menu list-unstyled">
@@ -255,12 +255,12 @@
         <form method="post" action="savStu" enctype="multipart/form-data">
             <input type="file" name="file"  />
             <input type="submit" value="提交">
-            <a href="export">导出</a>
+
         </form>
-         <button onclick="ex1()">导出</button>
 
     </div>
-    <div class="page_main2" style="width: auto;height: 30%" > </div>
+    <div style="float: right ;margin-right: 723px " > <button onclick="ex1()">导出</button></div>
+    <div style="width: auto;height: 60px"></div>
     <div class="container-fluid">
         <!-- Page Header-->
         <header>
