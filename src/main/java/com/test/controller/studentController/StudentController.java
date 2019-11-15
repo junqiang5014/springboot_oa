@@ -86,6 +86,11 @@ public class StudentController {
 
     }
 
+    @RequestMapping("student/studentindex")
+    public String studentindex(){
+        return "student/studentindex";
+    }
+
     /**
      * 查询学生信息
      * @param session
@@ -94,7 +99,8 @@ public class StudentController {
      */
     @RequestMapping("student/getStudentmessage")
     public String getStudentByUser(HttpSession session,Model model){
-        User user = (User)session.getAttribute("user1");
+        System.out.println("studnt");
+        User user = (User)session.getAttribute("user");
         Student student = studentService.getStudentByUser(user);
         model.addAttribute("student",student);
         return "student/updatemessage";
@@ -107,6 +113,7 @@ public class StudentController {
      */
     @RequestMapping("student/saveReport")
     public String saveReport(){
+        System.out.println("student222");
         return "student/add";
 
     }
@@ -159,6 +166,7 @@ public class StudentController {
     @RequestMapping("student/getReport")
     public String getReport(Model model){
         List<Report> reportList = reportService.getReportList();
+        System.out.println(reportList);
         model.addAttribute("reportList",reportList);
         return "student/resportlist";
     }
@@ -170,10 +178,11 @@ public class StudentController {
      * @return
      */
     @RequestMapping("student/editUpwd")
-    public String updateUpwd(HttpSession session){
-        User user = (User) session.getAttribute("user1");
-        String upwd = usersService.getUpwdByUname(user.getUname());
-        return "redirect:student/updateUpwd";
+    public String updateUpwd(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        String upwd = user.getUpwd();
+        model.addAttribute("user",user);
+        return "student/updateUpwd";
     }
 
     /**
