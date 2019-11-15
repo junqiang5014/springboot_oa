@@ -22,7 +22,7 @@
     <select id="getStudentListByCid" resultType="student">
         select * from students where cid=#{cid}
     </select>
-    <select id="getAllStudent" resultMap="studentMap">
+    <select id="getAllStudent" resultMap="studentMap2">
         select * from students inner join classes on students.cid=classes.cid
     </select>
 
@@ -42,6 +42,16 @@
         <result property="stusex" column="stusex"></result>
         <association property="classes" column="cid" javaType="classes" select="com.test.mapper.classesMapper.ClassesMapper.getClassByCid"></association>
         <association property="user" column="uid" javaType="user" select="com.test.mapper.userMapper1.UserMapper1.getUserByUid"></association>
+    </resultMap>
+    <resultMap id="studentMap2" type="student">
+        <id property="stuid" column="stuid" ></id>
+        <result property="stuname" column="stuname"></result>
+        <result property="stuage" column="stuage"></result>
+        <result property="stusex" column="stusex"></result>
+        <association property="classes" column="cid" javaType="classes" >
+            <id property="cid" column="cid"></id>
+            <result property="cname" column="cname"></result>
+        </association>
     </resultMap>
 
 
