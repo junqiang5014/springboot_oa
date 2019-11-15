@@ -11,19 +11,19 @@
             <id property="tid" column="tid"></id>
             <result property="tname" column="tname"></result>
         </association>
-        <association property="classleader" column="clid" javaType="classleader">
+        <association property="classLeader" column="clid" javaType="classLeader">
             <id property="clid" column="clid"></id>
             <result property="clname" column="clname"></result>
         </association>
     </resultMap>
     <insert id="addClass" parameterType="classes" useGeneratedKeys="true" keyProperty="cid">
-        insert into classes(cname,tid,clid) values (#{cname},#{teachers.tid},#{classleaders.clid})
+        insert into classes(cname,tid,clid) values (#{cname},#{teacher.tid},#{classleader.clid})
     </insert>
     <delete id="deleteClasses" parameterType="int" >
         delete from classes where cid=#{cid}
     </delete>
     <update id="updateClasses" parameterType="classes">
-        update classes set cname=#{cname},tid=#{teacher.tid},clid=#{classleaders.clid} where cid=#{cid}
+        update classes set cname=#{cname},tid=#{teacher.tid},clid=#{classleader.clid} where cid=#{cid}
     </update>
     <select id="getClassByCid" parameterType="int" resultMap="classesMap" >
         select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleaders.clid and classes.cid=#{cid}

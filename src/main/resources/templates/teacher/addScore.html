@@ -177,6 +177,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <table class="table">
                             <tbody>
                             <tr>
                                 <th>姓名</th><td th:text="${score.student.stuname}"></td>
@@ -194,8 +195,12 @@
                                 <tr>
                                     <th>阶段</th>
                                     <td>
-                                        <select th:each="i:${#numbers.sequence(1,5)}" name="stage">
-                                            <option th:value="${i}" name="stage"></option>
+                                        <select  name="stage">
+                                            <option value="1" name="stage">1</option>
+                                            <option value="2" name="stage">2</option>
+                                            <option value="3" name="stage">3</option>
+                                            <option value="4" name="stage">4</option>
+                                            <option value="5" name="stage">5</option>
                                         </select>
                                     </td>
                                 <tr>
