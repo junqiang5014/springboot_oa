@@ -5,7 +5,9 @@ package com.test.controller.classLeaderController;
 import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
 import com.test.util.ExcleUtil;
-import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -110,6 +110,7 @@ public class ClassLeaderController {
     //查看学生信息
     @RequestMapping("selectStudent")
     public String selectStudent(Model model) {
+        System.out.println("asd");
         List<Student> studentList= classLeaderService.selectStudent();
         model.addAttribute("studentList",studentList);
         return "classLeader/import";

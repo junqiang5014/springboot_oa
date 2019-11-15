@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.teacher_holidayMapper.Teacher_holidayMapper">
-    <insert id="add" >
-        insert into teacher_holiday (tid,hid) values (tid,hid)
+    <insert id="add" parameterType="int">
+        insert into teacher_holiday(tid,hid) values (#{tid},#{hid})
     </insert>
     <select id="getTeacher_holidayByTid" parameterType="int" resultMap="t_hMap">
         select * from teacher_holiday t_h inner join teachers on teachers.tid=t_h.tid

@@ -61,6 +61,7 @@
             $("body").on("click","#employee",function(){
                 $(".dv_content").attr("src","getAllEmployee");
             });
+
             // $("body").on("click","#showGoods",function(){
             //   $(".dv_content").attr("src","BackGoodsServlet");
             // });
@@ -71,6 +72,7 @@
             //   $(".dv_content").attr("src","/project_test/OrderServlet");
             // });
         })
+
     </script>
 
 
@@ -255,7 +257,7 @@
             <input type="submit" value="提交">
             <a href="export">导出</a>
         </form>
-
+         <button onclick="ex1()">导出</button>
 
     </div>
     <div class="page_main2" style="width: auto;height: 30%" > </div>
@@ -290,6 +292,11 @@
 
 
 </div>
+<script>
+    function ex1() {
+        window.location.href="export";
+    }
+</script>
 
 <!-- JavaScript files-->
 <script src="vendor/jquery/jquery.min.js"></script>
