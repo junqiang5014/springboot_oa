@@ -1,24 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <title>添加周报</title>
-</head>
-<body>
-    <form action="addReport" method="post">
-        月份：<input type="text" name="yue"/><br/>
-        星期：<input type="text" name="week"/><br/>
-        标题：<input type="text" name="title"/><br/>
-        内容：<input type="file" name="content"/><br/>
-        分数：<input type="text" name="score"/><br/>
-        <input type="submit"/>
-    </form>
-
-</body>
-</html>
-
-
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8"/>
@@ -127,45 +107,26 @@
 <div class="page">
     <div class="page_main" style="width: auto;height: auto">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>添加周报</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <form action="/student/addReport" method="post">
-
-                                <table class="table">
-                                    <tbody>
-
-                                    <tr>
-                                        <th>月份</th><td><input type="text" name="yue"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>星期</th><td><input type="text" name="week"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>标题</th><td><input type="text" name="title"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>内容</th><td><input type="file" name="content"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th>分数</th><td><input type="text" name="score"/></td>
-                                    </tr>
-                                    <tr>
-                                        <th><td><input type="submit" value="提交"></td> </th>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </form>
-                        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>个人资料</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>姓名</th><td th:text="${teacher.tname}"></td>
+                                <th>操作</th><td><a href="/teacher/changeUpwdPage">更改密码</a> </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </div>
 

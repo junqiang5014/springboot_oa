@@ -42,12 +42,12 @@ public class SchoolManagerController {
      * @param session
      * @return
      */
-    @RequestMapping("editUpwd2")
+    @RequestMapping("schoolmanager/editUpwd2")
     public String updateUpwd(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         SchoolManager schoolManager = schoolManagerService.getSchoolManagerByUid(user.getUid());
         model.addAttribute("schoolManager",schoolManager);
-        return "redirect:updateUpwd2";
+        return "redirect:schoolmanager/updateUpwd2";
     }
 
     /**
@@ -57,13 +57,13 @@ public class SchoolManagerController {
      * @param cfgPwd
      * @return
      */
-    @RequestMapping("updateUpwd2")
+    @RequestMapping("schoolmanager/updateUpwd2")
     public String editUpwd(String upwd, String newPwd, String cfgPwd){
         int i = usersService.updateUserPwd(upwd,newPwd,cfgPwd);
         if(i>0){
-            return "redirect:index";
+            return "schoolmanager/schoolmanagerindex";
         }
-        return "redirect:editUpwd2";
+        return "redirect:schoolmanager/editUpwd2";
 
     }
 
@@ -73,7 +73,7 @@ public class SchoolManagerController {
      * @param model
      * @return
      */
-    @RequestMapping("holidayListPage")
+    @RequestMapping("schoolmanager/holidayListPage")
     public String holidayListPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         SchoolManager schoolManager = schoolManagerService.getSchoolManagerByUid(user.getUid());
@@ -107,7 +107,7 @@ public class SchoolManagerController {
      * @param hid
      * @return
      */
-    @RequestMapping("approveHoliday")
+    @RequestMapping("schoolmanager/approveHoliday")
     public String approveHoliday(int hid,User user){
         //完成任务
         holidayService.changeStateByHid(hid);
@@ -117,7 +117,7 @@ public class SchoolManagerController {
     }
 
     //查看班级平均成绩
-    @RequestMapping("echarts_class")
+    @RequestMapping("schoolmanager/echarts_class")
     public String selectScoreAvg(Model model,String classname) {
         List<Double> avgList =new ArrayList<Double>();
         List<AllColumn> scoreList= schoolManagerService.selectScoreAvg(classname);
@@ -125,11 +125,11 @@ public class SchoolManagerController {
             avgList.add(avg.getAVG());
         }
         model.addAttribute("avgList",avgList);
-        return "student/echarts_class";
+        return "schoolmanager/echarts_class";
     }
 
     //查看学生成绩走势
-    @RequestMapping("echarts")
+    @RequestMapping("schoolmanager/echarts")
     public String echarts(Model model,String stuname){
         List<Integer> studentList =new ArrayList<Integer>();
         List<AllColumn> allColumnList=schoolManagerService.selectScoreByStuname(stuname);
@@ -138,7 +138,7 @@ public class SchoolManagerController {
             studentList.add(a.getScore());
         }
         model.addAttribute("studentList",studentList);
-        return "student/echarts";
+        return "schoolmanager/echarts";
     }
 
 
