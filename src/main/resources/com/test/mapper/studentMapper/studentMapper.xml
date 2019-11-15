@@ -9,14 +9,15 @@
     <update id="updateStudentByUser" parameterType="student">
         update students set stuname=#{stuname},stuage=#{stuage},stusex=#{stusex} where stuid=#{stuid}
     </update>
-    <select id="getStudentByUid" parameterType="int" resultMap="studentMap">
+    <select id="getStudentByUid" parameterType="int">
         select * from students where uid=#{user.uid}
     </select>
-    <select id="getStudentByUser" parameterType="user" resultMap="studentMap">
+    <select id="getStudentByUser" parameterType="user" >
         select * from students where uid=#{user.uid}
     </select>
-    <select id="getStudentByStuid" parameterType="int" resultMap="studentMap">
-        select * from students inner join users on student.uid=users.uid and stuid=#{stuid}
+    <select id="getStudentByStuid" parameterType="int" resultMap="studentMap1">
+        select * from students inner join classes on students.cid=classes.cid
+        inner join users on students.uid=users.uid and stuid=#{stuid}
     </select>
     <select id="getStudentListByCid" resultType="student">
         select * from students where cid=#{cid}
@@ -30,6 +31,14 @@
         <association property="classes" column="cid" javaType="classes"
                      select="com.test.mapper.classesMapper.ClassMapper.getClassByCid">
         </association>
+    </resultMap>
+    <resultMap id="studentMap1" type="student">
+        <id property="stuid" column="stuid" ></id>
+        <result property="stuname" column="stuname"></result>
+        <result property="stuage" column="stuage"></result>
+        <result property="stusex" column="stusex"></result>
+        <association property="classes" column="cid" javaType="classes" select="com.test.mapper.classesMapper.ClassesMapper.getClassByCid"></association>
+        <association property="user" column="uid" javaType="user" select="com.test.mapper.userMapper1.UserMapper1.getUserByUid"></association>
     </resultMap>
 
 

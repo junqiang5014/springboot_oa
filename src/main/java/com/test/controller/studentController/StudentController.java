@@ -169,7 +169,7 @@ public class StudentController {
      * @param session
      * @return
      */
-    @RequestMapping("editUpwd")
+    @RequestMapping("editUpwd1")
     public String updateUpwd(HttpSession session){
         User user = (User) session.getAttribute("user1");
         String upwd = usersService.getUpwdByUname(user.getUname());
@@ -183,7 +183,7 @@ public class StudentController {
      * @param cfgPwd
      * @return
      */
-    @RequestMapping("updateUpwd")
+    @RequestMapping("updateUpwd1")
     public String editUpwd(String upwd, String newPwd, String cfgPwd){
         int i = usersService.updateUserPwd(upwd,newPwd,cfgPwd);
         if(i>0){

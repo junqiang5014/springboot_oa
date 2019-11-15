@@ -15,6 +15,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +68,14 @@ public class TeacherController {
         return "teacher/teacherindex";
     }
 
+//    @RequestMapping("teacherindex")
+//    public String teacherindex(HttpSession session,Model model){
+//        User user = (User) session.getAttribute("user");
+//        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+//        model.addAttribute("teacher", teacher);
+//        return "teacher/teacherindex";
+//    }
+
     /**
      * 更改密码
      * @param session
@@ -82,8 +91,10 @@ public class TeacherController {
 
     @RequestMapping("changeUpwd")
     public String changeUpwd(User user){
+        Md5Hash md5Hash = new Md5Hash(user.getUpwd());
+        user.setUpwd(md5Hash.toString());
         userService1.updateUser(user);
-        return "redirect:teacher/index";
+        return "teacher/success";
     }
 
     /**
@@ -349,6 +360,7 @@ public class TeacherController {
      */
     @RequestMapping("teacherHoliday")
     public String teacherHoliday(Holiday holiday,int tid){
+        System.out.println(holiday);
         int days = getDays(holiday.getStartdate(), holiday.getEnddate());
         holiday.setDays(days);
         holidayService.addteacherHoliday(holiday,tid);
@@ -358,17 +370,17 @@ public class TeacherController {
 
     /**
      * 根据日期获取天数
-     * @param startDate
-     * @param endDate
+     * @param startdate
+     * @param enddate
      * @return
      */
-    private int getDays(String startDate, String endDate) {
+    private int getDays(String startdate, String enddate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date start = null;
         Date end = null;
         try {
-            start = simpleDateFormat.parse(startDate);
-            end = simpleDateFormat.parse(endDate);
+            start = simpleDateFormat.parse(startdate);
+            end = simpleDateFormat.parse(enddate);
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -28,6 +28,6 @@
         select * from courses inner join teachers on courses.tid=teachers.tid
     </select>
     <select id="getCourseByTid" resultMap="courseMap">
-        select * from courses inner join teachers on teachers.tid=courses.tid and teacher.tid=#{tid}
+        select * from courses inner join teachers on teachers.tid=courses.tid and teachers.tid=#{tid}
     </select>
 </mapper>
