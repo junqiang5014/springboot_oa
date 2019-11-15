@@ -112,6 +112,16 @@ public class UsersServiceImpl implements UsersService {
 
     }
 
+    @Override
+    public int getRoleById(int uid) {
+        return usersMapper.getRoleById(uid);
+    }
+
+    @Override
+    public String getRoleNameByRoleId(int roleid) {
+        return usersMapper.getRoleNameByRoleId(roleid);
+    }
+
 
     public static String getPingYin(String src) {
         char[] t1 = null;

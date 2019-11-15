@@ -45,7 +45,7 @@ public interface UsersService {
     public int updateUserPwd(String upwd,String newPwd,String cfgPwd);
 
 
-    //根据uid来删除用户
+    //根据uid来删除用户,并且删除员工信息
     public int deleteUser(int uid);
 
     //根据用户名进行模糊搜索
@@ -56,6 +56,19 @@ public interface UsersService {
 
     //增加用户
     public int addUser(User user);
+
+
+    /**
+     * 根据用户id查询角色id
+     */
+
+    public int getRoleById(int uid);
+
+    /**
+     * 根据角色id查询角色姓名
+     */
+
+    public String getRoleNameByRoleId(int roleid);
 
 
 }
