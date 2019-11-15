@@ -1,3 +1,23 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title>修改密码</title>-->
+<!--</head>-->
+<!--<body>-->
+   <!--<form action="editUpwd" method="post">-->
+       <!--<input type="hidden" name="uid" th:value="${user.uid}"/>-->
+       <!--用户名：<input type="text" name="uname" th:value="${user.uname}"/><br/>-->
+       <!--请输入旧密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>-->
+       <!--请输入新密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>-->
+       <!--确认新密码：<input type="password" name="upwd" th:value="${user.upwd}"/><br/>-->
+                 <!--<input type="submit"/>-->
+
+   <!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
@@ -79,19 +99,12 @@
             <h5 class="sidenav-heading">Main</h5>
 
             <ul shiro:hasRole="student" id="side-main-menu3" class="side-menu list-unstyled">
-                <li><a href="/getindex"><i class="icon-home"></i>学生</a></li>
+                <li><a href="/getindex"><i class="icon-home"></i>校长</a></li>
 
                 <li><a href="#exampledropdownDropdown9" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>个人资料管理 </a>
-                <ul id="exampledropdownDropdown9" class="collapse list-unstyled ">
-                    <li><a href="/student/getStudentmessage">个人基本信息的修改</a></li>
-                    <li><a href="/student/editUpwd">修改密码</a></li>
-                </ul>
-            </li>
-                <li><a href="#exampledropdownDropdown10" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>周报管理 </a>
-                    <ul id="exampledropdownDropdown10" class="collapse list-unstyled ">
-                        <li><a href="/student/addReport">添加周报</a></li>
-                        <li><a href="/student/deleteReport">删除周报</a></li>
-                        <li><a href="/student/getReport">查看周报</a></li>
+                    <ul id="exampledropdownDropdown9" class="collapse list-unstyled ">
+                        <li><a href="/schoolmanager/getStudentmessage">个人基本信息的修改</a></li>
+                        <li><a href="/schoolmanager/editUpwd">修改密码</a></li>
                     </ul>
                 </li>
                 <li><a href="#exampledropdownDropdown11" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>请假申请 </a>
@@ -107,26 +120,42 @@
 <div class="page">
     <div class="page_main" style="width: auto;height: auto">
         <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h4>个人资料</h4>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th>姓名</th><td th:text="${teacher.tname}"></td>
-                                <th>操作</th><td><a href="/teacher/changeUpwdPage">更改密码</a> </td>
-                            </tr>
-                            </tbody>
-                        </table>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>修改密码</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form action="/schoolmanager/editUpwd2" method="post">
+
+                                <table class="table">
+                                    <tbody>
+
+                                    <tr>
+                                        <th>用户名</th><td><input type="text" name="uname" th:value="${user.uname}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>请输入旧密码</th><td><input type="password" name="upwd" th:value="${user.upwd}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>请输入新密码</th><td><input type="password" name="upwd" th:value="${user.upwd}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>请确认新密码</th><td><input type="password" name="upwd" th:value="${user.upwd}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th><input type="hidden" name="uid" th:value="${user.uid}"><input type="submit" value="提交"> </th>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 
