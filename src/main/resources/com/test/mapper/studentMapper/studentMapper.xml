@@ -22,6 +22,9 @@
     <select id="getStudentListByCid" resultType="student">
         select * from students where cid=#{cid}
     </select>
+    <select id="getAllStudent" resultMap="studentMap">
+        select * from students inner join classes on students.cid=classes.cid
+    </select>
 
     <resultMap id="studentMap" type="student">
         <id property="stuid" column="stuid"></id>

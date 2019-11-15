@@ -182,6 +182,12 @@
                                 <tr th:each="student,var:${studentList}">
                                     <th>姓名</th><td th:text="${student.stuname}"></td><td><a th:href="@{studentScoreList(stuid=${student.stuid})}">查看成绩</a> </td>
                                 </tr>
+                                <form action="/teacher/export" enctype="multipart/form-data" method="post">
+                                <tr>
+                                    <td><input type="file" value="导出" name="infile"></td>
+                                    <td><input type="submit" value="导出到"></td>
+                                </tr>
+                                </form>
                                 </tbody>
                             </table>
                         </div>
