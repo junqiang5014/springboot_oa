@@ -109,7 +109,7 @@ public class ClassController {
             try {
                 tid = classService.getTid(tname);
             }catch (Exception e){
-                return "redirect:/getaddclass";
+                return "redirect:/getAllClass";
             }
             Teacher teacher = new Teacher();
             teacher.setTname(tname);
@@ -125,7 +125,7 @@ public class ClassController {
             try {
                 clid = classService.getClid(clname);
             }catch (Exception e){
-                return "redirect:/getaddclass";
+                return "redirect:/getAllClass";
             }
 
             ClassLeader classLeader = new ClassLeader();
