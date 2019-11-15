@@ -1,8 +1,110 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8"/>-->
+    <!--<title>周报列表</title>-->
+    <!--<script th:src="@{js/jquery-1.12.4.js}"></script>-->
+    <!--<script>-->
+        <!--$(function(){-->
+            <!--$(".delBtn").click(function(){-->
+                <!--var rid = $(this).attr("data");-->
+                <!--$.post("deleteReport",{rid:rid},function(data){-->
+                    <!--if(data == "success"){-->
+                        <!--$("#tr" + rid).remove();-->
+                    <!--}else{-->
+                        <!--alert("删除失败");-->
+                    <!--}-->
+                <!--})-->
+            <!--})-->
+        <!--})-->
+    <!--</script>-->
+<!--</head>-->
+<!--<body>-->
+    <!--<table>-->
+        <!--<tr>-->
+            <!--<th>序号</th>-->
+            <!--<th>月份</th>-->
+            <!--<th>星期</th>-->
+            <!--<th>标题</th>-->
+            <!--<th>内容</th>-->
+            <!--<th>分数</th>-->
+            <!--<th>操作</th>-->
+        <!--</tr>-->
+        <!--<tr th:id="tr+${report.rid}" th:each="report,var:${reportList}">-->
+            <!--<td th:text="${var.count}"></td>-->
+            <!--<td th:text="${report.yue}"></td>-->
+            <!--<td th:text="${report.week}"></td>-->
+            <!--<td th:text="${report.title}"></td>-->
+            <!--<td th:text="${report.content}"></td>-->
+            <!--<td th:text="${report.score}"></td>-->
+
+            <!--<td><a href="javascript:void(0)" th:data="${report.rid}" th:text="删除" class="delBtn"></a>-->
+        <!--</tr>-->
+    <!--</table>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="UTF-8"/>
-    <title>周报列表</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>主页</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="all,follow"/>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css"/>
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css"/>
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="../css/fontastic.css"/>
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="../css/grasp_mobile_progress_circle-1.0.0.min.css"/>
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="../vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"/>
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet"/>
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="../css/custom.css"/>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="/js/jquery-1.12.4.js" type="text/javascript"></script>
+
+    <script>
+        $(function(){
+            $("body").on("click","#course",function(){
+                $(".dv_content").attr("src","getallcourses");
+            });
+
+            $("body").on("click","#role",function(){
+                $(".dv_content").attr("src","getallroles");
+            });
+
+            $("body").on("click","#user",function(){
+                $(".dv_content").attr("src","getAllUser");
+            });
+            $("body").on("click","#employee",function(){
+                $(".dv_content").attr("src","getAllEmployee");
+            });
+            // $("body").on("click","#showGoods",function(){
+            //   $(".dv_content").attr("src","BackGoodsServlet");
+            // });
+            // $("body").on("click","#addGoods",function(){
+            //   $(".dv_content").attr("src","SelGoodsTypeServlet");
+            // });
+            // $("body").on("click","#OrderMage",function(){
+            //   $(".dv_content").attr("src","/project_test/OrderServlet");
+            // });
+        })
+    </script>
     <script th:src="@{js/jquery-1.12.4.js}"></script>
     <script>
         $(function(){
@@ -18,32 +120,102 @@
             })
         })
     </script>
+
 </head>
 <body>
-    <table>
-        <tr>
-            <th>序号</th>
-            <th>月份</th>
-            <th>星期</th>
-            <th>标题</th>
-            <th>内容</th>
-            <th>分数</th>
-            <th>操作</th>
-        </tr>
-        <tr th:id="tr+${report.rid}" th:each="report,var:${reportList}">
-            <td th:text="${var.count}"></td>
-            <td th:text="${report.yue}"></td>
-            <td th:text="${report.week}"></td>
-            <td th:text="${report.title}"></td>
-            <td th:text="${report.content}"></td>
-            <td th:text="${report.score}"></td>
+<!-- Side Navbar -->
+<nav class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+            <!-- User Info-->
+            <div class="sidenav-header-inner text-center"><img src="/img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
+                <h2 class="h5">Nathan Andrews</h2><span>Web Developer</span>
+            </div>
+            <!-- Small Brand information, appears on minimized sidebar-->
+            <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>操作</strong></a></div>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+            <h5 class="sidenav-heading">Main</h5>
 
-            <td><a href="javascript:void(0)" th:data="${report.rid}" th:text="删除" class="delBtn"></a>
-        </tr>
+            <ul shiro:hasRole="student" id="side-main-menu3" class="side-menu list-unstyled">
+                <li><a href="/getindex"><i class="icon-home"></i>学生</a></li>
 
+                <li><a href="#exampledropdownDropdown9" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>个人资料管理 </a>
+                    <ul id="exampledropdownDropdown9" class="collapse list-unstyled ">
+                        <li><a href="/student/getStudentmessage">个人基本信息的修改</a></li>
+                        <li><a href="/student/editUpwd">修改密码</a></li>
+                    </ul>
+                </li>
+                <li><a href="#exampledropdownDropdown10" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>周报管理 </a>
+                    <ul id="exampledropdownDropdown10" class="collapse list-unstyled ">
+                        <li><a href="/student/addReport">添加周报</a></li>
+                        <li><a href="/student/deleteReport">删除周报</a></li>
+                        <li><a href="/student/getReport">查看周报</a></li>
+                    </ul>
+                </li>
+                <li><a href="#exampledropdownDropdown11" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>请假申请 </a>
+                    <ul id="exampledropdownDropdown11" class="collapse list-unstyled ">
+                        <li><a href="/student/studentHolidayPage">我的假条</a></li>
+                    </ul>
+                </li>
+            </ul>
 
-    </table>
+        </div>
+    </div>
+</nav>
+<div class="page">
+    <div class="page_main" style="width: auto;height: auto">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>个人基本信息修改</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>月份</th>
+                                    <th>星期</th>
+                                    <th>标题</th>
+                                    <th>内容</th>
+                                    <th>分数</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr th:id="tr+${report.rid}" th:each="report,var:${reportList}">
+                                    <td th:text="${var.count}"></td>
+                                    <td th:text="${report.yue}"></td>
+                                    <td th:text="${report.week}"></td>
+                                    <td th:text="${report.title}"></td>
+                                    <td th:text="${report.content}"></td>
+                                    <td th:text="${report.score}"></td>
 
+                                    <td><a href="javascript:void(0)" th:data="${report.rid}" th:text="删除" class="delBtn"></a>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- JavaScript files-->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/popper.js/umd/popper.min.js"> </script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+<script src="../vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="../vendor/chart.js/Chart.min.js"></script>
+<script src="../vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="../vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../js/charts-home.js"></script>
+
+<!-- Main File  -->
+<script src="../js/front.js"></script>
 </body>
 </html>

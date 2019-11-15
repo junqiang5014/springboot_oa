@@ -4,16 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mapper.teacher_holidayMapper.Teacher_holidayMapper">
     <insert id="add" >
-        insert into teacher_holiday (tid,hid) values (#{args[0]},#{args[1]})
+        insert into teacher_holiday (tid,hid) values (tid,hid)
     </insert>
     <select id="getTeacher_holidayByTid" parameterType="int" resultMap="t_hMap">
-        select * from teacher_holiday t_h inner join teachers on teacher.tid=t_h.tid
-        inner join holiday on holiday.hid=t_h.hid and tid=#{tid}
+        select * from teacher_holiday t_h inner join teachers on teachers.tid=t_h.tid
+        inner join holiday on holiday.hid=t_h.hid and t_h.tid=#{tid}
     </select>
 
     <select id="getTeacher_holidayByHid" parameterType="int" resultMap="t_hMap">
-        select * from teacher_holiday t_h inner join teachers on teacher.tid=t_h.tid
-        inner join holiday on holiday.hid=t_h.hid and hid=#{hid}
+        select * from teacher_holiday t_h inner join teachers on teachers.tid=t_h.tid
+        inner join holiday on holiday.hid=t_h.hid and t_h.hid=#{hid}
+    </select>
+
+    <select id="getTeacherByHid" parameterType="int" resultMap="t_hMap">
+        select * from teachers inner join teacher_holiday on teachers.tid=teacher_holiday.tid where hid=#{hid}
     </select>
     <resultMap id="t_hMap" type="teacher_holiday">
         <association property="teacher" column="tid" javaType="teacher" select="com.test.mapper.teacherMapper.TeacherMapper.getTeacherByTid"></association>

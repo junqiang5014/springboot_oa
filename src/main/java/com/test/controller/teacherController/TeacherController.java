@@ -15,6 +15,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +68,14 @@ public class TeacherController {
         return "teacher/teacherindex";
     }
 
+//    @RequestMapping("teacherindex")
+//    public String teacherindex(HttpSession session,Model model){
+//        User user = (User) session.getAttribute("user");
+//        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+//        model.addAttribute("teacher", teacher);
+//        return "teacher/teacherindex";
+//    }
+
     /**
      * 更改密码
      * @param session
@@ -82,8 +91,10 @@ public class TeacherController {
 
     @RequestMapping("changeUpwd")
     public String changeUpwd(User user){
+        Md5Hash md5Hash = new Md5Hash(user.getUpwd());
+        user.setUpwd(md5Hash.toString());
         userService1.updateUser(user);
-        return "redirect:teacher/index";
+        return "teacher/success";
     }
 
     /**
@@ -291,7 +302,7 @@ public class TeacherController {
     }
 
     /**
-     * 某名学生各阶段分数走势图的学生列表
+     * 学生列表
      */
     @RequestMapping("studentListForScorePage")
     public String studentList(HttpSession session,Model model){
@@ -313,9 +324,14 @@ public class TeacherController {
         for (int i = 1;i < 6;i++){
             int stage = i;
             Score score = scoreService.getScoreByStuid_stage(stuid,stage);
-            int j = score.getScore();
-            scoreList.add(j);
+            if (score != null){
+                int j = score.getScore();
+                scoreList.add(j);
+            }else {
+                scoreList.add(0);
+            }
         }
+        System.out.println("这个学生的成绩列表"+ scoreList.size());
         ArrayList<String> names = new ArrayList<>();
         names.add("第1阶段");
         names.add("第2阶段");
@@ -324,47 +340,47 @@ public class TeacherController {
         names.add("第5阶段");
         model.addAttribute("names", names);
         model.addAttribute("datas", scoreList);
+        model.addAttribute("stuid", stuid);
         return "teacher/studentScoreList";
     }
 
     /**
      * 教师请假
      */
-    @RequestMapping("teacherHolidayPage")
+    @RequestMapping("teacherAddHolidayPage")
     public String teacherHolidayPage(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         Teacher teacher = teacherService.getTeacherByUid(user.getUid());
         model.addAttribute("teacher",teacher);
-        return "teacher/teacherHolidayPage";
+        return "teacher/teacherAddHoliday";
     }
 
     /**
      * 发起教师请假
      */
     @RequestMapping("teacherHoliday")
-    public String teacherHoliday(String reason,String startDate,String endDate,int tid){
-        Holiday holiday = new Holiday();
-        holiday.setReason(reason);
-        int days = getDays(startDate, endDate);
+    public String teacherHoliday(Holiday holiday,int tid){
+        System.out.println(holiday);
+        int days = getDays(holiday.getStartdate(), holiday.getEnddate());
         holiday.setDays(days);
         holidayService.addteacherHoliday(holiday,tid);
-        return "redirect:teacher/myHolidayPage?tid="+tid;
+        return "redirect:teacher/myHolidayPage";
     }
 
 
     /**
      * 根据日期获取天数
-     * @param startDate
-     * @param endDate
+     * @param startdate
+     * @param enddate
      * @return
      */
-    private int getDays(String startDate, String endDate) {
+    private int getDays(String startdate, String enddate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date start = null;
         Date end = null;
         try {
-            start = simpleDateFormat.parse(startDate);
-            end = simpleDateFormat.parse(endDate);
+            start = simpleDateFormat.parse(startdate);
+            end = simpleDateFormat.parse(enddate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -374,12 +390,21 @@ public class TeacherController {
     }
 
     /**
-     * 个人假条页面
+     * 老师的假条列表
      */
     @RequestMapping("myHolidayPage")
-    public String myHolidayPage(int tid,Model model){
-        List<Teacher_holiday> teacher_holidayList = teacher_holidayService.getTeacher_holidayByTid(tid);
-        model.addAttribute("t_hList", teacher_holidayList);
-        return "teacher/myHolidayPage";
+    public String myHolidayPage(Model model,HttpSession session){
+        User user=(User) session.getAttribute("user");
+        Teacher teacher = teacherService.getTeacherByUid(user.getUid());
+        List<Teacher_holiday> teacher_holidayList = teacher_holidayService.getTeacher_holidayByTid(teacher.getTid());
+        List<Holiday> holidays = null;
+        if (teacher_holidayList.size() != 0){
+            holidays = new ArrayList<>();
+            for (Teacher_holiday teacher_holiday:teacher_holidayList){
+                holidays.add(teacher_holiday.getHoliday());
+            }
+        }
+        model.addAttribute("holidays", holidays);
+        return "teacher/myHolidayList";
     }
 }

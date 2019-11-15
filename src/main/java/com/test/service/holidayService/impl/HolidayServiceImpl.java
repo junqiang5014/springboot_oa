@@ -8,6 +8,7 @@ import com.test.service.holidayService.HolidayService;
 import com.test.service.teacher_holidayService.Teacher_holidayService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,13 +65,24 @@ public class HolidayServiceImpl implements HolidayService {
     }
 
     @Override
-    public int addteacherHoliday(Holiday holiday, int id) {
-        Teacher teacher = teacherMapper.getTeacherByTid(id);
+    public int addteacherHoliday(Holiday holiday, int tid) {
+        Teacher teacher = teacherMapper.getTeacherByTid(tid);
         Map<String, Object> map = new HashMap<>();
-        map.put("teachername", teacher.getTname());
+        map.put("teacher_classLeader_name", teacher.getTname());
         map.put("schoolManagerName", "schoolManager");
-        runtimeService.startProcessInstanceByKey("teacher_classLeader_holiday",map);
-        holidayMapper.addHoliday(holiday);
-        return teacher_holidayService.add(id,holiday.getHid());
+//        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("teacher_classLeader_holiday", map);
+//        Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
+//        taskService.complete(task.getId());
+//        holidayMapper.addHoliday(holiday);
+        runtimeService.startProcessInstanceByKey("teacher_classLeader_holiday", map);
+        String bkey = String.valueOf(holidayMapper.addHoliday(holiday));
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(bkey).singleResult();
+        Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
+        taskService.complete(task.getId());
+        return teacher_holidayService.add(tid,holiday.getHid());
     }
+
+
+
+
 }

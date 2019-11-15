@@ -1,23 +1,167 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="UTF-8"/>
-    <title>个人基本信息修改</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>主页</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="robots" content="all,follow"/>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css"/>
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css"/>
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="../css/fontastic.css"/>
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="../css/grasp_mobile_progress_circle-1.0.0.min.css"/>
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="../vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"/>
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet"/>
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="../css/custom.css"/>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="../img/favicon.ico"/>
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="/js/jquery-1.12.4.js" type="text/javascript"></script>
+
+    <script>
+        $(function(){
+            $("body").on("click","#course",function(){
+                $(".dv_content").attr("src","getallcourses");
+            });
+
+            $("body").on("click","#role",function(){
+                $(".dv_content").attr("src","getallroles");
+            });
+
+            $("body").on("click","#user",function(){
+                $(".dv_content").attr("src","getAllUser");
+            });
+            $("body").on("click","#employee",function(){
+                $(".dv_content").attr("src","getAllEmployee");
+            });
+            // $("body").on("click","#showGoods",function(){
+            //   $(".dv_content").attr("src","BackGoodsServlet");
+            // });
+            // $("body").on("click","#addGoods",function(){
+            //   $(".dv_content").attr("src","SelGoodsTypeServlet");
+            // });
+            // $("body").on("click","#OrderMage",function(){
+            //   $(".dv_content").attr("src","/project_test/OrderServlet");
+            // });
+        })
+    </script>
+
+
+
 </head>
 <body>
-    <form action="updatestudent" method="post">
-        姓名：<input type="text" name="stuname" th:value="${student.stuname}"/><br/>
-        性别：
-        <span th:if="${student.stusex=='男'}">
-         <input  type="radio" name="stusex" value="男" checked="true"/>男 <input  type="radio" name="stusex"  value="女" />女<br/>
-    </span>
-        <span th:if="${student.stusex=='女'}">
-        <input  type="radio" name="stusex" value="男"/>男 <input  type="radio" name="stusex"  value="女" checked="true" />女<br/>
-    </span>
+<!-- Side Navbar -->
+<nav class="side-navbar">
+    <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+            <!-- User Info-->
+            <div class="sidenav-header-inner text-center"><img src="/img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle">
+                <h2 class="h5">Nathan Andrews</h2><span>Web Developer</span>
+            </div>
+            <!-- Small Brand information, appears on minimized sidebar-->
+            <div class="sidenav-header-logo"><a href="index.html" class="brand-small text-center"> <strong>操作</strong></a></div>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+            <h5 class="sidenav-heading">Main</h5>
 
-        年龄：<input type="text" name="stuage" th:value="${student.stuage}"/><br/>
-        <input type="submit"/>
-    </form>
+            <ul shiro:hasRole="student" id="side-main-menu3" class="side-menu list-unstyled">
+                <li><a href="/getindex"><i class="icon-home"></i>学生</a></li>
 
+                <li><a href="#exampledropdownDropdown9" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>个人资料管理 </a>
+                    <ul id="exampledropdownDropdown9" class="collapse list-unstyled ">
+                        <li><a href="/student/getStudentmessage">个人基本信息的修改</a></li>
+                        <li><a href="/student/editUpwd">修改密码</a></li>
+                    </ul>
+                </li>
+                <li><a href="#exampledropdownDropdown10" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>周报管理 </a>
+                    <ul id="exampledropdownDropdown10" class="collapse list-unstyled ">
+                        <li><a href="/student/addReport">添加周报</a></li>
+                        <li><a href="/student/deleteReport">删除周报</a></li>
+                        <li><a href="/student/getReport">查看周报</a></li>
+                    </ul>
+                </li>
+                <li><a href="#exampledropdownDropdown11" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>请假申请 </a>
+                    <ul id="exampledropdownDropdown11" class="collapse list-unstyled ">
+                        <li><a href="/student/studentHolidayPage">我的假条</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="page">
+    <div class="page_main" style="width: auto;height: auto">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>个人基本信息修改</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form action="/student/updatestudent" method="post">
+
+                                <table class="table">
+                                    <tbody>
+
+                                    <tr>
+                                        <th>姓名</th><td><input type="text" name="stuname" th:value="${student.stuname}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th>性别</th>
+                                        <span th:if="${student.stusex=='男'}">
+                                             <input  type="radio" name="stusex" value="男" checked="true"/>男 <input  type="radio" name="stusex"  value="女" />女<br/>
+                                        </span>
+                                        <span th:if="${student.stusex=='女'}">
+                                            <input  type="radio" name="stusex" value="男"/>男 <input  type="radio" name="stusex"  value="女" checked="true" />女<br/>
+                                        </span>
+                                    </tr>
+                                    <tr>
+                                        <th>年龄</th><td><input type="text" name="stuage" th:value="${student.stuage}"/><br/></td>
+                                    </tr>
+                                    <tr>
+                                        <th><input type="submit" value="提交"> </th>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--匹配-->
+<!-- JavaScript files-->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/popper.js/umd/popper.min.js"> </script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+<script src="../vendor/jquery.cookie/jquery.cookie.js"> </script>
+<script src="../vendor/chart.js/Chart.min.js"></script>
+<script src="../vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="../vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="../js/charts-home.js"></script>
+
+<!-- Main File  -->
+<script src="../js/front.js"></script>
 </body>
 </html>

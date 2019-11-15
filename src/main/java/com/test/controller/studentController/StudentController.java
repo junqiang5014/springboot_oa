@@ -49,11 +49,11 @@ public class StudentController {
      * @param model
      * @return
      */
-    @RequestMapping("getStudent")
+    @RequestMapping("student/getStudent")
     public String getStudent(Model model){
         List<Student> studentAndClassList = studentService.getStudentAndClassList();
         model.addAttribute("studentAndClassList",studentAndClassList);
-        return "stuList";
+        return "student/stuList";
     }
 
     /**
@@ -62,11 +62,11 @@ public class StudentController {
      * @param stuid
      * @return
      */
-    @RequestMapping("editstudent")
+    @RequestMapping("student/editstudent")
     public String editstudent(Model model,int stuid){
         Student student = studentService.getStudentByStuid(stuid);
         model.addAttribute(student);
-        return "updatemessage";
+        return "student/updatemessage";
     }
 
     /**
@@ -75,14 +75,14 @@ public class StudentController {
      * @param session
      * @return
      */
-    @RequestMapping("updatestudent")
+    @RequestMapping("student/updatestudent")
     public String updatestudent(Student student, HttpSession session){
         User user=(User) session.getAttribute("user1");
         int i = studentService.updateStudentByUser(student,user);
         if(i>0){
-            return "redirect:studentindex";
+            return "redirect:student/studentindex";
         }
-        return "redirect:getStudentmessage";
+        return "redirect:student/getStudentmessage";
 
     }
 
@@ -92,12 +92,12 @@ public class StudentController {
      * @param model
      * @return
      */
-    @RequestMapping("getStudentmessage")
+    @RequestMapping("student/getStudentmessage")
     public String getStudentByUser(HttpSession session,Model model){
         User user = (User)session.getAttribute("user1");
         Student student = studentService.getStudentByUser(user);
         model.addAttribute("student",student);
-        return "updatemessage";
+        return "student/updatemessage";
 
     }
 
@@ -105,9 +105,9 @@ public class StudentController {
      * 跳转到增加页面
      * @return
      */
-    @RequestMapping("saveReport")
+    @RequestMapping("student/saveReport")
     public String saveReport(){
-        return "add";
+        return "student/add";
 
     }
 
@@ -115,9 +115,9 @@ public class StudentController {
      * 跳转到周报管理页面
      * @return
      */
-    @RequestMapping("getreportmessage")
+    @RequestMapping("student/getreportmessage")
     public String getreportmessage(){
-        return "reportmessage";
+        return "student/reportmessage";
     }
 
     /**
@@ -125,13 +125,13 @@ public class StudentController {
      * @param report
      * @return
      */
-    @RequestMapping("addReport")
+    @RequestMapping("student/addReport")
         public String addReport(Report report){
         int i = reportService.addReport(report);
         if(i>0){
-            return "redirect:getreportmessage";
+            return "redirect:student/getreportmessage";
         }
-        return "redirect:saveReport";
+        return "redirect:student/saveReport";
     }
 
     /**
@@ -139,7 +139,7 @@ public class StudentController {
      * @param rid
      * @return
      */
-    @RequestMapping("deleteReport")
+    @RequestMapping("student/deleteReport")
     @ResponseBody
     public String deleteReport(int rid,Student student){
         int i = reportService.deleteReportByRid(rid,student);
@@ -156,11 +156,11 @@ public class StudentController {
      * @param model
      * @return
      */
-    @RequestMapping("getReport")
+    @RequestMapping("student/getReport")
     public String getReport(Model model){
         List<Report> reportList = reportService.getReportList();
         model.addAttribute("reportList",reportList);
-        return "resportlist";
+        return "student/resportlist";
     }
 
 
@@ -169,11 +169,11 @@ public class StudentController {
      * @param session
      * @return
      */
-    @RequestMapping("editUpwd")
+    @RequestMapping("student/editUpwd")
     public String updateUpwd(HttpSession session){
         User user = (User) session.getAttribute("user1");
         String upwd = usersService.getUpwdByUname(user.getUname());
-        return "redirect:updateUpwd";
+        return "redirect:student/updateUpwd";
     }
 
     /**
@@ -183,13 +183,13 @@ public class StudentController {
      * @param cfgPwd
      * @return
      */
-    @RequestMapping("updateUpwd")
+    @RequestMapping("student/updateUpwd")
     public String editUpwd(String upwd, String newPwd, String cfgPwd){
         int i = usersService.updateUserPwd(upwd,newPwd,cfgPwd);
         if(i>0){
-            return "redirect:index";
+            return "student/studentindex";
         }
-        return "redirect:editUpwd";
+        return "redirect:student/editUpwd";
 
     }
 
@@ -197,16 +197,16 @@ public class StudentController {
      * 学生请假
      * @return
      */
-    @RequestMapping("addHoliday")
+    @RequestMapping("student/addHoliday")
     public String addHoliday(Holiday holiday,HttpSession session,Model model){
         User user=(User)session.getAttribute("user");
         Student student = studentService.getStudentByUid(user.getUid());
         model.addAttribute("student",student);
         int i = holidayService.addHoliday(holiday);
         if(i>0){
-            return "";
+            return "student/studentindex";
         }
-        return "";
+        return "student/holiday";
     }
 
 

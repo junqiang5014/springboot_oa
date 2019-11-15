@@ -18,4 +18,27 @@
             <result property="upwd" column="upwd"></result>
         </association>
     </resultMap>
+
+    <!--查看班级平均成绩-->
+    <select id="selectScoreAvg" resultMap="Avg1" parameterType="java.lang.String">
+        select  cname, score,stage,AVG(score) from scores   INNER JOIN students  on scores.stuid=students.stuid
+        INNER JOIN classes  on classes.cid=students.cid where classes.cname=#{cname} GROUP BY  stage
+    </select>
+    <resultMap id="Avg1" type="ALLColumn">
+        <id column="score" property="score"></id>
+        <result property="cname" column="cname"></result>
+        <result property="stage" column="stage"></result>
+        <result column="AVG(score)" property="AVG"></result>
+    </resultMap>
+
+
+    <!--查看学生成绩走势-->
+    <select id="selectScoreByStuname" resultMap="selectScore1">
+        select  score  from students  INNER JOIN scores   on students.stuid=scores.stuid  where stuname=#{stuname}
+    </select>
+    <resultMap id="selectScore1" type="ALLColumn">
+        <result property="stuname" column="stuname"></result>
+        <result column="score" property="score"></result>
+        <result column="stage" property="stage"></result>
+    </resultMap>
 </mapper>

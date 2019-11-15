@@ -18,4 +18,6 @@ public interface HolidayService {
     public int changeStateByHid(int hid);
 
     public int addteacherHoliday(Holiday holiday, int id);
+
+
 }

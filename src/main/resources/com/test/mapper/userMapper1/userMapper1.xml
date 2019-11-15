@@ -6,4 +6,12 @@
     <update id="updateUser" parameterType="user">
         update users set uname=#{uname},upwd=#{upwd} where uid=#{uid}
     </update>
+    <select id="getUserByUid" parameterType="int">
+        select * from user where uid=#{uid}
+    </select>
+    <resultMap id="userM" type="user">
+        <id property="uid" column="uid"/>
+        <result property="uname" column="uname"/>
+        <result property="upwd" column="upwd"/>
+    </resultMap>
 </mapper>

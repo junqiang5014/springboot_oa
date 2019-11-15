@@ -16,4 +16,10 @@ public interface HolidayMapper {
     public List<Holiday> getHolidayList();
 
     public int changeStateByHid(int hid);
+
+
+
+
+
+
 }

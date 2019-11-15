@@ -30,4 +30,6 @@
     <update id="changeStateByHid" parameterType="int" >
         update holiday set state=1 where hid=#{hid}
     </update>
+
+
 </mapper>

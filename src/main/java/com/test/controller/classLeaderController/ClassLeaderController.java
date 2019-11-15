@@ -5,18 +5,21 @@ package com.test.controller.classLeaderController;
 import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
 import com.test.util.ExcleUtil;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -35,9 +38,7 @@ public class ClassLeaderController {
 
     public String selectMessage(Model model, HttpSession session){
         User user = (User) session.getAttribute("user");
-
         ClassLeader classLeader= classLeaderService.selectMessage(user.getUid());
-
         model.addAttribute("classLeader",classLeader);
         return "classLeader/index";
     }
@@ -59,12 +60,7 @@ public class ClassLeaderController {
         return "success";
     }*/
 
-    @RequestMapping("echarts")
-    public String echarts(Model model,String stuname){
-        List<AllColumn> allColumnList=classLeaderService.selectScoreByStuname("stuname");
-        model.addAttribute("allColumnList",allColumnList);
-        return "echarts";
-    }
+
 
 
         //查看周报
@@ -85,22 +81,31 @@ public class ClassLeaderController {
         return "reportList";
     }
     //查看班级平均成绩
-    @RequestMapping("selectScoreAvg")
-    @ResponseBody
-    public String selectScoreAvg( ) {
-        List<AllColumn> scoreList= classLeaderService.selectScoreAvg("java");
-        System.out.println(scoreList);
-        return "success";
+    @RequestMapping("echarts_class")
+    public String selectScoreAvg(Model model,String classname) {
+        List<Double> avgList =new ArrayList<Double>();
+        List<AllColumn> scoreList= classLeaderService.selectScoreAvg(classname);
+        for (AllColumn avg : scoreList){
+            avgList.add(avg.getAVG());
+        }
+        model.addAttribute("avgList",avgList);
+        return "classLeader/echarts_class";
     }
 
     //查看学生成绩走势
-    @RequestMapping("selectScoreByStuname")
-    @ResponseBody
-    public String selectScoreByStuname() {
-      List<AllColumn> scoreList= classLeaderService.selectScoreByStuname("xin");
-      System.out.println(scoreList);
-      return "success";
+    @RequestMapping("echarts")
+    public String echarts(Model model,String stuname){
+        List<Integer> studentList =new ArrayList<Integer>();
+        List<AllColumn> allColumnList=classLeaderService.selectScoreByStuname(stuname);
+        System.out.println(allColumnList);
+        for (AllColumn a :allColumnList){
+            studentList.add(a.getScore());
+        }
+        model.addAttribute("studentList",studentList);
+        return "classLeader/echarts";
     }
+
+
     //查看学生信息
     @RequestMapping("selectStudent")
     public String selectStudent(Model model) {
@@ -175,6 +180,69 @@ public class ClassLeaderController {
             ex.printStackTrace();
         }
     }
+
+    @RequestMapping("import")
+    public String impot(){
+        return "classLeader/import";
+    }
+
+    @RequestMapping(value = "savStu", method = RequestMethod.POST)
+    @ResponseBody
+    public String savStu(MultipartFile file, HttpServletRequest request){
+        String contentType = file.getContentType();
+
+        String fileName = file.getOriginalFilename();
+
+        if (file.isEmpty()) {
+            return "文件为空！";
+        }
+        try {
+            //根据路径获取这个操作excel的实例
+            HSSFWorkbook wb = new HSSFWorkbook(file.getInputStream());            //根据页面index 获取sheet页
+
+            HSSFSheet sheet = wb.getSheetAt(0);
+            //实体类集合
+            List<Student> importDatas = new ArrayList<Student>();
+            HSSFRow row = null;
+
+            //循环sesheet页中数据从第二行开始，第一行是标题
+            for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
+                //获取每一行数据
+                row = sheet.getRow(i);
+                Student stu = new Student();
+                row.getCell(0).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(1).setCellType(Cell.CELL_TYPE_STRING);
+                row.getCell(3).setCellType(Cell.CELL_TYPE_STRING);
+////
+                row.getCell(2).setCellType(Cell.CELL_TYPE_STRING);
+
+                stu.setStuid(Integer.parseInt(row.getCell(0).getStringCellValue()));
+                  //stu.setStuid(Integer.valueOf((int) row.getCell(0).getNumericCellValue()));
+                stu.setStuname(row.getCell(1).getStringCellValue());
+                stu.setStuage(Integer.parseInt(row.getCell(2).getStringCellValue()));
+                stu.setStusex(row.getCell(3).getStringCellValue());
+              //  stu.setScore(Integer.valueOf((int) row.getCell(4).getNumericCellValue()));
+
+                //SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                //data.setCreateDate(df.parse(df.format(HSSFDateUtil.getJavaDate(row.getCell(2).getNumericCellValue()))));
+
+                //data.setAge(Integer.valueOf((int) row.getCell(3).getNumericCellValue()));
+                importDatas.add(stu);
+            }
+            //循环展示导入的数据，实际应用中应该校验并存入数据库
+
+            for (Student imdata : importDatas) {
+                classLeaderService.insertStudentMessage(imdata);
+                System.out.println("ID:"+imdata.getStuid()+" name:"+imdata.getStuname());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "importSucPage";
+    }
+
+
 
 
 }
