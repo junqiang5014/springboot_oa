@@ -12,8 +12,8 @@
     <select id="getStudentByUid" parameterType="int">
         select * from students where uid=#{user.uid}
     </select>
-    <select id="getStudentByUser" parameterType="user" >
-        select * from students where uid=#{user.uid}
+    <select id="getStudentByUser" parameterType="user" resultMap="studentMap1" >
+        select * from students where uid=#{uid}
     </select>
     <select id="getStudentByStuid" parameterType="int" resultMap="studentMap1">
         select * from students inner join classes on students.cid=classes.cid
