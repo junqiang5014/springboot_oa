@@ -9,6 +9,10 @@
     <select id="getStudentByHid" parameterType="int" resultMap="stu_holidayMap">
         select * from students inner join on student_holiday.stuid=students.stuid where hid=#{hid}
     </select>
+    <select id="getStudent_holidayByHid" parameterType="int" resultMap="stu_holidayMap">
+        select * from student_holiday inner join students on students.stuid=student_holiday.stuid
+        inner join holiday on holiday.hid=student_holiday.hid where student_holiday.hid=#{hid}
+    </select>
 
 
     <resultMap id="stu_holidayMap" type="student_holiday">
