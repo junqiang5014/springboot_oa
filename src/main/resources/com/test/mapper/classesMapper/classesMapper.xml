@@ -26,7 +26,7 @@
         update classes set cname=#{cname},tid=#{teacher.tid},clid=#{classleaders.clid} where cid=#{cid}
     </update>
     <select id="getClassByCid" parameterType="int" resultMap="classesMap" >
-        select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleader.clid and classes.cid=#{cid}
+        select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleaders.clid and classes.cid=#{cid}
     </select>
     <select id="getClassesList" resultMap="classesMap">
         select * from classes inner join teachers on classes.tid=teachers.tid inner join classleaders on classes.clid=classleaders.clid

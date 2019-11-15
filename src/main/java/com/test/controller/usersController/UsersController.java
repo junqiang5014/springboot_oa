@@ -3,6 +3,7 @@ package com.test.controller.usersController;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.test.pojo.User;
+import com.test.service.userService.EmployeeService;
 import com.test.service.userService.UsersService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -25,6 +26,9 @@ public class UsersController {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @Autowired
     private SecurityManager securityManager;
@@ -68,7 +72,7 @@ public class UsersController {
             session.removeAttribute("user");
         }
 
-        return "loginPage";
+        return "redirect:/loginPage";
     }
 
 
@@ -104,6 +108,17 @@ public class UsersController {
 
     @RequestMapping("deleteUser1")
     public String deleteUser(String pageNum,String uid){
+
+        int roleid = usersService.getRoleById(Integer.parseInt(uid));
+        String rolename = usersService.getRoleNameByRoleId(roleid);
+        if(rolename.equals("teacher")){
+            employeeService.deleteTeacherByUid(Integer.parseInt(uid));
+        }else if(rolename.equals("classboss")){
+            employeeService.deleteClassLeaderByUid(Integer.parseInt(uid));
+        }else if(rolename.equals("schoolboss")){
+            employeeService.deleteSchoolManagerByUid(Integer.parseInt(uid));
+        }else
+            System.out.println("该用户对应的员工不存在");
 
         int i = usersService.deleteUser(Integer.parseInt(uid));
         System.out.println(i);

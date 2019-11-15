@@ -44,7 +44,7 @@ public class Role1Controller {
     @RequestMapping("changeRole")
     public String changeCourse(Role role){
         System.out.println(role);
-        role1Service.updateRole(role.getRoleid());
+        role1Service.updateRole(role);
         return "redirect:/getallroles";
     }
 
