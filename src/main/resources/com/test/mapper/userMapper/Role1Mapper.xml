@@ -12,7 +12,7 @@
         delete from roles where roleid=#{roleid}
     </delete>
 
-    <update id="updateRole" parameterType="int">
+    <update id="updateRole" parameterType="role">
         update roles set rolename=#{rolename} where roleid=#{roleid}
     </update>
 

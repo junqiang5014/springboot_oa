@@ -117,6 +117,44 @@
         insert into schoolmanager(smname,uid) values (#{smname},#{user.uid})
     </insert>
 
+<!--    /**-->
+<!--    * 根据员工id来查询uid-->
+<!--    */-->
+<!--    public int getTeacherUid(int tid);-->
+<!--    public int getClassLeaderUid(int clid);-->
+<!--    public int getSchoolManagerUid(int smid);-->
+
+    <select id="getTeacherUid" parameterType="int" resultType="int">
+        select uid from teachers where tid=#{tid}
+    </select>
+    <select id="getClassLeaderUid" parameterType="int" resultType="int">
+        select uid from classleaders where clid=#{clid}
+    </select>
+    <select id="getSchoolManagerUid" parameterType="int" resultType="int">
+        select uid from schoolmanager where smid=#{smid}
+    </select>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from users where uid=#{uid}
+    </delete>
+
+
+<!--    /**-->
+<!--    * 根据uid来删除员工信息-->
+<!--    */-->
+<!--    public int deleteTeacherByUid(int uid);-->
+<!--    public int deleteClassLeaderByUid(int uid);-->
+<!--    public int deleteSchoolManagerByUid(int uid);uid-->
+    <delete id="deleteTeacherByUid" parameterType="int">
+        delete from teachers where uid=#{uid}
+    </delete>
+    <delete id="deleteClassLeaderByUid" parameterType="int">
+        delete from classleaders where uid=#{uid}
+    </delete>
+    <delete id="deleteSchoolManagerByUid" parameterType="int">
+        delete from schoolmanager where uid=#{uid}
+    </delete>
+
 
 
 </mapper>

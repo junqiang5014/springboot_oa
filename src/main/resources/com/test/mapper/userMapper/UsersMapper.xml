@@ -42,5 +42,14 @@
         insert into users (uname,upwd,roleid) values (#{uname},#{upwd},#{role.roleid})
     </insert>
 
+<!--    根据用户id查询查询角色-->
+
+    <select id="getRoleById" resultType="int">
+        select roleid from users where uid=#{uid}
+    </select>
+
+    <select id="getRoleNameByRoleId" resultType="java.lang.String">
+        select rolename from roles where roleid=#{roleid}
+    </select>
 
 </mapper>
