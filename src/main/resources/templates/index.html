@@ -46,6 +46,13 @@
         $("body").on("click","#employee",function(){
           $(".dv_content").attr("src","getAllEmployee");
         });
+
+        $("body").on("click","#class",function(){
+          $(".dv_content").attr("src","getAllClass");
+        });
+        $("body").on("click","#exit",function(){
+          window.location.href="/exit";
+        });
         // $("body").on("click","#showGoods",function(){
         //   $(".dv_content").attr("src","BackGoodsServlet");
         // });
@@ -105,7 +112,7 @@
             </ul>
 
             </li>
-            <li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>班级管理</a>
+            <li><a id="class" href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>班级管理</a>
               <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
                 <li><a href="#">添加班级</a></li>
                 <li><a href="#">查看所有的班级</a></li>
@@ -120,6 +127,8 @@
                 <li><a href="#">删除员工信息</a></li>
                 <li><a href="#">修改员工信息</a></li>
               </ul>
+            </li>
+            <li><a id="exit" href="#exampledropdownDropdown5" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows">退出登录</i></a>
             </li>
 
           </ul>
@@ -176,12 +185,12 @@
                 <!-- Notifications dropdown-->
                 <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge badge-warning">12</span></a>
                   <ul aria-labelledby="notifications" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                    <li><a rel="nofollow" href="#" class="dropdown-item" th:text="欢迎+${#session.getAttribute('user').uname}">
                         <div class="notification d-flex justify-content-between">
                           <div class="notification-content"><i class="fa fa-envelope"></i>You have 6 new messages </div>
                           <div class="notification-time"><small>4 minutes ago</small></div>
                         </div></a></li>
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                    <li><a rel="nofollow" href="#" class="dropdown-item" th:text="注销账户">
                         <div class="notification d-flex justify-content-between">
                           <div class="notification-content"><i class="fa fa-twitter"></i>You have 2 followers</div>
                           <div class="notification-time"><small>4 minutes ago</small></div>

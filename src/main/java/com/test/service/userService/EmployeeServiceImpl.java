@@ -80,6 +80,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public int deleteTeahcerUser(int tid) {
+        int uid = employeeMapper.getTeacherUid(tid);
+        return employeeMapper.deleteUser(uid);
+    }
+
+    @Override
+    public int deleteClassLeaderUser(int clid) {
+        int uid = employeeMapper.getClassLeaderUid(clid);
+        return employeeMapper.deleteUser(uid);
+    }
+
+    @Override
+    public int deleteSchoolManagerUser(int smid) {
+        int uid = employeeMapper.getSchoolManagerUid(smid);
+        return employeeMapper.deleteUser(uid);
+    }
+
+    @Override
+    public int deleteUser(int uid) {
+        return 0;
+    }
+
+    @Override
     public Map<String, Object> getEmployee(int[]page) {
 
 //        List<Object> objectList = new ArrayList<Object>();
@@ -144,6 +167,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    @Override
+    public int deleteTeacherByUid(int uid) {
+        return employeeMapper.deleteTeacherByUid(uid);
+    }
+
+    @Override
+    public int deleteClassLeaderByUid(int uid) {
+        return employeeMapper.deleteClassLeaderByUid(uid);
+    }
+
+    @Override
+    public int deleteSchoolManagerByUid(int uid) {
+        return employeeMapper.deleteSchoolManagerByUid(uid);
+    }
 
 
 }

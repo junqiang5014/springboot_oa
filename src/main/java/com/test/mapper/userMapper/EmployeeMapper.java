@@ -50,4 +50,25 @@ public interface EmployeeMapper {
     public int addTeacher(Teacher teacher);
     public int addClassLeader(ClassLeader classLeader);
     public int addSchoolManager(SchoolManager schoolManager);
+
+    /**
+     * 根据员工id来查询uid
+     */
+    public int getTeacherUid(int tid);
+    public int getClassLeaderUid(int clid);
+    public int getSchoolManagerUid(int smid);
+
+    /**
+     * 根据uid来删除user账户信息
+     */
+
+    public int deleteUser(int uid);
+
+    /**
+     * 根据uid来删除员工信息
+     */
+    public int deleteTeacherByUid(int uid);
+    public int deleteClassLeaderByUid(int uid);
+    public int deleteSchoolManagerByUid(int uid);
+
 }

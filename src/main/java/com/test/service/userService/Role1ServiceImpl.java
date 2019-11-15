@@ -23,8 +23,8 @@ public class Role1ServiceImpl implements Role1Service {
     }
 
     @Override
-    public int updateRole(int roleid) {
-        return role1Mapper.updateRole(roleid);
+    public int updateRole(Role role) {
+        return role1Mapper.updateRole(role);
     }
 
     @Override
