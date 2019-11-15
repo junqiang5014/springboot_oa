@@ -54,10 +54,10 @@ public class UsersController {
             }
         }catch (Exception e){
             System.out.println("登录失败");
-            return "redirect:getlogin";
+            return "redirect:/loginPage";
         }
 
-        return "redirect:getlogin";
+        return "redirect:/loginPage";
     }
 
     @RequestMapping("getindex")
