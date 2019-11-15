@@ -81,7 +81,7 @@ public class ClassLeaderController {
         return "reportList";
     }
     //查看班级平均成绩
-    @RequestMapping("echarts_class")
+    @RequestMapping("echarts_class1")
     public String selectScoreAvg(Model model,String classname) {
         List<Double> avgList =new ArrayList<Double>();
         List<AllColumn> scoreList= classLeaderService.selectScoreAvg(classname);
@@ -89,11 +89,11 @@ public class ClassLeaderController {
             avgList.add(avg.getAVG());
         }
         model.addAttribute("avgList",avgList);
-        return "classLeader/echarts_class";
+        return "charts";
     }
 
     //查看学生成绩走势
-    @RequestMapping("echarts")
+    @RequestMapping("echarts1")
     public String echarts(Model model,String stuname){
         List<Integer> studentList =new ArrayList<Integer>();
         List<AllColumn> allColumnList=classLeaderService.selectScoreByStuname(stuname);
@@ -102,7 +102,8 @@ public class ClassLeaderController {
             studentList.add(a.getScore());
         }
         model.addAttribute("studentList",studentList);
-        return "classLeader/echarts";
+     //   return "classLeader/echarts";
+        return "charts";
     }
 
 
@@ -111,7 +112,7 @@ public class ClassLeaderController {
     public String selectStudent(Model model) {
         List<Student> studentList= classLeaderService.selectStudent();
         model.addAttribute("studentList",studentList);
-        return "test_xin";
+        return "classLeader/import";
     }
 
 
@@ -121,7 +122,6 @@ public class ClassLeaderController {
      * @return
      */
     @RequestMapping("export")
-    @ResponseBody
     public void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //获取数据
         List<Student> list =classLeaderService.export();
@@ -164,7 +164,7 @@ public class ClassLeaderController {
     /**
      * 发送响应流方法
      */
-    public void setResponseHeader(HttpServletResponse response, String fileName) {
+    public String setResponseHeader(HttpServletResponse response, String fileName) {
         try {
             try {
                 fileName = new String(fileName.getBytes(), "ISO8859-1");
@@ -179,15 +179,16 @@ public class ClassLeaderController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return "import";
     }
 
+    //上传文件
     @RequestMapping("import")
     public String impot(){
         return "classLeader/import";
     }
 
     @RequestMapping(value = "savStu", method = RequestMethod.POST)
-    @ResponseBody
     public String savStu(MultipartFile file, HttpServletRequest request){
         String contentType = file.getContentType();
 
@@ -239,11 +240,14 @@ public class ClassLeaderController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "importSucPage";
+        return "import";
     }
 
 
-
+//    @RequestMapping("cc")
+//    public String cc(){
+//        return "charts";
+//    }
 
 }
 
