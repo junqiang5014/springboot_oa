@@ -8,10 +8,10 @@
     select clid,clname  from classleaders inner join users on classLeaders.uid=users.uid where users.uid = #{uid}
     </select>
 
-    <!-- 班主任修改密码
+    <!-- 班主任修改密码-->
     <update id="updateUpwdByClassLeader" parameterType="user">
         update users set upwd=#{upwd} where uname=#{uname}
-    </update> -->
+    </update>
 
        <!--查看周报-->
       <select id="selectReport" resultMap="reportstu"  >
@@ -107,5 +107,20 @@
         <result column="score" property="score"></result>
         <result column="stage" property="stage"></result>
     </resultMap>
+
+<!--     班主任请假-->
+    <select id="getClassLeaderByClid" parameterType="int" resultMap="teacherMap">
+        select * from classLeaders inner join users on classLeaders.uid=users.uid where clid=#{clid}
+    </select>
+    <resultMap id="teacherMap" type="classLeader" >
+        <id property="clid" column="clid"></id>
+        <result property="clname" column="clname"></result>
+        <association property="user" column="uid" javaType="user">
+            <id property="uid" column="uid"></id>
+            <result property="uname" column="uname"></result>
+            <result property="upwd" column="upwd"></result>
+        </association>
+    </resultMap>
+
 <!--test-->
  </mapper>

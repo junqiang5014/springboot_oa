@@ -180,9 +180,10 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
-                                    <th>姓名</th><th>操作</th>
+                                    <th>编号</th></th><th>姓名</th><th>操作</th>
                                 </tr>
                                 <tr th:each="student_holiday,var:${student_holidays}">
+                                    <td th:text="${var.count}"></td>
                                     <td th:text="${student_holiday.student.stuname}"></td>
                                     <td><a th:href="@{teacher/holidayPage(hid=${student_holiday.holiday.hid})}">详情</a> </td>
                                 </tr>

@@ -4,11 +4,13 @@ package com.test.controller.classLeaderController;
 
 import com.test.pojo.*;
 import com.test.service.classLeaderService.ClassLeaderService;
+import com.test.service.userService1.UserService1;
 import com.test.util.ExcleUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,8 @@ public class ClassLeaderController {
     private ClassLeaderService classLeaderService;
     @Autowired
     private SecurityManager securityManager;
-
+    @Autowired
+    private UserService1 userService1;
 
     // 查看班主任信息
     @RequestMapping("selectMessage")
@@ -45,20 +48,24 @@ public class ClassLeaderController {
 
 
 
-   /* @RequestMapping("updateUpwd")
-    @ResponseBody
-    public String updateUpwd(){
-       // session.getAttribute()
-        String uname="classLeader";
-        String upwd="1234";
-        Md5Hash md5Hash =new Md5Hash(upwd);
-        String upwd1 = md5Hash.toString();
-        User user =new User();
-        user.setUpwd(upwd1);
-        user.setUname(uname);
+     @RequestMapping("classLeaderchangeUpwd")
+    public String classLeaderchangeUpwd(HttpSession session,Model model){
+         User user = (User) session.getAttribute("user");
+         ClassLeader classLeader= classLeaderService.selectMessage(user.getUid());
+         model.addAttribute("classLeader",classLeader);
+         return "classLeader/classLeaderChangeUpwd";
+    }
+
+
+    @RequestMapping("classLeaderchangeUpwd2")
+    public String classLeaderchangeUpwd2(User user,Model model){
+        Md5Hash md5Hash = new Md5Hash(user.getUpwd());
+        user.setUpwd(md5Hash.toString());
         classLeaderService.updateUpwdByClassLeader(user);
-        return "success";
-    }*/
+        ClassLeader classLeader= classLeaderService.selectMessage(user.getUid());
+        model.addAttribute("classLeader",classLeader);
+        return "classLeader/index";
+    }
 
 
 

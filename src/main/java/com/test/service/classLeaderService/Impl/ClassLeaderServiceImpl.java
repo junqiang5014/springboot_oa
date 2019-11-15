@@ -31,11 +31,11 @@ public class ClassLeaderServiceImpl implements ClassLeaderService {
     private CLassLeaderMapper classLeaderMapper;
 
 
-  /*  @Override
+   @Override
     public int updateUpwdByClassLeader(User user) {
         return classLeaderMapper.updateUpwdByClassLeader(user);
     }
-*/
+
     @Override
     public ClassLeader selectMessage(int clid) {
         return classLeaderMapper.selectMessage(clid);
