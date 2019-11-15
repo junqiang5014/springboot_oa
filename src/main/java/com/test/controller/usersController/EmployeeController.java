@@ -33,58 +33,68 @@ public class EmployeeController {
 
 
     @RequestMapping("getAllEmployee")
-    public String getAllEmployee(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "1")int pageNum1, @RequestParam(defaultValue = "1")int pageNum2, Model model, HttpSession session){
+    public String getAllEmployee(@RequestParam(defaultValue = "1") int pageNum, Model model, HttpSession session){
 
-        if(pageNum!=1){
-            session.setAttribute("pageNum",pageNum);
-        }
-        if(pageNum1!=1){
-            session.setAttribute("pageNum1",pageNum1);
-        }
-        if(pageNum2!=1){
-            session.setAttribute("pageNum2",pageNum2);
-        }
-
-        if(pageNum==1){
-            if(session.getAttribute("pageNum")==null){
-                pageNum=pageNum;
-            }else {
-                pageNum= (Integer) session.getAttribute("pageNum");
-            }
-
-        }
-        if (pageNum1==1){
-            if(session.getAttribute("pageNum1")==null){
-                pageNum1=pageNum1;
-            }else {
-                pageNum1= (Integer) session.getAttribute("pageNum1");
-            }
-        }
-        if(pageNum2==1){
-            if(session.getAttribute("pageNum2")==null){
-                pageNum2=pageNum2;
-            }else {
-                pageNum2= (Integer) session.getAttribute("pageNum2");
-            }
-        }
+//        int intpageNum=0,intpageNum1=0,intpageNum2=0;
+//
+//        if(pageNum!=null){
+//            session.setAttribute("pageNum",pageNum);
+//        }
+//        if(pageNum1!=null){
+//            session.setAttribute("pageNum1",pageNum1);
+//        }
+//        if(pageNum2!=null){
+//            session.setAttribute("pageNum2",pageNum2);
+//        }
+//
+//        if(pageNum==null){
+//            if(session.getAttribute("pageNum")==null){
+//                intpageNum=1;
+//                session.setAttribute("pageNum","1");
+//            }else {
+//                intpageNum= Integer.parseInt((String)session.getAttribute("pageNum"));
+//                pageNum = String.valueOf(intpageNum);
+//                session.setAttribute("pageNum",pageNum);
+//            }
+//
+//        }
+//        if (pageNum1==null){
+//            if(session.getAttribute("pageNum1")==null){
+//                intpageNum1=1;
+//                session.setAttribute("pageNum1","1");
+//            }else {
+//                intpageNum1= Integer.parseInt((String)session.getAttribute("pageNum1"));
+//                pageNum1 = String.valueOf(intpageNum1);
+//                session.setAttribute("pageNum1",pageNum1);
+//            }
+//        }
+//        if(pageNum2==null){
+//            if(session.getAttribute("pageNum2")==null){
+//                intpageNum2=1;
+//                session.setAttribute("pageNum2","1");
+//            }else {
+//                intpageNum2= Integer.parseInt((String)session.getAttribute("pageNum2"));
+//                pageNum2 = String.valueOf(intpageNum2);
+//                session.setAttribute("pageNum2",pageNum2);
+//            }
+//        }
 
 
 
         int[]page = new int[3];
         page[0]=pageNum;
-        page[1]=pageNum1;
-        page[2]=pageNum2;
+        page[1]=pageNum;
+        page[2]=pageNum;
         Map<String, Object> employee = employeeService.getEmployee(page);
 
-        PageHelper.startPage(pageNum,5);
+
         List<Teacher> teacherList = (List<Teacher>) employee.get("teacherList");
         PageInfo<Teacher> pageInfo = new PageInfo<Teacher>(teacherList);
 
-        PageHelper.startPage(pageNum1,4);
+
         List<ClassLeader> classLeaderList = (List<ClassLeader>) employee.get("classLeaderList");
         PageInfo<ClassLeader> pageInfo1 = new PageInfo<ClassLeader>(classLeaderList);
 
-        PageHelper.startPage(pageNum2,4);
         List<SchoolManager> schoolManagerList = (List<SchoolManager>) employee.get("schoolManagerList");
         PageInfo<SchoolManager> pageInfo2 = new PageInfo<SchoolManager>(schoolManagerList);
 
@@ -121,7 +131,9 @@ public class EmployeeController {
     public String deleteTeacher(int tid){
         Teacher teacher = new Teacher();
         teacher.setTid(tid);
+        employeeService.deleteTeahcerUser(tid);
         employeeService.deleteEmployee(teacher);
+
         return "redirect:/getAllEmployee";
     }
 
@@ -129,7 +141,9 @@ public class EmployeeController {
     public String deleteClassLeader(int clid){
         ClassLeader classLeader = new ClassLeader();
         classLeader.setClid(clid);
+        employeeService.deleteClassLeaderUser(clid);
         employeeService.deleteEmployee(classLeader);
+
         return "redirect:/getAllEmployee";
     }
 
@@ -137,7 +151,9 @@ public class EmployeeController {
     public String deleteSchoolManager(int smid){
         SchoolManager schoolManager = new SchoolManager();
         schoolManager.setSmid(smid);
+        employeeService.deleteSchoolManagerUser(smid);
         employeeService.deleteEmployee(schoolManager);
+
         return "redirect:/getAllEmployee";
     }
 
